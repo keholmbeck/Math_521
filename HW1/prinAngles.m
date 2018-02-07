@@ -1,10 +1,10 @@
 function theta = prinAngles(X1,X2)
 
 % Find orthonormal bases for X1,X2
-% [Q1,R1] = qr(X1);
-% [Q2,R2] = qr(X2);
-Q1 = orth(X1);
-Q2 = orth(X2);
+[Q1,R1] = qr(X1,0);
+[Q2,R2] = qr(X2,0);
+% Q1 = orth(X1);
+% Q2 = orth(X2);
 
 % Compute SVD for cosine
 [U,S,V] = svd(Q1' * Q2);

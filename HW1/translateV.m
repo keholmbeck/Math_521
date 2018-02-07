@@ -1,14 +1,12 @@
 function newImg = translateV(img, ty)
 
 [nr, nc] = size(img);
-nr2 = nr + abs(ty);
-newImg = zeros(nr2, nc);
+newImg = zeros(nr, nc);
 
 if ty > 0
-    newImg((ty+1):end,:) = img;
+    newImg(ty+1:end,:) = img(1:end-ty,:);
 else
-    newImg(1:(end+ty),:) = img;
+    newImg(1:(end+ty),:) = img(abs(ty)+1:end,:);
 end
-
 
 end

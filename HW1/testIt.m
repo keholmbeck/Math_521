@@ -1,17 +1,18 @@
 clear;
 
+%{
 I = imread('coins.png');
 
-newImg1 = translateV(I, 50);
-newImg2 = translateV(I, -50);
+newImg1 = translateH(I, 50);
+newImg2 = translateH(I, -50);
 
 subplot(131); imagesc(I); title 'Original'
 subplot(132); imagesc(newImg1); title 'Positive Vert Shift'
 subplot(133); imagesc(newImg2); title 'Negative Vert Shift';
 return
+%}
 
-clear;
-
+%{
 rng(10);
 
 n = 1000;
@@ -19,8 +20,6 @@ n = 1000;
 theta = 2*pi * randn(n,1);
 
 x{1} = [cos(theta), sin(theta)];
-
-
 A1 = 0.01*randn(n);
 x{2} = A1 * x{1};
 
@@ -31,14 +30,10 @@ for ii = 1:length(x)
     plot(x{ii}(:,1), x{ii}(:,2), '.'); hold on;
 end
 hold off;
-
-
-clear;
+%}
 
 load face1;
 load face2;
-
-newImg = translateH(face1, tx);
 
 theta = prinAngles(face1, face2);
 theta = 180/(2*pi)*theta;
