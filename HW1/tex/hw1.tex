@@ -1,0 +1,213 @@
+\input{template.tex}
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Homework\ 1} % Assignment title
+\newcommand{\hmwkDueDate}{Thursday,\ February\ 15,\ 2018} % Due date
+\newcommand{\hmwkClass}{Math\ 521} % Course/clas
+\newcommand{\hmwkAuthorName}{Kristin Holmbeck} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+\vspace{0.1in}
+\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\newpage
+\tableofcontents
+\listoffigures
+\newpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+% To have just one problem per page, simply put a \clearpage after each problem
+
+\begin{section}{Theory}
+
+\begin{homeworkSection}{Change of Basis}
+
+Let the basis $\mathcal{B}_1$ be the standard basis in $\mathbb{R}^2$, i.e., $\mathcal{B}_1 = span \left \{ \Vec{e_1}, \Vec{e_2} \right \}$, 
+and the basis $\mathcal{B}_2$ be given by 
+ $\mathcal{B}_2 = span \left \{\begin{bmatrix}1 \\ 1\end{bmatrix} , \begin{bmatrix} -1 \\ 1\end{bmatrix} \right \}$. Given $u_{\mathcal{B}_1} = (1, 1)^T$, find $u_{\mathcal{B}_2}$.
+
+\problemAnswer{
+\begin{align*}
+    V = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} &,
+    W = \begin{bmatrix} 1 & -1 \\ 1 & 1 \end{bmatrix} 
+    \implies  W^{-1} = \frac{1}{2} \begin{bmatrix} 1 & 1 \\ -1 & 1 \end{bmatrix} \\
+    u_{\mathcal{B}_2} &= W^{-1}V u_{\mathcal{B}_1} 
+        = \begin{bmatrix} 1 \\ 0 \end{bmatrix}
+\end{align*}
+}
+\end{homeworkSection}
+
+\end{section}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+\begin{section}{Computing}
+
+\begin{homeworkSection}{Unit Circle Transformations}
+Write a code to generate 1000 random numbers contained on the unit circle. Apply several random matrices to this data and describe your results in the terminology of bases and change of bases. How do your results differ if the multiplying matrix is constrained to be orthogonal?
+ \\
+ 
+The following matrices are the transformations used in Figure \ref{fig:unitCirc}, and note that $A_3$ is the $Q$ matrix for the QR decomposition of $A_1$.
+
+\begin{align*}
+    A_1 = \begin{bmatrix} 0.524 && -0.038 \\ -0.401 && -0.210 \end{bmatrix}, \quad
+    A_2 = \begin{bmatrix} 2 && 0 \\ 0 && 2 \end{bmatrix}, \quad
+    A_3 = \begin{bmatrix} -0.794 && 0.608 \\ 0.608 && 0.794\end{bmatrix}
+\end{align*}
+ 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\columnwidth]{../data/rand_unit_circ_pts} % Example image
+\caption{Transformation of Points on the Unit Circle}
+\label{fig:unitCirc}
+\end{figure}
+
+The actual data lies underneath the orthogonal, or $A_3$-transformed data on the graph. That is, the orthogonal transformation rotated the unit circle counter-clockwise. As expected, the scaling matrix $A_2$ uniformly scaled the points outwards (since the scaling factor was greater than 1). 
+\\
+
+The random matrix, $A_1$, scaled the unit circle non-uniformly into an ellipse. For extra fun, applying the orthogonal transformation to these elliptically-scaled points simply rotated the matrix. 
+
+\problemAnswer{
+
+}
+\end{homeworkSection}
+
+
+\begin{homeworkSection}{Principal Angles}
+\end{homeworkSection}
+
+
+\begin{homeworkSection}{Image Transformations}
+
+Any linear transformation i $\mathbb{R}^2$ is represented with respect to homogeneous coordinates by a matrix of the form:
+
+$$
+    \begin{bmatrix}
+        A_{2 x 2} && \mathbf{0} \\ \mathbf{0}  && \mathbf{1}
+    \end{bmatrix}
+$$
+
+Image translation is simple, as every point is uniformly translated in either direction. For scaling and rotation, however, using a matrix of the form above is necessary. \\
+
+For the following images, we used \textsc{Matlab}'s built-in image demo, coins.png (Figure \ref{fig:orig}).
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.75\columnwidth]{../data/orig} % Example image
+\caption{\textsc{Matlab}'s coins.png}
+\label{fig:orig}
+\end{figure}
+
+
+\begin{subsubsection}{Scaling}
+
+As shown in class, for scaling by $s_x$ and $s_y$ in the $x-$ and $y-$directions respectively, the corresponding scaling transformation matrix is given by
+
+\begin{align*}
+    M_{scale}(p) = \begin{bmatrix} s_x && 0 && (1-s_x)t_x \\
+        0 && s_y && (1-s_y)t_y \\
+        0 && 0 && 1 \end{bmatrix}
+\end{align*}
+
+where $p = \begin{bmatrix} t_x && t_y && 1 \end{bmatrix}^T$. 
+The data in Figure \ref{fig:scaled} was scaled by 2 in both $x$ and $y$, about the point $(t_x, t_y) = (150, 50)$. 
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.75\columnwidth]{../data/scaled} % Example image
+\caption{Image scaling about a point}
+\label{fig:scaled}
+\end{figure}
+\end{subsubsection}
+
+
+\begin{subsubsection}{Translation}
+\end{subsubsection}
+
+
+\begin{subsubsection}{Rotation}
+
+As shown in class, for rotating by $\theta$ about a point $p = \begin{bmatrix} t_x && t_y && 1 \end{bmatrix}^T$, the rotation matrix is given by:
+
+\begin{align*}
+    M_{rot}(p) = \begin{bmatrix} \cos \theta && -\sin\theta && 0 \\
+        \sin\theta && \cos\theta && 0 \\
+        0 && 0 && 1 \end{bmatrix}
+\end{align*}
+
+So where do we account for $p$? The matrix above rotates points with respect to the origin. In this case, we can translate the image (preserving the entirety of the image, unlike the previous section) by $-p$, which will make the origin $p$. Rotate about the origin, then undo the $-p$ translation by $p$, yielding the desired image.
+\\
+
+The data in Figure \ref{fig:scaled} was rotated by $\theta = \pi/2$, about the point $(t_x, t_y) = (150, 50)$. 
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.75\columnwidth]{../data/rotated} % Example image
+\caption{Rotation about a point}
+\label{fig:rotated}
+\end{figure}
+\end{subsubsection}
+
+\end{homeworkSection}
+
+
+
+\end{section}
+
+
+
+%----------------------------------------------------------------------------------------
+\newpage
+
+\appendix
+
+\section{Code}
+
+\subsection{prinAngles.m}
+
+\lstinputlisting{../prinAngles.m}
+
+
+\subsection{scale.m}
+\lstinputlisting{../scale.m}
+
+\subsection{rotate.m}
+\lstinputlisting{../rotate.m}
+
+\subsection{translateH.m}
+\lstinputlisting{../translateH.m}
+
+\subsection{translateV.m}
+\lstinputlisting{../translateV.m}
+
+\end{document}

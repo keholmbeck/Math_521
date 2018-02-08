@@ -1,10 +1,39 @@
 clear;
 
-%{
-I = imread('coins.png');
+% %{
+I = double(imread('data/coins.png'));
+
+alpha = [2;2];
+theta = pi/4;
+
+P = [150;50;1];
+ims = scale(I, alpha, P);
+imr = rotate(I, theta, P);
+
+ax = [1,1,1];
+
+ax = imagesc(I); title 'Original';
+saveas(ax, 'data/orig.png');
+
+ax = imagesc(ims); 
+title(sprintf('Scaled by %0.1f in x, %0.1f in y', alpha));
+saveas(ax, 'data/scaled.png');
+
+ax = imagesc(imr); 
+title(sprintf('Rotated by %d degrees', theta*180/pi));
+saveas(ax, 'data/rotated.png');
+
+subplot(131); imagesc(I); title 'Original';
+subplot(132); imagesc(ims); 
+title(sprintf('Scaled by %0.1f in x, %0.1f in y', alpha));
+subplot(133); imagesc(imr); 
+title(sprintf('Rotated by %d degrees', theta*180/pi));
+
+return;
 
 newImg1 = translateH(I, 50);
 newImg2 = translateH(I, -50);
+
 
 subplot(131); imagesc(I); title 'Original'
 subplot(132); imagesc(newImg1); title 'Positive Vert Shift'
@@ -17,22 +46,33 @@ rng(10);
 
 n = 1000;
 
-theta = 2*pi * randn(n,1);
+theta = 2*pi * randn(1,n);
 
-x{1} = [cos(theta), sin(theta)];
-A1 = 0.01*randn(n);
+x{1} = [cos(theta); sin(theta)];
+A1 = 1*randn(2);
 x{2} = A1 * x{1};
 
-A2 = 2*eye(n,n);
+A2 = 2*eye(2);
 x{3} = A2 * x{1};
 
+[A3,~] = qr(A1);
+x{4} = A3 * x{1};
+
+x{5} = A3 * x{2};
+
+k = ceil(n/2);
+ax = zeros(length(x), 1);
+c = {'k','b','r','m','g'};
 for ii = 1:length(x)
-    plot(x{ii}(:,1), x{ii}(:,2), '.'); hold on;
+    ax(ii) = plot(x{ii}(1,:), x{ii}(2,:), '.'); hold on;
+    plot(x{ii}(1,k), x{ii}(2,k), ['o',c{ii}]); hold on;
 end
+legend(ax, 'Original Data', 'A1', 'A2', 'A3', 'Location', 'SE');
 hold off;
+saveas(gcf, 'data/rand_unit_circ_pts.png');
 %}
 
-load face1;
+load data/face1;
 load face2;
 
 theta = prinAngles(face1, face2);

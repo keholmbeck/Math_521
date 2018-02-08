@@ -1,7 +1,7 @@
 function newImg = translateH(img, tx)
 
 [nr, nc] = size(img);
-newImg = zeros(nr, nc);
+newImg   = zeros(nr, nc);
 
 if tx > 0
     newImg(:,(tx+1):end) = img(:,1:(end-tx));
