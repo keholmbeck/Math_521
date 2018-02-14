@@ -1,0 +1,15 @@
+\contentsline {section}{Theory}{3}
+\contentsline {subsection}{Change of Basis}{3}
+\contentsline {section}{Computing}{3}
+\contentsline {subsection}{Unit Circle Transformations}{3}
+\contentsline {subsection}{Principal Angles}{4}
+\contentsline {subsection}{Image Transformations}{4}
+\contentsline {subsubsection}{Scaling}{4}
+\contentsline {subsubsection}{Translation}{5}
+\contentsline {subsubsection}{Rotation}{5}
+\contentsline {section}{Code}{6}
+\contentsline {subsection}{prinAngles.m}{6}
+\contentsline {subsection}{scale.m}{7}
+\contentsline {subsection}{rotate.m}{8}
+\contentsline {subsection}{translateH.m}{8}
+\contentsline {subsection}{translateV.m}{8}

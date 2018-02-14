@@ -1,6 +1,6 @@
 clear;
 
-% %{
+%{
 I = double(imread('data/coins.png'));
 
 alpha = [2;2];
@@ -73,10 +73,10 @@ saveas(gcf, 'data/rand_unit_circ_pts.png');
 %}
 
 load data/face1;
-load face2;
+load data/face2;
 
 theta = prinAngles(face1, face2);
-theta = 180/(2*pi)*theta;
+% theta = 180/(2*pi)*theta;
 
 return
 
