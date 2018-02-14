@@ -75,8 +75,11 @@ saveas(gcf, 'data/rand_unit_circ_pts.png');
 load data/face1;
 load data/face2;
 
-theta = prinAngles(face1, face2);
+[theta,truth] = prinAngles(face1, face2);
 % theta = 180/(2*pi)*theta;
+
+F1 = reshape(face1, 160,138, 21);
+F2 = reshape(face2, 160,138, 21);
 
 return
 

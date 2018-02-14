@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.10.10)  11 FEB 2018 13:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.10.10)  13 FEB 2018 18:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -327,21 +327,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 120--121
 
  []
 
-<../data/orig.png, id=26, 578.16pt x 433.62pt>
+<../data/orig.png, id=26, 562.2606pt x 421.575pt>
 File: ../data/orig.png Graphic file (type png)
  <use ../data/orig.png>
 Package pdftex.def Info: ../data/orig.png used on input line 126.
-(pdftex.def)             Requested size: 352.31624pt x 264.23654pt.
+(pdftex.def)             Requested size: 352.31624pt x 264.16559pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [4 <../data/rand_unit_circ_pts.png (PNG copy)>]
-<../data/scaled.png, id=30, 578.16pt x 433.62pt>
+<../data/scaled.png, id=30, 562.2606pt x 421.575pt>
 File: ../data/scaled.png Graphic file (type png)
  <use ../data/scaled.png>
 Package pdftex.def Info: ../data/scaled.png used on input line 147.
-(pdftex.def)             Requested size: 352.31624pt x 264.23654pt.
+(pdftex.def)             Requested size: 352.31624pt x 264.16559pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -351,11 +351,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 168--170
 
  []
 
-<../data/rotated.png, id=31, 578.16pt x 433.62pt>
+<../data/rotated.png, id=31, 562.2606pt x 421.575pt>
 File: ../data/rotated.png Graphic file (type png)
  <use ../data/rotated.png>
 Package pdftex.def Info: ../data/rotated.png used on input line 175.
-(pdftex.def)             Requested size: 352.31624pt x 264.23654pt.
+(pdftex.def)             Requested size: 352.31624pt x 264.16559pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -368,38 +368,42 @@ LaTeX Font Info:    Try loading font information for OT1+pcr on input line 198.
 (/usr/local/texlive/2017basic/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-(../prinAngles.m) (../scale.m [7]) (../rotate.m) (../translateH.m)
-(../translateV.m) [8] 
+(../prinAngles.m) (../scale.m) [7] (../rotate.m) (../translateH.m)
+(../translateV.m) 
 AED: lastpage setting LastPage
-[9] (./hw1.aux) ) 
+[8] (./hw1.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 4893 strings out of 494437
- 67319 string characters out of 6166644
- 388747 words of memory out of 5000000
- 8127 multiletter control sequences out of 15000+600000
+ 4887 strings out of 494437
+ 67289 string characters out of 6166644
+ 377747 words of memory out of 5000000
+ 8121 multiletter control sequences out of 15000+600000
  13760 words of font info for 53 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 39i,17n,43p,343b,1553s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2017basic/texmf-dist/fonts/enc/dvips/base/
-8r.enc}</usr/local/texlive/2017basic/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmbx10.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmbx12.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmcsc10.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmex10.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2017basic/texmf-dist/font
-s/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2017basic/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2017basic/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2017basic/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2017basic/texmf
--dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2017basic/te
-xmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/201
-7basic/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on hw1.pdf (9 pages, 463565 bytes).
+ 39i,17n,43p,343b,1501s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2017basic/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/lo
+cal/texlive/2017basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
+r/local/texlive/2017basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+</usr/local/texlive/2017basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10
+.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+ex10.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmmi10.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmmi7.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmr10.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr5.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmr7.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmr9.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/
+type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2017basic/texmf-di
+st/fonts/type1/urw/courier/ucrr8a.pfb>
+Output written on hw1.pdf (8 pages, 446587 bytes).
 PDF statistics:
- 95 PDF objects out of 1000 (max. 8388607)
- 65 compressed objects within 1 object stream
+ 92 PDF objects out of 1000 (max. 8388607)
+ 63 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
