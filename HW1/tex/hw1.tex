@@ -97,9 +97,8 @@ The actual data lies underneath the orthogonal, or $A_3$-transformed data on the
 
 The random matrix, $A_1$, scaled the unit circle non-uniformly into an ellipse. For extra fun, applying the orthogonal transformation to these elliptically-scaled points simply rotated the matrix. 
 
-\problemAnswer{
+% \problemAnswer{} 
 
-}
 \end{homeworkSection}
 
 
@@ -109,7 +108,7 @@ The random matrix, $A_1$, scaled the unit circle non-uniformly into an ellipse. 
 
 \begin{homeworkSection}{Image Transformations}
 
-Any linear transformation i $\mathbb{R}^2$ is represented with respect to homogeneous coordinates by a matrix of the form:
+Any linear transformation in $\mathbb{R}^2$ is represented with respect to homogeneous coordinates by a matrix of the form:
 
 $$
     \begin{bmatrix}
@@ -121,7 +120,7 @@ Image translation is simple, as every point is uniformly translated in either di
 
 For the following images, we used \textsc{Matlab}'s built-in image demo, coins.png (Figure \ref{fig:orig}).
 
-\begin{figure}[!h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.75\columnwidth]{../data/orig} % Example image
 \caption{\textsc{Matlab}'s coins.png}
@@ -129,9 +128,29 @@ For the following images, we used \textsc{Matlab}'s built-in image demo, coins.p
 \end{figure}
 
 
+\begin{subsubsection}{Translation}
+As stated before, image translation is simple, but we need to be sure to preserve the original image size. That is, translation will cut off part of the image so that we maintain the same viewfinder size. Horizontal and vertical translations are shown separately in Figures \ref{fig:horiz} and \ref{fig:vert}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\columnwidth]{../data/horiz} % Example image
+\caption{Horizontal image translation}
+\label{fig:horiz}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\columnwidth]{../data/vert} % Example image
+\caption{Vertical image translation}
+\label{fig:vert}
+\end{figure}
+
+\end{subsubsection}
+
+
 \begin{subsubsection}{Scaling}
 
-As shown in class, for scaling by $s_x$ and $s_y$ in the $x-$ and $y-$directions respectively, the corresponding scaling transformation matrix is given by
+As shown in class, for scaling by $s_x$ and $s_y$ in the $x-$ and $y-$directions, respectively, the corresponding scaling transformation matrix is given by $M_{scale}(p)$:
 
 \begin{align*}
     M_{scale}(p) = \begin{bmatrix} s_x && 0 && (1-s_x)t_x \\
@@ -148,10 +167,6 @@ The data in Figure \ref{fig:scaled} was scaled by 2 in both $x$ and $y$, about t
 \caption{Image scaling about a point}
 \label{fig:scaled}
 \end{figure}
-\end{subsubsection}
-
-
-\begin{subsubsection}{Translation}
 \end{subsubsection}
 
 

@@ -1,14 +1,18 @@
 clear;
 
-%{
+% %{
 I = double(imread('data/coins.png'));
 
 alpha = [2;2];
 theta = pi/4;
+horiz = -100;
+vert = 200;
 
 P = [150;50;1];
 ims = scale(I, alpha, P);
 imr = rotate(I, theta, P);
+imh = translateH(I, horiz);
+imv = translateV(I, vert);
 
 ax = [1,1,1];
 
@@ -18,6 +22,14 @@ saveas(ax, 'data/orig.png');
 ax = imagesc(ims); 
 title(sprintf('Scaled by %0.1f in x, %0.1f in y', alpha));
 saveas(ax, 'data/scaled.png');
+
+ax = imagesc(imh); 
+title(sprintf('Translated horizontally by %0d', horiz));
+saveas(ax, 'data/horiz.png');
+
+ax = imagesc(imv); 
+title(sprintf('Translated vertically by %0d', vert));
+saveas(ax, 'data/vert.png');
 
 ax = imagesc(imr); 
 title(sprintf('Rotated by %d degrees', theta*180/pi));
