@@ -1,6 +1,6 @@
 clear;
 
-% %{
+%{
 I = double(imread('data/coins.png'));
 
 alpha = [2;2];

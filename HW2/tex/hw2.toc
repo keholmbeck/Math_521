@@ -1,0 +1,11 @@
+\contentsline {section}{Theory}{3}
+\contentsline {subsection}{1. Unique Decomposition}{3}
+\contentsline {subsection}{2. Bases for $A$}{3}
+\contentsline {subsection}{3. Projections}{4}
+\contentsline {subsection}{4. Orthonormal Basis Vectors}{5}
+\contentsline {subsection}{5. SVD}{5}
+\contentsline {section}{Computing}{5}
+\contentsline {subsection}{1. Kohonen's Novelty Filter }{5}
+\contentsline {subsection}{2. SVD}{6}
+\contentsline {section}{Code}{7}
+\contentsline {subsection}{Gram-Schmidt}{7}

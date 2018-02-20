@@ -1,0 +1,191 @@
+\input{template.tex}
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Homework\ 2} % Assignment title
+\newcommand{\hmwkDueDate}{Thursday,\ February\ 15,\ 2018} % Due date
+\newcommand{\hmwkClass}{Math\ 521} % Course/clas
+\newcommand{\hmwkAuthorName}{Kristin Holmbeck} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+\vspace{0.1in}
+\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\newpage
+\tableofcontents
+\listoffigures
+\newpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+% To have just one problem per page, simply put a \clearpage after each problem
+
+\begin{section}{Theory}
+
+\begin{homeworkSection}{1. Unique Decomposition}
+
+Let $W_1, W_2$ be vector subspaces and $W=W_1+W_2, W_1 \neq W_2$. Show, by giving an example, that the decomposition of a vector $\bm{x} \in W$ is not unique.
+
+\problemAnswer{
+    The requirements for a subspace $\hat{W}$ include :
+    \begin{itemize}
+        \item The zero vector is in $\hat{W}$
+        \item If $\bm{u}, \bm{v} \in \hat{W}$, then $\bm{u}+\bm{v} \in \hat{W}$
+        \item If $\bm{u} \in \hat{W}, c \in \mathbb{R}, c\bm{u} \in \hat{W}$
+    \end{itemize}
+    If we let $W = \{\begin{bmatrix} x && y && 0 \end{bmatrix}^T \ni x,y \in \mathbb{R} \} \subset \mathbb{R}^3$, then we can decompose $W$ into $W_1 = \{\begin{bmatrix} x && 0 && 0 \end{bmatrix}^T \ni x,y \in \mathbb{R} \}$ and $W_2 = \{\begin{bmatrix} x && y && 0 \end{bmatrix}^T \ni x,y \in \mathbb{R} \}$. Then, we can express a vector $\bm{x} \in W$ non-uniquely. For example:
+    \begin{align*}
+        \bm{x} = \begin{bmatrix} 2 \\ 10 \\ 0 \end{bmatrix} 
+            = \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} + \begin{bmatrix} 1 \\ 10 \\ 0 \end{bmatrix} 
+            = \begin{bmatrix} 2 \\ 0 \\ 0 \end{bmatrix} + \begin{bmatrix} 0 \\ 10 \\ 0 \end{bmatrix}
+    \end{align*}
+}
+
+\end{homeworkSection}
+
+\begin{homeworkSection}{2. Bases for $A$}
+Consider the matrix
+\begin{align*}
+    A = \begin{bmatrix} 1 && -1 \\ 2 && -2 \\ 3 && -3 \end{bmatrix}
+\end{align*}
+Determine bases for the column space, row space, null space, and left null space of $A$.
+
+\rule{\textwidth}{1pt}
+
+\problemAnswer{ 
+
+\begin{itemize}
+
+\item The column space of $A$ is the linearly independent columns in $A$. Since the second column is a scalar multiple of the first (by -1), the column space of $A$ is: \\ span$ \left \{ \begin{bmatrix} 1 \\2 \\ 3 \end{bmatrix} \right \} $.
+
+\item The row space of $A$ is the linearly independent rows of $A$. Notice that rows 2 and 3 are scalar multiples of the first row. Hence, the row space is: \\ span$ \left \{ \begin{bmatrix} 1 \\ -1 \end{bmatrix} \right \} $.
+
+\item The null space of $A$ includes the vectors that solve $Ax = \bm{0}$. Then it is easy to see that $A \begin{bmatrix} x_1 \\ x_1 \end{bmatrix} = \bm{0}$ solves this. In other words, \\ null space of $A$ = span $\left\{ \begin{bmatrix} 1 \\ 1 \end{bmatrix} \right \}$.
+
+\item The \textit{left} null space of $A$ are the vectors that solve $x^TA = 0$. \\
+$\begin{bmatrix} x_1 & x_2 && x_3 \end{bmatrix} \begin{bmatrix} 1 && -1 \\ 2 && -2 \\ 3 && -3 \end{bmatrix} = \begin{bmatrix} x_1+2x_2+3x_3 && -x_1-2x_2-3x_3 \end{bmatrix} = \bm{0}$ \\
+The most direct way to solve this is to convert $ [ A \quad | \quad I_{3}  ] $ to reduced-row echelon form. Performing this calculation, we obtain the basis for the left null space: \\
+span = $\left \{ \begin{bmatrix} 1 \\ 0 \\ -\frac{1}{3}\end{bmatrix},
+                \begin{bmatrix} 0 \\ 1 \\ -\frac{2}{3}\end{bmatrix} \right \}
+        $
+\end{itemize}
+}
+
+\end{homeworkSection}
+
+
+\begin{homeworkSection}{3. Projections}
+Let $V = \mathbb{R}^3$, let 
+\begin{align*}
+    u^{(1)} = \begin{bmatrix} 1 \\ 2 \\ 0 \end{bmatrix}, 
+    u^{(2)} = \begin{bmatrix} -1 \\ 0 \\ 1 \end{bmatrix}, 
+    x = \begin{bmatrix} 0 \\ 2 \\ 1 \end{bmatrix},
+\end{align*}
+and define $W = \text{span}(u^{(1)}, u^{(2)})$. Find the orthogonal projection of $x$ onto $W$. Also find the projection matrix $\mathbb{P}$ associated with this mapping.
+
+\problemAnswer{
+    For orthogonal projections, the Gram-Schmidt process is used. The Gram-Schmidt process is a method for generating an orthonormal basis from a set of vectors. A key part of this method is the projection step.
+    \\
+    First, we determine an orthonormal basis for $W$ using the Gram-Schmidt algorithm (see the code in the Code section). We obtain the basis vectors:
+    \begin{align*}
+        e^{(1)} = \frac{1}{\sqrt{5}} \begin{bmatrix} 1 \\ 2 \\ 0 \end{bmatrix}, \qquad
+        e^{(2)} = \frac{1}{3\sqrt{5}} \begin{bmatrix} -4 \\ 2 \\ 5 \end{bmatrix}
+    \end{align*}
+    A projection matrix $\mathbb{P}_i$ onto $e^{(i)}$, is given by $e^{(i)} {e^{(i)}}^T$. From this, we have the two projection matrices for the basis vectors above:
+    \begin{align*}
+        \mathbb{P}_1 &= \frac{1}{5} \begin{bmatrix} 1 && 2 && 0 \\ 2&& 4 && 0 \\ 0 && 0 && 0 \end{bmatrix} \\ 
+        \mathbb{P}_2 &= \frac{1}{45} \begin{bmatrix} 16 && -8 && -20 \\ -8 && 4 && 10 \\ -20 && 10 && 25 \end{bmatrix} \\ 
+        \text{then the total projection is: }
+        \mathbb{P} &= \mathbb{P}_1 + \mathbb{P}_2 = \frac{1}{9} \begin{bmatrix} 5 && 2 && -4 \\ 2 && 8 && 2 \\ -4 && 2 && 5 \end{bmatrix}
+    \end{align*}
+}
+\end{homeworkSection}
+
+\begin{homeworkSection}{4. Orthonormal Basis Vectors}
+Reconsider Problem 3. Find vectors such that $x = UU^Tx$ and $x \neq UU^Tx$ where the matrix $U$ consists of the orthonormal basis vectors of $W$ from Problem 3.
+
+\problemAnswer{
+    Note that $UU^T = \mathbb{P}$.
+}
+\end{homeworkSection}
+
+\begin{homeworkSection}{5. SVD}
+Determine the SVD of the data matrix
+\begin{align*}
+    A = \begin{bmatrix} -2 && -1 && 1 \\ 0 && -1 && 0 \\ -1 && 1 && 2 \\ 1 && -1 && 1 \end{bmatrix}
+\end{align*}
+and compute rank-one, -two, and -three approximations to $A$.
+\end{homeworkSection}
+
+\end{section}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+\begin{section}{Computing}
+
+\begin{homeworkSection}{1. Kohonen's Novelty Filter }
+Consider the training set consisting of the following three patterns consisting of 5 x 4 arrays of black squares.
+\\
+
+Proceed by assuming that the black square entries have numerical value one and the blank entries have numerical value zero. Concatenate the columns of each pattern to make vectors in $\mathbb{R}^{20}$. Does your result make sense? Why or why not?
+
+% \problemAnswer{} 
+
+\end{homeworkSection}
+
+
+\begin{homeworkSection}{2. SVD}
+Compute the SVD of the matrix $A$ whose entries come from the pattern in <reference here> and display (in terms of an image) the reconstructions $A_1, A_2, A_3, A_4$. Again, treat the squares as ones and the blanks as zeros. Your reconstructions should be matrices with numerical values. Interpret your results.
+
+\end{homeworkSection}
+
+\end{section}
+
+
+%----------------------------------------------------------------------------------------
+\newpage
+
+\appendix
+
+\section{Code}
+
+\subsection{Gram-Schmidt} \label{code:gram_schmidt}
+
+\lstinputlisting{../Kristin_Holmbeck_HW2_GramSchmidt.m}
+
+
+\begin{thebibliography}{10}
+    \bibitem{kohonen}
+    T. Kohonen. Self-Organization and Associative Memory. Springer-Verlag, Berlin, 1984.
+
+\end{thebibliography}
+
+\end{document}
