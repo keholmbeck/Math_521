@@ -115,7 +115,7 @@ and define $W = \text{span}(u^{(1)}, u^{(2)})$. Find the orthogonal projection o
 \\
 \\
 \problemAnswer{
-    For orthogonal projections, the Gram-Schmidt process is used -- a method for generating an orthonormal basis from a set of vectors. Using the Gram-Schmidt algorithm (see the code in the Code section). We obtain the basis vectors:
+    For orthogonal projections, the Gram-Schmidt process is used -- a method for generating an orthonormal basis from a set of vectors. Using the Gram-Schmidt algorithm (in the Code section of this document), we obtain the basis vectors:
     \begin{align*}
         e^{(1)} = \frac{1}{\sqrt{5}} \begin{bmatrix} 1 \\ 2 \\ 0 \end{bmatrix}, \qquad
         e^{(2)} = \frac{1}{3\sqrt{5}} \begin{bmatrix} -4 \\ 2 \\ 5 \end{bmatrix}
@@ -278,18 +278,29 @@ Proceed by assuming that the black square entries have numerical value one and t
     In order to calculate the novelty, we find an orthonormal basis for the first three patterns. We create a matrix of size (20 x 3), and obtain an orthonormal basis $W$. The projection matrix then becomes $\mathbb{P} = WW^T$, and the novelty is then $(I-\mathbb{P})x$, where $x$ is the (20 x 1) vector obtain from concatenating the columns of the pattern in Figure \ref{fig:pattern}. 
     \\
     \\
-    This gives us the novelty:
-
-    \begin{align*} (I-\mathbb{P})x = w^T =  \begin{bmatrix}
-            0.2727  &&  0.2727  &&  0.2727  &&  0.2727 \\
-                 0  &&       0  &&       0  && -0.7273 \\
-                 0  &&       0  &&       0  && -0.7273 \\
-                 0  &&       0  &&       0  && -0.7273 \\
-            0.2727  &&  0.2727  &&  0.2727  &&  0.2727
-    \end{bmatrix}\end{align*}
+    This gives us the novelty shown in Figure \ref{fig:novelty}, corresponding to the matrix below:
     \\
-    \\ 
-    Does this result make sense?
+    \begin{minipage}{.5\textwidth}
+        \begin{align*}(I-\mathbb{P})x = w^T =  \begin{bmatrix}
+                0  &&  0  &&  0  &&  0 \\
+                     0  &&       1  &&       0  && 0 \\
+                     0  &&       1  &&       0  && 0 \\
+                     0  &&       1  &&       0  && 0 \\
+                0 && 0 && 0 && 0
+        \end{bmatrix}\end{align*}
+    \end{minipage}
+    \begin{minipage}{.5\textwidth}
+        \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.35\columnwidth]{../data/novelty}
+        \caption{Novelty from Kohonen's filter}
+        \label{fig:novelty}
+        \end{figure}
+    \end{minipage}
+    \\
+    \\
+    \\
+    Does this result make sense? Our comparison data is a linear combination of the training data, other than the vertical column appearing in the middle of the matrix. It makes sense then that our novelty, or difference, appears in that column.
 }
 
 \end{homeworkSection}
@@ -408,7 +419,7 @@ Recall that the relative error of a rank-$k$ approximation is given by $\sigma_{
 
 \appendix
 
-\section{Code}
+\section{Code}\label{code}
 
 \subsection{Gram-Schmidt} \label{code:gram_schmidt}
 

@@ -1,6 +1,6 @@
 clear;
 
-A1 = [1  1  1  1
+A4 = [1  1  1  1
       0  1  0  1
       0  1  0  1
       0  1  0  1
@@ -18,7 +18,7 @@ A3 = [1  1  1  1
       0  0  0  1
       1  1  1  1];
 
-A4 = [1  1  1  1
+A1 = [1  1  1  1
       0  0  0  0
       0  0  0  0
       0  0  0  0
@@ -42,6 +42,7 @@ g = colormap('gray');
 g = g(end:-1:1,:);
 
 Adisp = {A1, A2, A3, A4, wt};
+
 for jj = 1:length(Adisp)
     A = Adisp{jj};
     Z = zeros(2*size(A,1)+1, 2*size(A,2)+1);
@@ -51,27 +52,19 @@ for jj = 1:length(Adisp)
         Z(2:2:end,ii) = A(:,n);
     end
     Adisp{jj} = Z;
-    
-    ax = subplot(2,3, jj);
-    imagesc(Z); caxis([-1,1]);    
-    axis image; axis off; grid off; colormap(g);
-    
-    if jj <= 3
-        title(sprintf('Training Pattern %d', jj), 'FontW', 'B');
-    elseif jj == 4
-        title(sprintf('Pattern'), 'FontW', 'B');
-    else
-        title(sprintf('Novelty'), 'FontW', 'B');
-    end
 end
-subplot(2,3,6); caxis([-1,1]); colorbar; axis off;
 
-return
+for ii = 1:3
+    subplot(1,3,ii); imagesc(Adisp{ii}); axis image; axis off; grid off;
+    colormap(g);
+end
+pos = get(gcf, 'Position');
+set(gcf, 'Position', [pos(1),pos(2), 866,295]);
+saveas(gcf, 'data/kohonen_training.png');
 
-subplot(221); imagesc(-A1); axis image; grid off;
-subplot(222); imagesc(-A2); axis image; grid off;
-subplot(223); imagesc(-A3); axis image; grid off;
-subplot(224); imagesc(-A4); axis image; grid off;
-colormap gray;
+close all;
+imagesc(Adisp{4}); axis image; axis off; grid off; colormap(g);
+saveas(gcf, 'data/pattern.png');
 
-
+imagesc(Adisp{5}); axis image; axis off; grid off; colormap(g);
+saveas(gcf, 'data/novelty.png');
