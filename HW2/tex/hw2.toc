@@ -8,6 +8,6 @@
 \contentsline {subsection}{1. Kohonen's Novelty Filter }{6}
 \contentsline {subsection}{2. SVD on a boolean matrix}{7}
 \contentsline {subsection}{3. (a) SVD on a higher-resolution image}{9}
-\contentsline {subsection}{3. (b) Lower-Rank Approximations}{11}
-\contentsline {section}{Code}{13}
-\contentsline {subsection}{Gram-Schmidt}{13}
+\contentsline {subsection}{3. (b) Lower-Rank Approximations}{12}
+\contentsline {section}{Code}{14}
+\contentsline {subsection}{Gram-Schmidt}{14}

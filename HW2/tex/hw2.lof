@@ -3,7 +3,8 @@
 \contentsline {figure}{\numberline {3}{\ignorespaces Novelty from Kohonen's filter}}{7}
 \contentsline {figure}{\numberline {4}{\ignorespaces Reconstruction of $A$ by $A_1$}}{8}
 \contentsline {figure}{\numberline {5}{\ignorespaces Test Image: Palos Verdes Half Marathon (960 $\times $ 1440)}}{9}
-\contentsline {figure}{\numberline {6}{\ignorespaces Cumulative Energy of Figure 5\hbox {}}}{10}
-\contentsline {figure}{\numberline {7}{\ignorespaces Rank-6 Approximation of Figure 5\hbox {}}}{10}
-\contentsline {figure}{\numberline {8}{\ignorespaces Rank-47 Approximation of Figure 5\hbox {}}}{11}
-\contentsline {figure}{\numberline {9}{\ignorespaces Lower-Rank Approximations of Figure 5\hbox {}}}{12}
+\contentsline {figure}{\numberline {6}{\ignorespaces Singular Value Distribution (first 100 of 960) of Figure 5\hbox {}}}{10}
+\contentsline {figure}{\numberline {7}{\ignorespaces Cumulative Energy of Figure 5\hbox {}}}{10}
+\contentsline {figure}{\numberline {8}{\ignorespaces Rank-6 Approximation of Figure 5\hbox {}}}{11}
+\contentsline {figure}{\numberline {9}{\ignorespaces Rank-47 Approximation of Figure 5\hbox {}}}{12}
+\contentsline {figure}{\numberline {10}{\ignorespaces Lower-Rank Approximations of Figure 5\hbox {}}}{13}

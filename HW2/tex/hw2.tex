@@ -357,6 +357,7 @@ Compute the SVD of the matrix $A$ whose entries come from the first pattern in F
 
 \begin{homeworkSection}{3. (a) SVD on a higher-resolution image}
 
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.95\columnwidth]{../data/testim}
@@ -364,7 +365,15 @@ Compute the SVD of the matrix $A$ whose entries come from the first pattern in F
 \label{fig:myim}
 \end{figure}
 
+
 Computing the cumulative energy $E$ via $E_k = \cfrac{\Sigma_{i=1}^{k} \sigma_i^2}{\Sigma_{i=1}^{k} \sigma_i^2}$ with $r=$ rank(image) and $k \leq r$, we obtain the \textit{numerical rank} of the image in Figure \ref{fig:myim} as 6; the number of singular values required to retain at least 95\% of the energy in the original image. The cumulative energy is shown in Figure \ref{fig:energy}. What this actually looks like in terms of reconstruction is shown in Figure \ref{fig:rank_6}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\columnwidth]{../data/SVD_dist}
+\caption{Singular Value Distribution (first 100 of 960) of Figure \ref{fig:myim}}
+\label{fig:svd_dist}
+\end{figure}
 
 \begin{figure}[H]
 \centering
