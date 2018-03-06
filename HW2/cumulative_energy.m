@@ -1,5 +1,6 @@
 function E = cumulative_energy(sigmas, r)
-%  r is the rank of the image
+% sigmas is the vector of singular values, in descending order
+% r is the rank of the image
 
 if nargin == 1
     r = length(sigmas);
