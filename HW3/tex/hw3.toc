@@ -1,0 +1,8 @@
+\contentsline {section}{Theory}{2}
+\contentsline {subsection}{1. Gradient of Inner Product}{2}
+\contentsline {subsection}{2. Commutativity of Symmetric Matrix in the Inner Product}{2}
+\contentsline {subsection}{3. Eigenvalues and eigenvectors}{3}
+\contentsline {subsection}{4. FLOP count}{3}
+\contentsline {section}{Computing}{5}
+\contentsline {section}{Code}{8}
+\contentsline {subsection}{Gram-Schmidt}{8}

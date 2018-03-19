@@ -1,0 +1,250 @@
+\input{template.tex}
+
+%----------------------------------------------------------------------------------------
+%   NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Homework\ 3} % Assignment title
+\newcommand{\hmwkDueDate}{Thursday,\ March\ 22,\ 2018} % Due date
+\newcommand{\hmwkClass}{Math\ 521} % Course/clas
+\newcommand{\hmwkAuthorName}{Kristin Holmbeck} % Your name
+
+%----------------------------------------------------------------------------------------
+%   TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\textmd{\textbf{\hmwkClass \ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+\vspace{0.1in}
+\vspace{0.2in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%   TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+\vspace{0.75in}
+\tableofcontents
+\listoffigures
+\newpage
+
+%----------------------------------------------------------------------------------------
+%   PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+% To have just one problem per page, simply put a \clearpage after each problem
+
+\begin{section}{Theory}
+
+\begin{homeworkSection}{1. Gradient of Inner Product}
+
+Show that $\nabla_{\bm{v}} (\bm{v}, \bm{v}) = 2\bm{v}$ and that for a symmetric matrix $C$, $\nabla_{\bm{v}} (\bm{v}, C\bm{v}) = 2C\bm{v}$. 
+
+\problemAnswer{
+Assume $\bm{v} \in \mathbb{R}^n$.
+	\begin{align*}
+		\nabla_{\bm{v}} (\bm{v}, \bm{v}) &= \nabla_{\bm{v}} \bm{v}^T\bm{v} \\
+			&= \nabla_{\bm{v}} \left ( v_1^2 + v_2^2 + \cdots + v_n^2 \right ) \\
+			&= \left( \frac{\partial \left ( v_1^2 + v_2^2 + \cdots + v_n^2 \right ) }{\partial v_1}, \ldots, \frac{\partial \left ( v_1^2 + v_2^2 + \cdots + v_n^2 \right ) }{\partial v_n}, \right ) \\ 
+			&= \left( 2v_1,  2v_2, \ldots, 2v_n \right ) \\
+			&= 2 \bm{v}
+	\end{align*}
+Next, show $\nabla_{\bm{v}} (\bm{v}, C\bm{v}) = 2C\bm{v}$ :
+	\begin{align*}
+		\text{Let } \bm{v} &= \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix} \\
+		\text{and } C &= \begin{bmatrix} c_{11} && c_{12} && \cdots && c_{1n} \\
+			c_{21} && c_{22} && \cdots && c_{2n} \\ 
+			\vdots && 		&& 			&& \vdots \\
+			c_{n1} &&    \cdots && && c_{nn} \end{bmatrix}
+			= \begin{bmatrix} c_{11} && c_{21} && \cdots && c_{n1} \\
+			c_{12} && c_{22} && \cdots && c_{n2} \\ 
+			\vdots && 		&& 			&& \vdots \\
+			c_{1n} &&    \cdots && && c_{nn} \end{bmatrix} \\
+		&= \begin{bmatrix} \vec{c}_1 \cdots \vec{c}_n \end{bmatrix} \\
+		\text{then } \bm{v}^T C\bm{v} &= \begin{bmatrix} v_1 &&  \cdots && v_n \end{bmatrix}
+				\begin{bmatrix} \vec{c}_1 \cdot \bm{v} \\ \vdots \\ \vec{c}_n \cdot \bm{v} \end{bmatrix}
+			= v_1 \vec{c}_1 \cdot \bm{v} + \cdots + v_ n \vec{c}_n \cdot \bm{v} \\
+		&= v_1 (c_{11} v_1 + c_{12} v_2 + \cdots + c_{1n}v_n)  + \cdots + v_n (c_{n1} v_1 + c_{n2} v_2 + \cdots + c_{nn}v_n) \\ 
+		\text{So } \nabla_{\bm{v}} (\bm{v}, C\bm{v}) &= \nabla_{\bm{v}} \bm{v}^T C\bm{v} \\
+		\nabla_{\bm{v}} \bm{v}^T C\bm{v} &= 
+			\begin{bmatrix} \partial v_1 (\bm{v}^T C\bm{v}) \\ \vdots \\ \partial v_n (\bm{v}^T C\bm{v}) \end{bmatrix} \\
+		&= \begin{bmatrix} \vec{c}_1 \cdot \bm{v} + \end{bmatrix} \\
+		\partial v_k (\bm{v}^T C\bm{v}) &= v1 c_{1k} + v2 c_{2k} + \cdots + \partial v_k \left [ v_k (c_{k1}v1 + \cdots + c_{kk}v_k + \cdots + c_{kn}v_n) \right ] + \cdots + v_n c_{nk}
+		\\
+		\partial v_k (\bm{v}^T C\bm{v}) &= v1 c_{1k} + v2 c_{2k} + \cdots + \left [ (c_{k1}v1 + \cdots + c_{kk}v_k + \cdots + c_{kn}v_n ) + v_k c_{kk} \right ] + \cdots + v_n c_{nk} \\
+		&= 2 \vec{c}_k \bm{v} \\
+		\implies \nabla_{\bm{v}} (\bm{v}, C\bm{v}) &= 2 C \bm{v} \\
+	\end{align*}
+}
+
+\end{homeworkSection}
+
+\begin{homeworkSection}{2. Commutativity of Symmetric Matrix in the Inner Product}
+Show that for a symmetric matrix $C$, $( \phi^{(1)}, C\phi^{(2)} ) = ( C\phi^{(1)}, \phi^{(2)} )$.
+\\
+\\
+\problemAnswer{ 
+	\begin{align*}
+	(x,Cy) &= (Cy)^Tx = y^TC^T x = y^T Cx = (Cx,y) \\
+	\implies (x,Cy) &= (Cx,y)
+	\end{align*}
+}
+
+\end{homeworkSection}
+
+
+\begin{homeworkSection}{3. Eigenvalues and eigenvectors}
+$ X = \begin{bmatrix} -2 && -1 && 1 \\ 0 && -1 && 0 \\ -1 && 1 && 2 \\ 1 && -1 && 1
+\end{bmatrix} $
+\end{homeworkSection}
+
+
+\begin{homeworkSection}{4. FLOP count}
+Assume $A$ is $N \times P$, and that $N > P$. Then the SVD of $A$ is $A=U \Sigma V^T$ where $U$ is $N \times P$, $\Sigma$ is $P\times P$, and $V$ is $P\times P$.
+
+\problemAnswer {
+	\begin{align*}
+	 A = \Sigma V^T &= 
+		 \begin{bmatrix} \sigma_{1} &&  && 0 \\  && \ddots &&  \\ 0 &&  && \sigma_{P} \\ 0 && \cdots && 0 \end{bmatrix}
+		 \begin{bmatrix} v_{11} && \cdots && v_{1P} \\ \vdots && \ddots && \vdots \\ v_{P1} && \cdots && v_{PP} \end{bmatrix}^T \\
+	&= 	\begin{bmatrix} \sigma_{1} &&  && 0 \\  && \ddots &&  \\ 0 &&  && \sigma_{P} \\ 0 && \		\cdots && 0 \end{bmatrix}
+		\begin{bmatrix} v_{11} && \cdots && v_{P1} \\ \vdots && \ddots && \vdots \\ v_{1P} && \cdots && v_{PP} \end{bmatrix} \\
+	&= \begin{bmatrix}
+		\sigma_1 {\bm{v}^{(1)}}^T  \\
+		\sigma_2 {\bm{v}^{(2)}}^T  \\
+		\vdots \\
+		\sigma_P {\bm{v}^{(P)}}^T  \\
+		\end{bmatrix}
+	= \begin{bmatrix}
+		\text{$P$ scalar multiplies} \\
+		\text{$P$ scalar multiplies} \\
+		\vdots \\ 
+		\text{$P$ scalar multiplies}
+		\end{bmatrix}
+	= \text{$P^2$ operations}
+	\end{align*}
+On the other hand,
+	\begin{align*}
+		A = U^T X &= \begin{bmatrix} u_{11} && \cdots && u_{N1} \\ \vdots && \ddots && \vdots \\ u_{1P} && \cdots && u_{NP} \end{bmatrix}^T 
+			 \begin{bmatrix} x_{11} && \cdots && x_{N1} \\ \vdots && \ddots && \vdots \\ x_{1P} && \cdots && x_{NP} \end{bmatrix} \\
+		&= \begin{bmatrix} u_{11} && \cdots && u_{P1} \\ \vdots && \ddots && \vdots \\ u_{1N} && \cdots && u_{PN} \end{bmatrix} 
+			 \begin{bmatrix} x_{11} && \cdots && x_{N1} \\ \vdots && \ddots && \vdots \\ x_{1P} && \cdots && x_{NP} \end{bmatrix} \\
+		&= \begin{bmatrix}
+			\text{$P$ multiplies, $P-1$ additions} && \cdots && \text{$P$ multiplies, $P-1$ additions} \\
+			\vdots && \ddots && \vdots \\
+			\text{$P$ multiplies, $P-1$ additions} && \cdots && \text{$P$ multiplies, $P-1$ additions}
+			\end{bmatrix}_{N \times N} \\
+		&= \begin{bmatrix}
+			\text{$2P-1$ operations} && \cdots && \text{$2P-1$ operations} \\
+			\vdots && \ddots && \vdots \\
+			\text{$2P-1$ operations} && \cdots && \text{$2P-1$ operations}
+			\end{bmatrix}_{N \times N} \\
+		&= \text{$(2P-1)N^2$ operations}
+	\end{align*}
+}
+\end{homeworkSection}
+
+\end{section}
+
+
+\newpage
+\begin{section}{Computing}
+The computing assignment is to apply the \textit{snapshot} method to a collection of high-resolution files. We will briefly discuss the background being the method, the implementation, and provide results on a test data set.
+\\
+\\
+Suppose we have a set of $P$ $N \times N$ matrices where $P << N$. The KL expansion as discussed in class gives rise to a construction of an optimal basis for a set of vectors $\lbrace{\bm{x}^{(\mu)}} \rbrace_{\mu=1}^P$ characterized by:
+
+\begin{align}
+	C \phi^{(i)} &= \lambda_i \phi^{(i)} \label{eqn:KL}
+\end{align}
+\begin{align*}
+	\text{where} \quad C &= \frac{1}{P} \Sigma_{\mu=1}^P (x^{(\mu)} - \langle x \rangle )(x^{(\mu)} - \langle x \rangle )^T \qquad \text{is the ensemble average covariance matrix} \\
+	\text{and} \quad \langle x \rangle &= \frac{1}{P} \Sigma_{\mu=1}^P x^{(\mu)} \qquad \text{is the ensemble average}
+\end{align*}
+
+Notice that $C$ is $N \times N$. When $N$ becomes large, it is not feasible to solve this problem directly. If $C$ is nonsingular, we can reduce (without approximation) the problem from Equation \ref{eqn:KL} into a $P \times P$ problem. This is known as the $snapshot$ method.
+
+\vspace{10pt}
+
+\problemAnswer{
+	\vspace{10pt}
+	The test data set in question involves a fixed camera in a room with a person facing the camera and moving in the foreground. The ensemble average of these data is shown in Figure \ref{fig:ensemble_average}.
+
+    \begin{minipage}{1.0\textwidth}
+        \begin{figure}[H]
+        \centering
+        \includegraphics[trim={0cm 2cm 0cm 2cm},clip,width=0.85\columnwidth]{../data/ensemble_average}
+        \caption{Ensemble Average of data set}
+        \label{fig:ensemble_average}
+        \end{figure}
+    \end{minipage}
+}
+\problemAnswer{
+	\vspace{10pt}
+	Next, we display one of the mean-subtracted images, that is, the data set minus the ensemble average (Figure \ref{fig:mean_subtracted_ex}). \\
+    \begin{minipage}{1.0\textwidth}
+        \begin{figure}[H]
+        \centering
+        \includegraphics[trim={2cm 3cm 2cm 3cm},clip,width=0.85\columnwidth]{../data/mean_subtracted_ex}
+        \setlength{\belowcaptionskip}{15pt}
+        \caption{One mean-subtracted image}
+        \label{fig:mean_subtracted_ex}
+        \end{figure}
+    \end{minipage}
+    \\
+    Additionally, several eigen-images are shown below:
+
+    \begin{minipage}{1.0\textwidth}
+        \begin{figure}[H]
+        \centering
+        \includegraphics[trim={0cm 0cm 0cm 2cm},clip,width=0.85\columnwidth]{../data/eig_images}
+        \setlength{\abovecaptionskip}{-20pt}
+        \caption{Some eigen-images}
+        \label{fig:eig_images}
+        \end{figure}
+    \end{minipage}
+    Next, we show the cumulative energy (as defined in a previous homework) of the mean-subtracted data set (Figure \ref{fig:cumulative_energy}). 
+}
+
+\problemAnswer{
+    \begin{minipage}{1.0\textwidth}
+        \begin{figure}[H]
+        \centering
+        \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.85\columnwidth]{../data/cumulative_energy}
+        \caption{Cumulative Energy}
+        \label{fig:cumulative_energy}
+        \end{figure}
+    \end{minipage}}
+
+\end{section}
+
+%----------------------------------------------------------------------------------------
+\newpage
+
+\appendix
+
+\section{Code}\label{code}
+
+\subsection{Gram-Schmidt} \label{code:gram_schmidt}
+
+%\lstinputlisting{../Kristin_Holmbeck_HW2_GramSchmidt.m}
+
+
+\begin{thebibliography}{10}
+    \bibitem{chang}
+    Chang, Jen-Mei. \textit{Matrix Methods for Geometric Data Analysis and Recognition}. 2014.
+
+\end{thebibliography}
+
+\end{document}
