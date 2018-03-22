@@ -92,12 +92,11 @@ Next, show $\nabla_{\bm{v}} (\bm{v}, C\bm{v}) = 2C\bm{v}$ :
 
 \begin{homeworkSection}{2. Commutativity of Symmetric Matrix in the Inner Product}
 Show that for a symmetric matrix $C$, $( \phi^{(1)}, C\phi^{(2)} ) = ( C\phi^{(1)}, \phi^{(2)} )$.
-\\
-\\
+
 \problemAnswer{ 
 	\begin{align*}
-	(x,Cy) &= (Cy)^Tx = y^TC^T x = y^T Cx = (Cx,y) \\
-	\implies (x,Cy) &= (Cx,y)
+		(x,Cy) &= (Cy)^Tx = y^TC^T x = y^T Cx = (Cx,y) \\
+		\implies (x,Cy) &= (Cx,y)
 	\end{align*}
 }
 
@@ -105,8 +104,27 @@ Show that for a symmetric matrix $C$, $( \phi^{(1)}, C\phi^{(2)} ) = ( C\phi^{(1
 
 
 \begin{homeworkSection}{3. Eigenvalues and eigenvectors}
-$ X = \begin{bmatrix} -2 && -1 && 1 \\ 0 && -1 && 0 \\ -1 && 1 && 2 \\ 1 && -1 && 1
-\end{bmatrix} $
+Given the data matrix 
+$$ X = \begin{bmatrix} -2 && -1 && 1 \\ 0 && -1 && 0 \\ -1 && 1 && 2 \\ 1 && -1 && 1
+\end{bmatrix} $$
+compute the eigenvalues and eigenvectors of $XX^T$ and $X^TX$. For $\bm{u}^{(1)}$, confirm the statement
+$$
+	\bm{u}^{(j)} = \frac{1}{\sigma_j} \Sigma_{k=1}^{P} v_k^{(j)} \bm{x}^{(k)}
+$$
+\problemAnswer{
+	By \textsc{Matlab}, $\rho(XX^T) = \lambda(\lambda - 9)(\lambda - 4)(\lambda-3) = \lambda \rho(X^T X)$, i.e. the eigenvalues of $XX^T$ are $\lbrace 0, 3, 4, 9 \rbrace$ and the eigenvalues of $X^TX$ are $\lbrace 3, 4, 9 \rbrace$. See the heavy-lifting code later in this document. The eigenvectors of $X^TX$ are the column vectors of the matrix:
+	\begin{align*}
+		\begin{bmatrix}-0.71 && 0.50 && -0.41 && -0.29 \\ 0.00 && 0.50 && -0.00 && 0.87 \\ -0.71 && -0.50 && 0.41 && 0.29 \\ -0.00 && 0.50 && 0.82 && -0.29 \end{bmatrix}
+	\end{align*}
+	and the eigenvectors of $XX^T$ are the column vectors of
+	\begin{align*}
+		\begin{bmatrix}-0.71 && 0.00 && -0.71 \\ 0.00 && -1.00 && 0.00 \\ 0.71 && 0.00 && -0.71 \end{bmatrix}
+	\end{align*}
+	For $\bm{u}^{(1)}$,
+	\begin{align*}
+		stuff goes here
+	\end{align*}
+}
 \end{homeworkSection}
 
 
@@ -214,18 +232,28 @@ Notice that $C$ is $N \times N$. When $N$ becomes large, it is not feasible to s
         \label{fig:eig_images}
         \end{figure}
     \end{minipage}
-    Next, we show the cumulative energy (as defined in a previous homework) of the mean-subtracted data set (Figure \ref{fig:cumulative_energy}). 
+    Next, we show the cumulative energy (as defined in a previous homework) of the mean-subtracted data set (Figure \ref{fig:eigvals}). 
 }
 
 \problemAnswer{
     \begin{minipage}{1.0\textwidth}
         \begin{figure}[H]
         \centering
-        \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.85\columnwidth]{../data/cumulative_energy}
-        \caption{Cumulative Energy}
-        \label{fig:cumulative_energy}
+        \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.85\columnwidth]{../data/eigvals}
+        \caption{Scaled singular values}
+        \label{fig:eigvals}
         \end{figure}
-    \end{minipage}}
+    \end{minipage}
+
+    \begin{minipage}{1.0\textwidth}
+        \begin{figure}[H]
+        \centering
+        \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.85\columnwidth]{../data/approx_errors}
+        \caption{Rank Approximation Errors (rank $\geq$ 40)}
+        \label{fig:approx_errors}
+        \end{figure}
+    \end{minipage}
+}
 
 \end{section}
 
@@ -236,9 +264,8 @@ Notice that $C$ is $N \times N$. When $N$ becomes large, it is not feasible to s
 
 \section{Code}\label{code}
 
-\subsection{Gram-Schmidt} \label{code:gram_schmidt}
-
-%\lstinputlisting{../Kristin_Holmbeck_HW2_GramSchmidt.m}
+\subsection{Eigenvalues and Vectors} \label{code:eigvalvec}
+\lstinputlisting{../Kristin_Holmbeck_HW3_Prob3.m}
 
 
 \begin{thebibliography}{10}

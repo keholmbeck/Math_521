@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.10.10)  18 MAR 2018 17:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.10.10)  22 MAR 2018 08:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -309,95 +309,120 @@ Underfull \hbox (badness 10000) in paragraph at lines 89--90
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 94--103
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 94--103
+Underfull \hbox (badness 10000) in paragraph at lines 101--102
 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 155--157
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 113--129
+ []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 113--129
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 173--175
 
  []
 
 [3] [4]
-Underfull \hbox (badness 10000) in paragraph at lines 163--167
+Underfull \hbox (badness 10000) in paragraph at lines 181--185
 
  []
 
-<../data/ensemble_average.png, id=28, 1119.2214pt x 650.43pt>
+<../data/ensemble_average.png, id=29, 1119.2214pt x 650.43pt>
 File: ../data/ensemble_average.png Graphic file (type png)
 
 <use ../data/ensemble_average.png>
-Package pdftex.def Info: ../data/ensemble_average.png used on input line 192.
+Package pdftex.def Info: ../data/ensemble_average.png used on input line 210.
 (pdftex.def)             Requested size: 391.307pt x 187.61476pt.
 
-<../data/mean_subtracted_ex.png, id=30, 1119.2214pt x 650.43pt>
+<../data/mean_subtracted_ex.png, id=31, 1119.2214pt x 650.43pt>
 File: ../data/mean_subtracted_ex.png Graphic file (type png)
 
 <use ../data/mean_subtracted_ex.png>
-Package pdftex.def Info: ../data/mean_subtracted_ex.png used on input line 218.
+Package pdftex.def Info: ../data/mean_subtracted_ex.png used on input line 236.
 
 (pdftex.def)             Requested size: 391.307pt x 186.69954pt.
 
-<../data/eig_images.png, id=32, 1119.2214pt x 650.43pt>
+<../data/eig_images.png, id=33, 1119.2214pt x 650.43pt>
 File: ../data/eig_images.png Graphic file (type png)
 
 <use ../data/eig_images.png>
-Package pdftex.def Info: ../data/eig_images.png used on input line 218.
+Package pdftex.def Info: ../data/eig_images.png used on input line 236.
 (pdftex.def)             Requested size: 391.307pt x 207.51027pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 192--219
+Underfull \hbox (badness 10000) in paragraph at lines 210--237
 
  []
 
 [5 <../data/ensemble_average.png (PNG copy)>]
-<../data/cumulative_energy.png, id=39, 1119.2214pt x 650.43pt>
-File: ../data/cumulative_energy.png Graphic file (type png)
+<../data/eigvals.png, id=40, 562.2606pt x 421.575pt>
+File: ../data/eigvals.png Graphic file (type png)
+ <use ../data/eigvals.png>
+Package pdftex.def Info: ../data/eigvals.png used on input line 256.
+(pdftex.def)             Requested size: 391.307pt x 293.39581pt.
 
-<use ../data/cumulative_energy.png>
-Package pdftex.def Info: ../data/cumulative_energy.png used on input line 228.
-(pdftex.def)             Requested size: 391.307pt x 227.40579pt.
+<../data/approx_errors.png, id=42, 562.2606pt x 421.575pt>
+File: ../data/approx_errors.png Graphic file (type png)
 
-Underfull \hbox (badness 10000) in paragraph at lines 228--229
+<use ../data/approx_errors.png>
+Package pdftex.def Info: ../data/approx_errors.png used on input line 256.
+(pdftex.def)             Requested size: 391.307pt x 293.39581pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 256--257
 
  []
 
 [6 <../data/mean_subtracted_ex.png (PNG copy)> <../data/eig_images.png (PNG cop
-y)>] [7 <../data/cumulative_energy.png (PNG copy)>]
+y)>]
+Overfull \vbox (14.00621pt too high) has occurred while \output is active []
 
+
+[7 <../data/eigvals.png (PNG copy)> <../data/approx_errors.png (PNG copy)>]
+[8]
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 268.
+
+ (/usr/local/texlive/2017basic/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+)
+(../Kristin_Holmbeck_HW3_Prob3.m) 
 AED: lastpage setting LastPage
-[8] (./hw3.aux) ) 
+[9] (./hw3.aux) ) 
 Here is how much of TeX's memory you used:
- 4283 strings out of 494437
- 60726 string characters out of 6166644
- 269048 words of memory out of 5000000
- 7522 multiletter control sequences out of 15000+600000
- 17366 words of font info for 64 fonts, out of 8000000 for 9000
+ 4956 strings out of 494437
+ 68314 string characters out of 6166644
+ 337048 words of memory out of 5000000
+ 8183 multiletter control sequences out of 15000+600000
+ 18398 words of font info for 68 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 39i,22n,43p,295b,387s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2017basic/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmbx10.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmex10.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2017basic/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2017basic/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2017basic/texmf-di
-st/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb></usr/local/texlive/2017basic
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2017ba
-sic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2017
-basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/20
-17basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texliv
-e/2017basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/tex
-live/2017basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local
-/texlive/2017basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on hw3.pdf (8 pages, 623293 bytes).
+ 39i,22n,43p,354b,1511s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2017basic/texmf-dist/fonts/enc/dvips/base/
+8r.enc}</usr/local/texlive/2017basic/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmbx10.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmbx12.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmcsc10.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmex10.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2017basic/texmf-dist/fo
+nts/type1/public/amsfonts/cmextra/cmmib7.pfb></usr/local/texlive/2017basic/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2017basic/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2017basic
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2017bas
+ic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2017b
+asic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2
+017basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texliv
+e/2017basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/te
+xlive/2017basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr
+/local/texlive/2017basic/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
+Output written on hw3.pdf (9 pages, 682326 bytes).
 PDF statistics:
- 99 PDF objects out of 1000 (max. 8388607)
- 66 compressed objects within 1 object stream
+ 118 PDF objects out of 1000 (max. 8388607)
+ 79 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 45 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 56 words of extra memory for PDF output out of 10000 (max. 10000000)
 
