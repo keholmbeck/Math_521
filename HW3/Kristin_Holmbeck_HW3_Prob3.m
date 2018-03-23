@@ -32,12 +32,12 @@ V_ATA = [V_ATA{:}];
 
 % Confirming the statement for u^{(1)}:
 
-k = 1;
+k = 2;
 u1 = 0;
 for ii = 1:size(X,2)
-    u1 = u1 + X(:,ii)*Vt(ii,k);
+    u1 = u1 + X(:,ii)*V_AAT(ii,k);
 end
-% u1 = u1 / sqrt(S1(1));
+u1 = u1 / sqrt(S1(k,k));
 
 return
 

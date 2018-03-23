@@ -1,7 +1,8 @@
 clear;
 
-plotAndSave = false;
+plotAndSave = true;
 
+%{
 load faces1.mat;
 
 Y1 = double(Y1);
@@ -50,9 +51,26 @@ if plotAndSave
     saveas(gcf, 'data/eig_images.png');
 end
 
-% reconstruct an image
+
 E = cumulative_energy(diag(S), rank(Y1));
 D = find(E>0.95,1);
+
+if plotAndSave
+    % reconstruct an image
+    for ii = [D, D+30, D+60]
+        Xd = U(:,1:ii) * S(1:ii,1:ii) * V(:,1:ii)';
+        Xd = reshape(Xd(:,50),siz);
+        clf; imagesc(Xd); colormap gray
+        axis image; axis off;
+        
+        nd = norm(Xd - Yms_disp);
+        title({sprintf('%d^t^h rank reconstruction',ii), ...
+        sprintf('error: %0.3e', nd)}, 'FontW' ,'B');
+        saveas(gcf, sprintf('data/rank_%d_recon.png', ii));
+    end
+end
+
+% plot cumulative energy / eigval distribution
 lambda = diag(S).^2;
 
 if plotAndSave
@@ -87,5 +105,32 @@ if plotAndSave
     ylabel 'residual';
     title 'Rank Approximation Errors' FontW B;
     saveas(gcf, 'data/approx_errors.png');
+end
+
+% -------------------------------------------------------
+%}
+load Digits.mat; Gallery = double(Gallery); Probe = double(Probe);
+ndx = classify(Gallery, Probe);
+
+if plotAndSave
+    clf;
+    M = size(Probe,2);
+    for ii = 1:M
+        compim = reshape(Gallery(:,ndx(ii)), photo_size);
+        
+        subplot(M,2,2*ii-1); imagesc( reshape(Probe(:,ii),photo_size) );
+        axis off;
+        
+        if ii == 1
+            title 'Probed Image';
+        end
+        
+        subplot(M,2,2*ii); imagesc( compim );
+        axis off;
+        if ii == 1
+            title 'Classified Image';
+        end
+    end
+    colormap gray;
 end
 

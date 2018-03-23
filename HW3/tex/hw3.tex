@@ -112,18 +112,26 @@ $$
 	\bm{u}^{(j)} = \frac{1}{\sigma_j} \Sigma_{k=1}^{P} v_k^{(j)} \bm{x}^{(k)}
 $$
 \problemAnswer{
-	By \textsc{Matlab}, $\rho(XX^T) = \lambda(\lambda - 9)(\lambda - 4)(\lambda-3) = \lambda \rho(X^T X)$, i.e. the eigenvalues of $XX^T$ are $\lbrace 0, 3, 4, 9 \rbrace$ and the eigenvalues of $X^TX$ are $\lbrace 3, 4, 9 \rbrace$. See the heavy-lifting code later in this document. The eigenvectors of $X^TX$ are the column vectors of the matrix:
+	By \textsc{Matlab}, $\rho(XX^T) = \lambda(\lambda - 9)(\lambda - 4)(\lambda-3) = \lambda \rho(X^T X)$, i.e. the eigenvalues of $XX^T$ are $\lbrace 0, 3, 4, 9 \rbrace$ and the eigenvalues of $X^TX$ are $\lbrace 3, 4, 9 \rbrace$. (See the heavy-lifting code at the end of this document). The eigenvectors of $X^TX$ are the column vectors of the matrix:
 	\begin{align*}
 		\begin{bmatrix}-0.71 && 0.50 && -0.41 && -0.29 \\ 0.00 && 0.50 && -0.00 && 0.87 \\ -0.71 && -0.50 && 0.41 && 0.29 \\ -0.00 && 0.50 && 0.82 && -0.29 \end{bmatrix}
 	\end{align*}
 	and the eigenvectors of $XX^T$ are the column vectors of
 	\begin{align*}
 		\begin{bmatrix}-0.71 && 0.00 && -0.71 \\ 0.00 && -1.00 && 0.00 \\ 0.71 && 0.00 && -0.71 \end{bmatrix}
-	\end{align*}
+	\end{align*}.
+	Note that the matrix eigenvectors of $XX^T$ is the same as the matrix $V$ in the SVD decomposition $X = U \Sigma V^T$, i.e. the eigenvectors of $XX^T$ are the right singular vectors of $X$.
 	For $\bm{u}^{(1)}$,
 	\begin{align*}
-		stuff goes here
+		\frac{1}{\sigma_1} \Sigma_{k=1}^{P} v_k^{(1)} \bm{x}^{(k)}
+		&= \frac{1}{3} \left( 
+			-0.7071 \begin{bmatrix}-2.00 \\ 0.00 \\ -1.00 \\ 1.00 \end{bmatrix}
+			+ 0 \begin{bmatrix}-1.00 \\ -1.00 \\ 1.00 \\ -1.00 \end{bmatrix}
+			+ 0.7071 \begin{bmatrix}1.00 \\ 0.00 \\ 2.00 \\ 1.00 \end{bmatrix}
+		\right ) \\
+		&= \begin{bmatrix}0.71 \\ 0.00 \\ 0.71 \\ -0.00 \end{bmatrix} = \bm{u}^{(1)}
 	\end{align*}
+	Where the vector $\bm{u}^{(1)}$ is calculated from SVD via \textsc{Matlab}. 
 }
 \end{homeworkSection}
 
@@ -191,7 +199,7 @@ Suppose we have a set of $P$ $N \times N$ matrices where $P << N$. The KL expans
 	\text{and} \quad \langle x \rangle &= \frac{1}{P} \Sigma_{\mu=1}^P x^{(\mu)} \qquad \text{is the ensemble average}
 \end{align*}
 
-Notice that $C$ is $N \times N$. When $N$ becomes large, it is not feasible to solve this problem directly. If $C$ is nonsingular, we can reduce (without approximation) the problem from Equation \ref{eqn:KL} into a $P \times P$ problem. This is known as the $snapshot$ method.
+Notice that $C$ is $N \times N$. When $N$ becomes large, it is not feasible to solve this problem directly. If $C$ is nonsingular, we can reduce (without approximation) the problem from Equation \ref{eqn:KL} into a $P \times P$ problem. This is known as the $snapshot$ method. We showed in class that we can obtain a best basis for the $C$ matrix from the thin SVD of $X$.
 
 \vspace{10pt}
 
@@ -216,7 +224,7 @@ Notice that $C$ is $N \times N$. When $N$ becomes large, it is not feasible to s
         \centering
         \includegraphics[trim={2cm 3cm 2cm 3cm},clip,width=0.85\columnwidth]{../data/mean_subtracted_ex}
         \setlength{\belowcaptionskip}{15pt}
-        \caption{One mean-subtracted image}
+        \caption{50th mean-subtracted image}
         \label{fig:mean_subtracted_ex}
         \end{figure}
     \end{minipage}
@@ -232,27 +240,67 @@ Notice that $C$ is $N \times N$. When $N$ becomes large, it is not feasible to s
         \label{fig:eig_images}
         \end{figure}
     \end{minipage}
-    Next, we show the cumulative energy (as defined in a previous homework) of the mean-subtracted data set (Figure \ref{fig:eigvals}). 
+    \\
+    \\
+    \\
+	The graph in Figure \ref{fig:eigvals} shows the scaled singular values in order. We can use this as a way to determine where the cutoff rank should be. For example, at the ``elbow" of the curve.
+	\\
+	\\
 }
 
 \problemAnswer{
-    \begin{minipage}{1.0\textwidth}
+	Below we present a few reconstructions for the 50-th image from Figure \ref{fig:mean_subtracted_ex}.
         \begin{figure}[H]
         \centering
-        \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.85\columnwidth]{../data/eigvals}
+        \includegraphics[trim={0cm 3.5cm 0cm 0cm},clip,width=0.6\columnwidth]{../data/rank_37_recon}
+        \caption{Rank-37 Reconstruction}
+        \label{fig:r37}
+        \end{figure}
+
+        \begin{figure}[H]
+        \centering
+        \includegraphics[trim={0cm 3.5cm 0cm 0cm},clip,width=0.6\columnwidth]{../data/rank_67_recon}
+        \caption{Rank-67 Reconstruction}
+        \label{fig:r67}
+        \end{figure}
+
+        \begin{figure}[H]
+        \centering
+        \includegraphics[trim={0cm 3.5cm 0cm 0cm},clip,width=0.6\columnwidth]{../data/rank_97_recon}
+        \caption{Rank-97 Reconstruction}
+        \label{fig:r97}
+        \end{figure}
+}
+
+\problemAnswer{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[trim={0cm 1cm 0cm 0cm},clip,width=0.85\columnwidth]{../data/eigvals}
         \caption{Scaled singular values}
         \label{fig:eigvals}
-        \end{figure}
-    \end{minipage}
+    \end{figure}
+    
 
-    \begin{minipage}{1.0\textwidth}
-        \begin{figure}[H]
+    
+    \begin{figure}[H]
         \centering
-        \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.85\columnwidth]{../data/approx_errors}
-        \caption{Rank Approximation Errors (rank $\geq$ 40)}
+        \includegraphics[trim={0cm 1cm 0cm 0cm},clip,width=0.85\columnwidth]{../data/approx_errors}
+        \caption{Rank Approximation (Absolute) Errors for image 50 (rank $\geq$ 40)}
         \label{fig:approx_errors}
-        \end{figure}
-    \end{minipage}
+    \end{figure}
+}
+\newpage
+\problemAnswer{
+	Finally, we will discuss a possible classification algorithm based on this idea of best basis. We will classify a ``probe" set of data compared to a ``gallery" set, or training set. For this, we will, like usual, perform the SVD of a gallery set $X$ to get an orthonormal basis. By determining the orthonormal basis for $X$, we will then create a projection matrix $\mathbb{P}$ to project the probe set onto. 
+	\\
+	\\
+	First, we subtract the ensemble average to make the matrices relatively on the same caxis. After projecting the probe data onto the subspace, we compare (norm of the difference) each projection with the gallery set. (Again, see the code later in this document). As shown in Figure \ref{fig:classify}, the classification works for all but one digit of our probe set (left column). The handwritten digit "8" is misclassified as a "9". We will expand on classification schemes in future projects.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[trim={0cm 3cm 0cm 0.5cm},clip,width=0.45\columnwidth]{../data/classify}
+        \caption{Classification results}
+        \label{fig:classify}
+    \end{figure}
 }
 
 \end{section}
@@ -262,10 +310,13 @@ Notice that $C$ is $N \times N$. When $N$ becomes large, it is not feasible to s
 
 \appendix
 
-\section{Code}\label{code}
+\section{Code}
 
-\subsection{Eigenvalues and Vectors} \label{code:eigvalvec}
+\subsection{Eigenvalues and Eigenvectors}
 \lstinputlisting{../Kristin_Holmbeck_HW3_Prob3.m}
+
+\subsection{Classification}
+\lstinputlisting{../classify.m}
 
 
 \begin{thebibliography}{10}

@@ -1,4 +1,4 @@
-function X = ensemble_average(X)
+function [X, Xa] = ensemble_average(X)
 % ENSEMBLE_AVERAGE
 % 
 % Syntax:
@@ -10,6 +10,6 @@ function X = ensemble_average(X)
 % 
 
 nx = size(X,2);
-X  = sum(X,2) / nx;
-
+Xa = sum(X,2) / nx;
+X  = bsxfun(@minus, X, Xa);
 end

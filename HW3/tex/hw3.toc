@@ -4,5 +4,6 @@
 \contentsline {subsection}{3. Eigenvalues and eigenvectors}{3}
 \contentsline {subsection}{4. FLOP count}{3}
 \contentsline {section}{Computing}{5}
-\contentsline {section}{Code}{9}
-\contentsline {subsection}{Eigenvalues and Vectors}{9}
+\contentsline {section}{Code}{10}
+\contentsline {subsection}{Eigenvalues and Eigenvectors}{10}
+\contentsline {subsection}{Classification}{10}
