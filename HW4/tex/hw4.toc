@@ -1,0 +1,8 @@
+\contentsline {section}{Theory}{2}
+\contentsline {subsection}{1. }{2}
+\contentsline {subsection}{2. }{2}
+\contentsline {subsection}{3. }{2}
+\contentsline {section}{Computing}{3}
+\contentsline {subsection}{1. }{3}
+\contentsline {section}{Code}{4}
+\contentsline {subsection}{Gram-Schmidt}{4}

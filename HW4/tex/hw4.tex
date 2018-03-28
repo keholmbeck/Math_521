@@ -1,0 +1,166 @@
+\input{template.tex}
+
+%----------------------------------------------------------------------------------------
+%   NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Homework\ 4} % Assignment title
+\newcommand{\hmwkDueDate}{Tuesday,\ April\ 17,\ 2018} % Due date
+\newcommand{\hmwkClass}{Math\ 521} % Course/clas
+\newcommand{\hmwkAuthorName}{Kristin Holmbeck} % Your name
+
+%----------------------------------------------------------------------------------------
+%   TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\textmd{\textbf{\hmwkClass \ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+\vspace{0.1in}
+\vspace{0.2in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%   TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+\vspace{0.75in}
+\tableofcontents
+\listoffigures
+\newpage
+
+%----------------------------------------------------------------------------------------
+%   PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+% To have just one problem per page, simply put a \clearpage after each problem
+
+\begin{section}{Theory}
+
+\begin{homeworkSection}{1. }
+
+Consider the two eigenvector problems
+\begin{align*}
+	C_x \bm{u} = \lambda_x \bm{u}
+\end{align*}
+and
+\begin{align*}
+	C_s \bm{v} = \lambda_s \bm{v}
+\end{align*}
+where the matrices are related by $C_x = C_x + \alpha I$, where $\alpha$ is a real number and $I$ is the usual identity matrix. Show that if $\bm{u}$ is an eigenvector of $C_x$, then it is also an eigenvector of $C_s$ associated with eigenvalue $\lambda_s = \lambda_x -\alpha$.
+\\
+\\
+\problemAnswer{
+	\begin{align*}
+		C_x \bm{u} &= \lambda_x \bm{u} = C_s \bm{u} + \alpha I \bm{u} \\
+		C_s \bm{u} &= \lambda_x \bm{u} - \alpha I \bm{u} \\
+		C_s \bm{u} &= (\lambda_x  - \alpha) \bm{u}  \\
+		\text{but} \quad C_s \bm{v} &= \lambda_s \bm{v} \\
+		\implies \lambda_s &= \lambda_x  - \alpha \qquad \text{is an eigenvalue with associated eigenvector $\bm{u}$}
+	\end{align*}
+}
+
+\end{homeworkSection}
+
+\begin{homeworkSection}{2. }
+Let $A \in \mathbb{R}^{m \times n}$. Show that the matrix $M$ defined as
+\begin{align*}
+	M &= \alpha^2 I + AA^T, \quad  \alpha \neq 0 \in \mathbb{R}
+\end{align*}
+
+is nonsingular, where $I = I_m$ and $\alpha$ is a nonzero real number.
+\\
+\\
+\problemAnswer{ 
+	For the trivial case, suppose $A = 0_{m \times n}$. Then $M = \alpha^2 I$ which is clearly nonsingular since $\alpha \neq 0$.
+	\\
+	\\
+
+}
+
+\end{homeworkSection}
+
+\begin{homeworkSection}{3. }
+Show that the between-class scatter matrix, $S_B$, in the multi-class \textit{Fisher Discriminant Analysis} is given by
+\begin{align*}
+	S_B &= \sum_{i=1}^M n_i (\bm{m}_i - \bm{m})(\bm{m}_i - \bm{m})^T,
+\end{align*}
+where $M$ is the total number of distinct classes, $n_i$ is the number of data points in class $i$, $\bm{m}_i$ is the class mean of the $i^{\text{th}}$ class, and $m$ is the mean across all $n$ data points. You may use the facts that
+\begin{align*}
+	S_T = S_B + S_W, \quad S_W = \sum_{i=1}^M \sum_{x \in D_i} (x - \bm{m}_i)(x - \bm{m}_i)^T, \quad \text{and} \quad S_T = \sum_{i=1}^n (x_i - \bm{m})(x_i - \bm{m})^T
+\end{align*}
+\\
+\\
+\end{homeworkSection}
+
+\end{section}
+
+%----------------------------------------------------------------------------------------
+\begin{section}{Computing}
+
+\begin{homeworkSection}{1. }
+This project concerns the application of the KL procedure for incomplete data \cite{everson}. Let the complete data set be translation-invariant:
+\begin{align*}
+	f(x_m, t_\mu) &= \frac{1}{N} \sum_{k=1}^N \frac{1}{k} \sin[k(x_m-  t_\mu)],
+\end{align*}
+where $m = 1,\ldots, M$, with $M$ dimension of the ambient space (size of the spatial grid), and $\mu = 1,\ldots,P$, with $P$ the number of points in the ensemble. 
+\\
+\\
+Let $x_m = \cfrac{2\pi(m-1)}{M}$ and $t_\mu = \cfrac{2\pi(\mu-1)}{P}$.
+\\
+\\
+Select an ensemble of masks $\lbrace \bm{m}^{(\mu)} \rbrace$, $\mu = 1, \ldots, P$. where 10\% of the indices are selected to be zero for each mask. Each pattern in the incomplete ensemble may be written as
+\begin{align*}
+	\tilde{\bm{x}}^{(\mu)} &= \bm{m}^{(\mu)} . \bm{f}^{(\mu)},
+\end{align*}
+where $\left ( \bm{f}^{(\mu)} \right )_m = \frac{1}{N} \sum_{k=1}^N \frac{1}{k} \sin[k(x_m-  t_\mu)]$. Let $P=M=64$ and $N=3$.
+
+\renewcommand{\theenumi}{\alph{enumi}}
+\begin{enumerate}
+  \item Compute the eigenvectors of this ensemble using the gappy algorithm \cite{everson}.
+  \item Plot the eigenvalues as a function of the iteration, and continue until they converge.
+  \item Plot your final eigenfunctions corresponding to the 10 largest eigenvalues.
+  \item Plot the element $\tilde{\bm{x}}^{(1)}$ and the vector $\tilde{\bm{x}}_D$ repaired 	according to Equation
+  \begin{align}
+  	\tilde{\bm{x}} \approx \tilde{\bm{x}}_D = \sum_{n=1}^D \tilde{a}_n \phi^{(n)}.
+  \end{align}
+  Determine the value of $D$ that provides the best approximation to the original non-gappy pattern vector.
+\end{enumerate}
+
+\end{homeworkSection}
+	
+\end{section}
+%----------------------------------------------------------------------------------------
+\newpage
+
+\appendix
+
+\section{Code}\label{code}
+
+\subsection{Gram-Schmidt} \label{code:gram_schmidt}
+
+% \lstinputlisting{../Kristin_Holmbeck_HW2_GramSchmidt.m}
+
+
+\begin{thebibliography}{10}
+    \bibitem{chang}
+    Chang, Jen-Mei. \textit{Matrix Methods for Geometric Data Analysis and Recognition}. 2014.
+
+    \bibitem{fisher}
+    P. N. Belhumeur, J. P. Hespanha and D. J. Kriegman, ``Eigenfaces vs. Fisherfaces: recognition using class specific linear projection," in \textit{IEEE Transactions on Pattern Analysis and Machine Intelligence}, vol. 19, no. 7, pp. 711-720, Jul 1997.
+
+    \bibitem{everson}
+    R. Everson and L. Sirovich. The karhunen-loeve transform for incomplete data. \textit{J. Opt. Soc. Am., A}, 12(8):1657–1664, 1995.
+\end{thebibliography}
+
+\end{document}
