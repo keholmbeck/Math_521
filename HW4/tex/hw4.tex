@@ -85,7 +85,7 @@ is nonsingular, where $I = I_m$ and $\alpha$ is a nonzero real number.
 	For the trivial case, suppose $A = 0_{m \times n}$. Then $M = \alpha^2 I$ which is clearly nonsingular since $\alpha \neq 0$.
 	\\
 	\\
-
+	Next, note that $AA^T=(AA^T)^T$ since $(AA^T)^T=(A^T)^T A^T=AA^T$. This implies that $M$ is symmetric.
 }
 
 \end{homeworkSection}
@@ -101,6 +101,25 @@ where $M$ is the total number of distinct classes, $n_i$ is the number of data p
 \end{align*}
 \\
 \\
+\problemAnswer{
+	Given what we know above, and the fact that the i$^{th}$ class mean $\bm{m}_i = \frac{1}{n_i} \sum_{x \in D_i} \bm{x}$ and the mean $\bm{m}$ across all data points is given by $\bm{m} = \frac{1}{n} \sum_{i=1}^n \bm{x}_i$, we will start with evaluating $S_B = S_T - S_W$.
+	\\
+	\\
+	Furthermore, note that $\forall \bm{x}_i \in X$ (the entire data set), $\bm{x}_i \in \bigcup\limits_{j=1}^{M} D_j$, the union of all distinct classes, and also $\bm{m}_i n_i =  \sum_{x \in D_i} \bm{x}$.
+	\\
+	\begin{align*}
+		S_T - S_W &= \sum_{i=1}^n (x_i - \bm{m})(x_i - \bm{m})^T - \sum_{i=1}^M \sum_{x \in D_i} (x - \bm{m}_i)(x - \bm{m}_i)^T \\
+		&= \sum_{i=1}^M \sum_{x \in D_i} \left [ (x - \bm{m})(x - \bm{m})^T - (x - \bm{m}_i)(x - \bm{m}_i)^T \right ] \\
+		&= \sum_{i=1}^M \sum_{x \in D_i} \left [ (x x^T - \bm{m} x^T -x \bm{m}^T + \bm{m}\bm{m}^T )- (xx^T - \bm{m}_i x^T - x {\bm{m}_i}^T + \bm{m}_i {\bm{m}_i}^T) \right ] \\
+		&= \sum_{i=1}^M \sum_{x \in D_i} \left [ (\bm{m}\bm{m}^T - \bm{m} x^T -x \bm{m}^T )- (\bm{m}_i {\bm{m}_i}^T - \bm{m}_i x^T - x {\bm{m}_i}^T) \right ] \\
+		&= \sum_{i=1}^M \left [ n_i \bm{m}\bm{m}^T - n_i \bm{m}_i {\bm{m}_i}^T + \sum_{x \in D_i}  (\bm{m}_i x^T + x {\bm{m}_i}^T - \bm{m} x^T - x \bm{m}^T ) \right ] \\
+		&= \sum_{i=1}^M \left [ n_i \bm{m}\bm{m}^T - n_i \bm{m}_i {\bm{m}_i}^T + \bm{m}_i \sum_{x \in D_i} x^T + {\bm{m}_i}^T \sum_{x \in D_i} x - \bm{m} \sum_{x \in D_i} x^T - \bm{m}^T \sum_{x \in D_i} x \right ] \\
+		&= \sum_{i=1}^M \left [ n_i \bm{m}\bm{m}^T - n_i \bm{m}_i {\bm{m}_i}^T + \bm{m}_i n_i {\bm{m}_i}^T + {\bm{m}_i}^T n_i {\bm{m}_i} - \bm{m} n_i {\bm{m}_i}^T - \bm{m}^T n_i {\bm{m}_i} \right ] \\
+		&= \sum_{i=1}^M n_i \left [ \bm{m}\bm{m}^T + {\bm{m}_i}^T {\bm{m}_i} - \bm{m} {\bm{m}_i}^T - \bm{m}^T {\bm{m}_i} \right ] \\
+		&= \sum_{i=1}^M n_i (\bm{m} - \bm{m}_i)(\bm{m} - \bm{m}_i)^T
+		\\
+	\end{align*}
+}
 \end{homeworkSection}
 
 \end{section}
