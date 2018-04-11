@@ -13,6 +13,7 @@ CLASS_3 = [];
 for c = task
     for trial = trials
         dat = load([foldername, sprintf('class-%d_seq-%d', c, trial)])';
+        dat = dat(:);
         
         if c == 2
             CLASS_2 = [CLASS_2, dat];
@@ -22,7 +23,8 @@ for c = task
     end
 end
 
-% CLASS_2 = CLASS_2'; CLASS_3 = CLASS_3';
+CLASS_2 = CLASS_2'; CLASS_3 = CLASS_3';
+DATA = [CLASS_2; CLASS_3];
 
 m1 = sum(CLASS_2,2) / size(CLASS_2,2);
 m2 = sum(CLASS_3,2) / size(CLASS_3,2);
@@ -33,4 +35,6 @@ X2 = CLASS_3;
 A  = m2-m1;
 B  = sum(bsxfun(@minus, X1, m1) + bsxfun(@minus, X2, m2), 2);
 
-[U,V,X,C,S] = gsvd(A,B,0);
+[U,V,X,C,S] = gsvd(A*A', B*B', 0);
+w = U(:,1);
+

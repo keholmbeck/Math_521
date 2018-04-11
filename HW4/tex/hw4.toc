@@ -1,8 +1,10 @@
 \contentsline {section}{Theory}{2}
-\contentsline {subsection}{1. }{2}
-\contentsline {subsection}{2. }{2}
-\contentsline {subsection}{3. }{2}
+\contentsline {subsection}{1. Eigen-relationship}{2}
+\contentsline {subsection}{2. Invertibility of a particular symmetric matrix}{2}
+\contentsline {subsection}{3. Between-Class Scatter Matrix simplification}{2}
 \contentsline {section}{Computing}{3}
-\contentsline {subsection}{1. }{3}
-\contentsline {section}{Code}{5}
-\contentsline {subsection}{Gram-Schmidt}{5}
+\contentsline {subsection}{1. KL Procedure for Gappy Data}{3}
+\contentsline {subsection}{2. Linear Discriminant Analysis (LDA)}{4}
+\contentsline {subsection}{3. Maximum Noise Fraction (MNF) method}{4}
+\contentsline {section}{Code}{6}
+\contentsline {subsection}{Gram-Schmidt}{6}

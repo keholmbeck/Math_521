@@ -9,6 +9,9 @@
 \newcommand{\hmwkClass}{Math\ 521} % Course/clas
 \newcommand{\hmwkAuthorName}{Kristin Holmbeck} % Your name
 
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
 %----------------------------------------------------------------------------------------
 %   TITLE PAGE
 %----------------------------------------------------------------------------------------
@@ -47,7 +50,7 @@
 
 \begin{section}{Theory}
 
-\begin{homeworkSection}{1. }
+\begin{homeworkSection}{1. Eigen-relationship}
 
 Consider the two eigenvector problems
 \begin{align*}
@@ -66,13 +69,13 @@ where the matrices are related by $C_x = C_s + \alpha I$, where $\alpha$ is a re
 		C_s \bm{u} &= \lambda_x \bm{u} - \alpha I \bm{u} \\
 		C_s \bm{u} &= (\lambda_x  - \alpha) \bm{u}  \\
 		\text{but} \quad C_s \bm{v} &= \lambda_s \bm{v} \\
-		\implies \lambda_s &= \lambda_x  - \alpha \qquad \text{is an eigenvalue with associated eigenvector $\bm{u}$}
+		\implies \lambda_s &= \lambda_x  - \alpha \qquad \text{is an eigenvalue of $C_s$ with associated eigenvector $\bm{u}$}
 	\end{align*}
 }
 
 \end{homeworkSection}
 
-\begin{homeworkSection}{2. }
+\begin{homeworkSection}{2. Invertibility of a particular symmetric matrix}
 Let $A \in \mathbb{R}^{m \times n}$. Show that the matrix $M$ defined as
 \begin{align*}
 	M &= \alpha^2 I + AA^T, \quad  \alpha \neq 0 \in \mathbb{R}
@@ -82,15 +85,21 @@ is nonsingular, where $I = I_m$ and $\alpha$ is a nonzero real number.
 \\
 \\
 \problemAnswer{ 
-	For the trivial case, suppose $A = 0_{m \times n}$. Then $M = \alpha^2 I$ which is clearly nonsingular since $\alpha \neq 0$.
-	\\
-	\\
-	Next, note that $AA^T=(AA^T)^T$ since $(AA^T)^T=(A^T)^T A^T=AA^T$. This implies that $M$ is symmetric.
+    \textbf{ THIS IS WRONG. TRY AGAIN }
+    \\
+    If $M$ is singular, then it has at least one eigenvalue of 0. Since $AA^T$ is symmetric, the diagonal entries
+    are non-negative, that is, $(AA^T)_{i,i} = (a_{i,i})^2\geq 0, \forall i = 1, \ldots n$. 
+    Examining the trace of the matrix $M$, 
+    $$
+        tr(M) = \sum{i=1}^n M_{i,i} = \sum{i=1}^n \left ( \alpha^2 + (AA^A)_{i,i} \right ) \geq n \alpha^2 > 0
+    $$
+    Since the trace of a matrix is the sum of its eigenvalues, (\small{$tr(A) = \sum_{i=1}^n \lambda_i$}), 
+    $tr(M)>0$ implies $0$ is not an eigenvalue of $M$. Hence, $M$ is nonsingular.
 }
 
 \end{homeworkSection}
 
-\begin{homeworkSection}{3. }
+\begin{homeworkSection}{3. Between-Class Scatter Matrix simplification}
 Show that the between-class scatter matrix, $S_B$, in the multi-class \textit{Fisher Discriminant Analysis} is given by
 \begin{align*}
 	S_B &= \sum_{i=1}^M n_i (\bm{m}_i - \bm{m})(\bm{m}_i - \bm{m})^T,
@@ -127,7 +136,7 @@ where $M$ is the total number of distinct classes, $n_i$ is the number of data p
 %----------------------------------------------------------------------------------------
 \begin{section}{Computing}
 
-\begin{homeworkSection}{1. }
+\begin{homeworkSection}{1. KL Procedure for Gappy Data}
 This project concerns the application of the KL procedure for incomplete data \cite{everson}. Let the complete data set be translation-invariant:
 \begin{align*}
 	f(x_m, t_\mu) &= \frac{1}{N} \sum_{k=1}^N \frac{1}{k} \sin[k(x_m-  t_\mu)],
@@ -157,7 +166,63 @@ where $\left ( \bm{f}^{(\mu)} \right )_m = \frac{1}{N} \sum_{k=1}^N \frac{1}{k} 
 \end{enumerate}
 
 \end{homeworkSection}
-	
+
+\begin{homeworkSection}{2. Linear Discriminant Analysis (LDA)}
+\renewcommand{\theenumi}{\alph{enumi}}
+\begin{enumerate}
+  \item Write a \textsc{MATLAB} routine to produce an optimal projection direction, $w$, using the two-class LDA
+    criterion
+    $$
+        w = \argmax_w J(w) = \argmax_w \frac{w^T S_B w}{w^T S_W w},
+    $$
+    where
+    $$
+        S_B = (\bm{m}_2 - \bm{m}_1)(\bm{m}_2 - \bm{m}_1)^T \quad \text{and} \quad
+        S_W = \sum_{i=1}^M \sum_{x \in D_i} (x - \bm{m}_i)(x - \bm{m}_i)^T
+    $$
+    are the between-class scatter matrix and the within-class scatter matrix, respectively. That is, your
+    code should take in a set of data points with a clear indication which points belong to class 1 and
+    which points belong to class 2, and output a single vector $w$ that is the solution of the generalized
+    eigenvalue problem $S_B w = \lambda S_W w$.
+  \item Now, use your subroutine in part (a) to project the EEG data onto a real line. Particularly, we can
+    form a data point in $\mathbb{R}^{1040×19}$ by concatenating the columns for each trial, therefore having 10 data
+    points for task 2 and 10 data points for task 3. You would then project these 20 points onto the
+    real line with the $w$ found with part (a). Plot the projected data on the real line and distinguish the
+    classes with different symbols. Do you see a clear separation? Analyze your results.
+\end{enumerate}
+\end{homeworkSection}
+
+\begin{homeworkSection}{3. Maximum Noise Fraction (MNF) method}
+Construct a $n \times 10$ matrix (choose $n \geq 250$) to serve as a ground truth data set so that each column is a
+$n$-dimensional time series. Next, add \textbf{correlated noise} to each column to create a noisy data set, $X$. The
+goal of this problem is to implement the Maximum Noise Fraction method to recover the ground truth as
+closely as possible from the noisy data. Suppose the source of the noise is unknown, you may estimate
+the noise covariance, $N^TN$, using the difference matrix as $N^T N = \frac{1}{2} dX^TdX$ where if
+$$
+    X = \begin{bmatrix}
+        x_1(t_1)  &&  x_2(t_1) && \cdots && x_p(t_1) \\
+        x_1(t_2)  &&  x_2(t_2) && \cdots && x_p(t_2) \\
+        \vdots    && \vdots    && \ddots && \vdots \\
+        x_1(t_n)  &&  x_2(t_n) && \cdots && x_p(t_n)
+    \end{bmatrix}
+$$
+then
+$$
+    dX = \begin{bmatrix}
+        x_1(t_2)-x_1(t_1)  &&  x_2(t_2)-x_2(t_1) && \cdots && x_2(t_2) - x_p(t_1) \\
+        x_1(t_3)-x_1(t_2)  &&  x_2(t_3)-x_2(t_2) && \cdots && x_2(t_3) - x_p(t_2) \\
+        \vdots    && \vdots    && \ddots && \vdots \\
+        x_1(t_n)-x_1(t_{n-1})  &&  x_2(t_n)-x_2(t_{n-1}) && \cdots && x_2(t_n) - x_p(t_{n-1})
+    \end{bmatrix}
+$$
+Notice that $X \in \mathbb{R}^{n \times p}$ and $dX \in \mathbb{R}^{(n-1) \times p}$.
+In your report, examine and elaborate on the effect of a $D$-mode
+reconstruction on a single noisy signal for various values of $D$ (i.e., choose a single column to filter). In
+a single graph, visually display the result of the original signal, noisy signal, and filtered (de-noised) data
+(with your best choice of $D$) to compare. Use the graph legend to distinguish each.
+
+\end{homeworkSection}
+
 \end{section}
 %----------------------------------------------------------------------------------------
 \newpage
