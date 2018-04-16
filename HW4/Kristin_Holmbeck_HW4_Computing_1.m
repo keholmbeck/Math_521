@@ -2,6 +2,8 @@ clear;
 
 rng(1028);
 
+GEN_PLOTS = false;
+
 N = 3;
 M = 64;     % size of spatial grid
 P = 64;     % number of points in the ensemble
@@ -11,83 +13,83 @@ tm = ((1:P)-1)* 2*pi / P;
 
 [T,X] = meshgrid(tm, xm);
 
-f   = zeros(M,P);
-mmu = ones(M,P);        % known mask for gappy data
-k   = ceil(0.10*M);     % 0.10 of indices will be gappy
+f    = zeros(M,P);
+mask = ones(M,P);        % known mask for gappy data
+k    = ceil(0.10*M);     % 0.10 of indices will be gappy
 
 for ii = 1:N
     f = f + sin(ii*(X-T))/ii;
 end
 for ii = 1:P
     ndx = randperm(M, k);
-    mmu(ndx,ii) = 0;
+    mask(ndx,ii) = 0;
 end
-mmu = logical(mmu);
+mask = logical(mask);
 
-xt = f / N;      % true data
-xg = xt.*mmu;     % gappy data
+xt = f / N;         % true data
+xg = xt.*mask;      % gappy data
 
-% -------------------------------------
-% Type 1 algorithm: we have a good basis --
-% 
-%   
+[xrep, eigData] = repair_gappy_data(xg, mask);
 
+markers = {'o', '+', '*', 'd', 's', '^', 'V', '>', '<'};
 
-% Type 2 algorithm: we don't have a good basis --
-% 
-%   make an initial repair with the ensemble average
-%   compute first estimate of KL basis
-%   do until convergence:
-%       re-estimate the gappy data using Type 1 algorithm
-%       recompute the KL basis
-% 
-
-Pi = sum(mmu,2);
-
-xhat = xg;
-
-xavg        = sum(xhat,2) ./ Pi;
-xavg        = repmat(xavg, 1, P);
-xhat(~mmu)  = xavg(~mmu);   % fill in initial gaps with ensemble avg
-
-x1 = xhat;
-
-for kk = 1:3
-%     xavg        = sum(xhat,2) ./ Pi;
-%     xavg        = repmat(xavg, 1, P);
-%     xhat(~mmu)  = xavg(~mmu);   % fill in initial gaps with ensemble avg
+if GEN_PLOTS
+    surf(xt, 'EdgeColor','none');
+    axis tight; title 'True Data' FontW B; xlabel x; ylabel y;
+    saveas(gcf, 'data/true_data.png');
     
-    [U,S,V]     = best_basis(xhat);
+    surf(xg, 'EdgeColor','none');
+    axis tight; title 'Gappy Data' FontW B; xlabel x; ylabel y;
+    saveas(gcf, 'data/gappy_data.png');
     
-    D = 6;      % need to do a D-approximation of xhat
-    U = U(:,1:D);
-    S = S(1:D,1:D);
-    V = V(:,1:D);
-    
-    b = zeros(D,P);
-    
-    for mm = 1:P
-        mu = mmu(:,mm);
-        
-        Ms = zeros(D,D);
-        for ii = 1:size(Ms,1)
-            for jj=1:size(Ms,2)
-                Ui = U(:,ii);
-                Uj = U(:,jj);
-                Ms(ii,jj) = (Ui.*mu)' * (Uj.*mu);
-            end
+    [U,S,V] = svd(xrep, 0);
+    for jj = 1:2
+        for ii = 1:5
+            plot(U(:,ii*jj), markers{ii}); hold on;
         end
-        f = zeros(D,1);
-        for jj = 1:D
-            f(jj) = (xhat(:,mm).*mu)' * (U(:,jj).*mu);
+        hold off;
+        if jj == 1
+            title 'First 5 eigenvectors' 'FontW' B;
+        else
+            title 'Second 5 eigenvectors' 'FontW' B;
         end
-        b(:,mm) = pinv(Ms)*f;
+        saveas(gcf, sprintf('data/eigvec_%d.png', jj));
     end
     
-    repair      = U*b;
-    xhat(~mmu)  = repair(~mmu);
+    nIter = size(eigData,1);
+    for ii = 1:nIter
+        subplot(4,2,2*ii-1);
+        surf(eigData{ii,3}, 'EdgeColor', 'none');
+        axis tight;
+        
+        if ii == 1
+            title({'Approximated Data', sprintf('iter %d',ii)}, 'FontW','B');
+        else
+            title(sprintf('iter %d',ii), 'FontW','B');
+        end
+        
+        subplot(4,2,2*ii);
+        surf(xt - eigData{ii,3}, 'EdgeColor', 'none');
+        axis tight;
+        if ii == 1
+            title({'Error', sprintf('iter %d',ii)}, 'FontW','B');
+        else
+            title(sprintf('iter %d',ii), 'FontW','B');
+        end
+    end
     
-%     xavg        = sum(repair,2) ./ Pi;
-%     xavg        = repmat(xavg, 1, P);   % ensemble average of xnew
-%     xhat(~mmu)  = xavg(~mmu);
+    % already knowing nIterations = 8 ---
+    for ii = 1:nIter
+        subplot(4,2,ii);
+        plot(eigData{ii,1}); axis tight;
+        title(sprintf('iteration %d', ii));
+    end
+    saveas(gcf, 'data/eigvec_convergence.png');
+    
+    eigVals = cell2mat(eigData(:,2)');
+    evDiff  = diff(eigVals');
+    plot(2:8, evDiff); axis tight;
+    xlabel iteration; ylabel 'difference from previous iteration';
+    title 'Convergence of eigenvalues' FontW B;
+    saveas(gcf, 'data/eigval_convergence.png');
 end

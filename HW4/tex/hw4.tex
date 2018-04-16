@@ -84,17 +84,17 @@ Let $A \in \mathbb{R}^{m \times n}$. Show that the matrix $M$ defined as
 is nonsingular, where $I = I_m$ and $\alpha$ is a nonzero real number.
 \\
 \\
-\problemAnswer{ 
-    \textbf{ THIS IS WRONG. TRY AGAIN }
+\problemAnswer{
+    First, we will show that $M$ is positive-definite.
+    For any $x \neq 0 \in \mathbb{R}^m$,
+    \begin{align*}
+        x^T M x &= x^T (\alpha^2 I + AA^T) x = \alpha^2 x^T x + x^T AA^T x \\
+                &= \alpha^2 ||x||^2 + ||A^T x||^2 \\
+                &\geq \alpha^2 ||x||^2 \qquad \text{if $x \in$ null($A^T$)} > 0\\
+        \implies x^T M x &> 0,
+    \end{align*}
+    thus, $M$ is positive definite which implies that the eigenvalues of $M$ are positive. Since zero cannot be an eigenvalue, $M$ is nonsingular.
     \\
-    If $M$ is singular, then it has at least one eigenvalue of 0. Since $AA^T$ is symmetric, the diagonal entries
-    are non-negative, that is, $(AA^T)_{i,i} = (a_{i,i})^2\geq 0, \forall i = 1, \ldots n$. 
-    Examining the trace of the matrix $M$, 
-    $$
-        tr(M) = \sum{i=1}^n M_{i,i} = \sum{i=1}^n \left ( \alpha^2 + (AA^A)_{i,i} \right ) \geq n \alpha^2 > 0
-    $$
-    Since the trace of a matrix is the sum of its eigenvalues, (\small{$tr(A) = \sum_{i=1}^n \lambda_i$}), 
-    $tr(M)>0$ implies $0$ is not an eigenvalue of $M$. Hence, $M$ is nonsingular.
 }
 
 \end{homeworkSection}
@@ -134,6 +134,8 @@ where $M$ is the total number of distinct classes, $n_i$ is the number of data p
 \end{section}
 
 %----------------------------------------------------------------------------------------
+\newpage
+
 \begin{section}{Computing}
 
 \begin{homeworkSection}{1. KL Procedure for Gappy Data}
@@ -165,8 +167,138 @@ where $\left ( \bm{f}^{(\mu)} \right )_m = \frac{1}{N} \sum_{k=1}^N \frac{1}{k} 
   Determine the value of $D$ that provides the best approximation to the original non-gappy pattern vector.
 \end{enumerate}
 
+\problemAnswer{
+    We begin by visualizing the true and gappy data (generated using a random mask) shown in Figures \ref{fig:true_data} and \ref{fig:gappy_data}, respectively.
+
+    \begin{minipage}{0.5\textwidth}
+        \begin{figure}[H]
+        \centering
+        \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\columnwidth]{../data/true_data}
+        \caption{True Data (Generated)}
+        \label{fig:true_data}
+        \end{figure}
+    \end{minipage}
+    \begin{minipage}{0.5\textwidth}
+        \begin{figure}[H]
+        \centering
+        \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\columnwidth]{../data/gappy_data}
+        \caption{Gappy Data (``Given")}
+        \label{fig:gappy_data}
+        \end{figure}
+    \end{minipage}
+}
+\problemAnswer{
+    The procedure for filling in the gappy data is outlined in \cite{chang}, and the actual code for doing so is given later in this document. Given a set of data $\lbrace \bm{x}^{(\mu)} \rbrace_{\mu=1}^P$ with each $\bm{x}^{(\mu)} \in \mathbb{R}^{M \times P}$, we initialize masks for each data point $\lbrace \bm{m}^{(\mu)} \rbrace_{\mu=1}^P$ to define our gappy data. If $m^{(\mu)}_i = 0$, there is a gap and we need to repair the data; if $m^{(\mu)}_i=1$, do nothing. We are changing/repairing only the gaps (defined by the 0-values in a mask vector $m$) with a \textit{repair} $\bm{r}$, where
+    $$
+        \bm{r} = \sum_{n=1}^D b_n U^{(n)}
+    $$
+    where $D$ is a rank-approximation value, and $\lbrace U^{(n)} \rbrace$ is a set of basis vectors (eigenvectors) of the data set $\lbrace x^{(\mu)} \rbrace_{\mu=1}^P$. The coefficients $b_n$ for each set of data are found by solving the system of equations
+    $$
+        \begin{bmatrix} \langle \bm{x}^{(\mu)}, U^{(1)} \rangle_m \\
+        \vdots \\
+        \langle \bm{x}^{(\mu)}, U^{(D)} \rangle_m
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            \langle U^{(1)}, U^{(1)} \rangle_m && \cdots && \langle U^{(1)}, U^{(D)} \rangle_m \\
+            \vdots && \ddots && \vdots \\
+            \langle U^{(D)}, U^{(1)} \rangle_m && \cdots && \langle U^{(D)}, U^{(D)} \rangle_m \\
+        \end{bmatrix}
+        \begin{bmatrix} b_1 \\ \vdots \\ b_D \end{bmatrix}        
+    $$
+    where $\langle U^{(i)}, U^{(j)} \rangle_{\bm{m}}$ is the dot product of $U^{(i)}, U^{(j)}$ with the applied mask $\bm{m}$. In other words,
+    $$
+        \langle U^{(i)}, U^{(j)} \rangle_{\bm{m}} = 
+        \begin{bmatrix}
+            U^{(i)}_1 m_1 && U^{(i)}_2 m_2 && \cdots && U^{(i)}_M m_M
+        \end{bmatrix}
+        \begin{bmatrix}
+            U^{(j)}_1 m_1 \\ U^{(j)}_2 m_2 \\\vdots \\ U^{(j)}_M m_M
+        \end{bmatrix}
+    $$
+    Solving for the repair $\bm{r}$ for each $\bm{x}^{(\mu)}$ gives us an approximation to the true data set, and we iterate this algorithm until convergence. With that, let's look at the results for the data set shown in Figure \ref{fig:true_data}. We use the first iteration of this algorithm to determine an appropriate $D$-approximation to the data set.
+    \begin{minipage}{1.0\textwidth}
+        \begin{figure}[H]
+        \centering
+        \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.70\columnwidth]{../data/cumulative_energy}
+        \caption{Cumulative energy of the mean-subtracted gappy data}
+        \label{fig:energy}
+        \end{figure}
+    \end{minipage}
+}
+\newpage
+\problemAnswer{
+    From Figure \ref{fig:energy}, we select a $D=6$ rank approximation of the data to retain 90\% of the energy. So for the remaining iterations, we will use the rank-6 approximation when obtaining the best basis (SVD). To further illustrate this point, we plot the first gappy data point along with its repair, i.e. estimation of the gappy data using the coefficients $b_n$ from above:
+    \\
+    \begin{minipage}{1.0\textwidth}
+        \begin{figure}[H]
+        \centering
+        \includegraphics[trim={0cm 1cm 0cm 1cm},clip,width=0.70\columnwidth]{../data/x1}
+        \caption{First iteration repair}
+        \label{fig:x1}
+        \end{figure}
+    \end{minipage}
+    \\
+    \\
+    \\
+    Using this rank-6 approximation, we iterate until convergence using the eigenvalues of the repaired data as a critera: when the maximum absolute change in eigenvalues falls below $1e-4$, we consider the algorithm to have converged. With this tolerance, the algorithm converges in 8 iterations. For a tolerance of $1e-8$, we get convergence in 18 iterations. The convergence of the eigenvalues is shown in Figure \ref{fig:eigval_convergence}.
+    \\
+    \begin{minipage}{1.0\textwidth}
+        \begin{figure}[H]
+        \centering
+        \includegraphics[trim={0cm 1cm 0cm 0cm},clip,width=0.70\columnwidth]{../data/eigval_convergence}
+        \caption{Eigenvalue convergence}
+        \label{fig:eigval_convergence}
+        \end{figure}
+    \end{minipage}
+}
+\newpage
+\problemAnswer{
+   The convergence of the data is shown below with the error from the true data. Depending on the application, the repair given in iteration 3 is visually very similar to the true data from Figure \ref{fig:true_data}.
+    \begin{minipage}{1.0\textwidth}
+        \begin{figure}[H]
+        \centering
+        \includegraphics[trim={1cm 2cm 1cm 0cm},clip,width=0.90\columnwidth]{../data/data_convergence}
+        \caption{Data convergence for the first 4 iterations}
+        \label{fig:data_convergence}
+        \end{figure}
+    \end{minipage}
+    \\
+    \\
+}
+\problemAnswer{
+    Let us also examine the first ten eigenvectors of the repaired set. As expected, the eigenvectors / eigenfunctions of this data are sinusoidal. Further eigenvectors do not show anything intuitive as they are associate with low singular values. For reference, the first several singular values are given as: 
+    $\lbrace \frac{32}{3},\frac{32}{3},\frac{16}{3},\frac{16}{3},\frac{32}{9},\frac{32}{9},
+    0.0006,
+    0.0002,
+    0.0002,
+    0.0001,
+    0.0001,
+    0.0001 \rbrace$. As we can see, the first 6 eigenvalue-eigenvector pairs make up the bulk of the data. 
+    \\
+    \\
+    \begin{minipage}{1.0\textwidth}
+        \begin{figure}[H]
+        \centering
+        \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.60\columnwidth]{../data/eigvec_1}
+        \caption{Eigenvectors 1 to 5}
+        \label{fig:eigvec_1}
+        \end{figure}
+    \end{minipage}
+    \begin{minipage}{1.0\textwidth}
+        \begin{figure}[H]
+        \centering
+        \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.60\columnwidth]{../data/eigvec_2}
+        \caption{Eigenvectors 6 to 10}
+        \label{fig:eigvec_2}
+        \end{figure}
+    \end{minipage}
+    \\
+    \\
+}
 \end{homeworkSection}
 
+\newpage
 \begin{homeworkSection}{2. Linear Discriminant Analysis (LDA)}
 \renewcommand{\theenumi}{\alph{enumi}}
 \begin{enumerate}
@@ -185,13 +317,19 @@ where $\left ( \bm{f}^{(\mu)} \right )_m = \frac{1}{N} \sum_{k=1}^N \frac{1}{k} 
     which points belong to class 2, and output a single vector $w$ that is the solution of the generalized
     eigenvalue problem $S_B w = \lambda S_W w$.
   \item Now, use your subroutine in part (a) to project the EEG data onto a real line. Particularly, we can
-    form a data point in $\mathbb{R}^{1040×19}$ by concatenating the columns for each trial, therefore having 10 data
+    form a data point in $\mathbb{R}^{1040 \times 19}$ by concatenating the columns for each trial, therefore having 10 data
     points for task 2 and 10 data points for task 3. You would then project these 20 points onto the
     real line with the $w$ found with part (a). Plot the projected data on the real line and distinguish the
     classes with different symbols. Do you see a clear separation? Analyze your results.
 \end{enumerate}
+
+\problemAnswer{
+    First we will examine the true data
+}
+
 \end{homeworkSection}
 
+\newpage
 \begin{homeworkSection}{3. Maximum Noise Fraction (MNF) method}
 Construct a $n \times 10$ matrix (choose $n \geq 250$) to serve as a ground truth data set so that each column is a
 $n$-dimensional time series. Next, add \textbf{correlated noise} to each column to create a noisy data set, $X$. The
@@ -231,9 +369,9 @@ a single graph, visually display the result of the original signal, noisy signal
 
 \section{Code}\label{code}
 
-\subsection{Gram-Schmidt} \label{code:gram_schmidt}
+\subsection{KL Procedure for Gappy Data}
 
-% \lstinputlisting{../Kristin_Holmbeck_HW2_GramSchmidt.m}
+\lstinputlisting{../repair_gappy_data.m}
 
 
 \begin{thebibliography}{10}
