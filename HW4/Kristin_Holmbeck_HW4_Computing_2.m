@@ -30,7 +30,21 @@ for c = task
 end
 
 DATA = [CLASS_2, CLASS_3];
+DATA_M = bsxfun(@minus, DATA, sum(DATA,2));
 classes = [ones(1,10), 2*ones(1,10)];
+
+[w, yproj, alpha] = lda(DATA, classes);
+[w1, yproj1, alpha1] = lda(DATA_M, classes);
+
+return
+
+% h1 = gscatter(CLASS_2',CLASS_3',classes','krb','ov^',[],'off');
+% h1(1).LineWidth = 2;
+% h1(2).LineWidth = 2;
+% legend(spec{1}, spec{2},'Location','best')
+% 
+% return
+
 
 % DATA = load('Digits.mat');
 % DATA = double(DATA.Gallery);
@@ -72,8 +86,9 @@ SW = cov(X1) + cov(X2);
 SB = (m2-m1)*(m2-m1)';
 [U,S,V] = svd(pinv(SW)*SB);
 
-w = pinv(SW)*(m1-m2);
-w = U(:,1);
+w = -U(:,1);
+
+[w1, yproj] = fda(DATA, classes);
 
 y1 = w'*X1';
 y2 = w'*X2';
@@ -83,7 +98,51 @@ line = @(x) slope *x;
 x = -1:15;
 plot(x, line(x), 'k'); hold on;
 plot(X1(:,1), X1(:,2), 'ob'); plot(X2(:,1), X2(:,2),'or');hold off;
+
 return
 
+load fisheriris;
+PL = meas(:,3);
+PW = meas(:,4);
 
-[w, yproj] = fda(DATA, classes);
+spec = unique(species);
+spec1 = cellfun(@(x) isequal(x, spec{1}), species);
+spec2 = cellfun(@(x) isequal(x, spec{2}), species);
+spec3 = cellfun(@(x) isequal(x, spec{3}), species);
+
+MdlLinear = fitcdiscr([PL,PW],species);
+
+h1 = gscatter(PL,PW,species,'krb','ov^',[],'off');
+h1(1).LineWidth = 2;
+h1(2).LineWidth = 2;
+h1(3).LineWidth = 2;
+legend('Setosa','Versicolor','Virginica','Location','best')
+hold on
+K = MdlLinear.Coeffs(2,3).Const;
+L = MdlLinear.Coeffs(2,3).Linear;
+f = @(x1,x2) K + L(1)*x1 + L(2)*x2;
+h2 = ezplot(f,[.9 7.1 0 2.5]);
+h2.Color = 'r';
+h2.LineWidth = 2;
+hold off;
+
+% return
+
+X = [PL(spec1|spec2), PW(spec1|spec2)];
+class = species(spec1|spec2);
+MdlLinear = fitcdiscr(X,class);
+
+h1 = gscatter(X(:,1),X(:,2),class,'krb','ov^',[],'off');
+h1(1).LineWidth = 2;
+h1(2).LineWidth = 2;
+legend(spec{1}, spec{2},'Location','best')
+hold on
+K = MdlLinear.Coeffs(2,1).Const;
+L = MdlLinear.Coeffs(2,1).Linear;
+f = @(x1,x2) K + L(1)*x1 + L(2)*x2;
+h2 = ezplot(f,[.9 7.1 0 2.5]);
+h2.Color = 'r';
+h2.LineWidth = 2;
+hold off;
+
+% [w, yproj] = fda(X, [1,2]);

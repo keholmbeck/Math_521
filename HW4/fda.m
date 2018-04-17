@@ -42,12 +42,16 @@ SWt = SW1*SW1' + SW2*SW2';
 % SW = SWt;
 
 SB = (m2-m1)*(m2-m1)';
-
-wt = pinv(SW)*(m1-m2);
+% SB =  ni(1)*(m-m1)*(m-m1)' +  ni(2)*(m-m2)*(m-m2)';
 
 A       = pinv(SW)*SB;
-[U,S,V] = svd(A,0);
-w       = U(:,1);
+[V,D]   = eig(A);
+D       = abs(diag(D));
+[D,ndx] = max(D);
+w       = V(:,ndx);
+
+% [U,S,V] = svd(A,0);
+% w       = U(:,1);
 Xproj   = w'*X;
 
 alpha = w'*m;

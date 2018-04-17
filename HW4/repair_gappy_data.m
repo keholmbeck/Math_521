@@ -68,7 +68,7 @@ for iter = 1:maxit
         
         mu      = mask(:,mm);
         Umask   = U .* repmat(mu, 1, D);
-        Ms      = Umask'*Umask;
+        Ms      = Umask' * Umask;
         f       = Umask' * (xhat(:,mm).*mu);
         
     %{
