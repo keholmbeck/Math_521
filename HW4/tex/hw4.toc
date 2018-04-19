@@ -5,6 +5,8 @@
 \contentsline {section}{Computing}{4}
 \contentsline {subsection}{1. KL Procedure for Gappy Data}{4}
 \contentsline {subsection}{2. Linear Discriminant Analysis (LDA)}{9}
-\contentsline {subsection}{3. Maximum Noise Fraction (MNF) method}{10}
-\contentsline {section}{Code}{11}
-\contentsline {subsection}{KL Procedure for Gappy Data}{11}
+\contentsline {subsection}{3. Maximum Noise Fraction (MNF) method}{11}
+\contentsline {section}{Code}{12}
+\contentsline {subsection}{KL Procedure for Gappy Data}{12}
+\contentsline {subsection}{LDA}{13}
+\contentsline {subsection}{MNF}{14}

@@ -1,4 +1,4 @@
-function [w,Xproj,alpha] = lda(DATA, classes)
+function [w,Xproj,alpha] = LDA(DATA, classes)
 % LDA
 % Linear Discriminant Analysis
 % 
@@ -20,16 +20,19 @@ for ii = 1:nClasses
     ni(ii) = sum(classes == allClasses(ii));
 end
 
-% approximate the data with lower dimensions:
+% approximate the data with lower dimensions (PCA)
+% and transform into a new space (X)
 [U,S,V] = svd(DATA,0);
-[U,S,V] = best_basis(DATA);
-X       = S*V';
+% [U,S,V] = best_basis(DATA);
+E       = cumulative_energy(diag(S), rank(DATA));
+k       = find(E>0.95, 1);          % 95% rank approximation
+X       = S(1:k,1:k)*V(:,1:k)';     % use this new space
 
 nDat    = size(X,2);
-m       = sum(X,2) / nDat;
+m       = sum(X,2) / nDat;          % total mean
 
-SB = zeros(nDat);
-SW = zeros(nDat);
+SB = zeros(k);
+SW = zeros(k);
 for ii = 1:nClasses
     thisClass   = ( classes==allClasses(ii) );
     classData   = X(:,thisClass);
@@ -47,7 +50,6 @@ D       = abs(diag(D));
 [D,ndx] = max(D);
 w       = V(:,ndx);
 Xproj   = w'*X;
-alpha   = w'*m;
+alpha   = w'*m;         % alpha is only valid for nClasses=2
 
 end
-

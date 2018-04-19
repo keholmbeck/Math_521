@@ -6,3 +6,6 @@
 \contentsline {figure}{\numberline {6}{\ignorespaces Data convergence for the first 4 iterations}}{7}
 \contentsline {figure}{\numberline {7}{\ignorespaces Eigenvectors 1 to 5}}{8}
 \contentsline {figure}{\numberline {8}{\ignorespaces Eigenvectors 6 to 10}}{8}
+\contentsline {figure}{\numberline {9}{\ignorespaces LDA using SVD directly}}{10}
+\contentsline {figure}{\numberline {10}{\ignorespaces LDA using SVD on the mean-subtracted data}}{10}
+\contentsline {figure}{\numberline {11}{\ignorespaces MNF for noise elimination}}{11}

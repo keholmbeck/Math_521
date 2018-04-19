@@ -1,4 +1,4 @@
-function [w,Xproj] = fda(DATA, classes)
+function [w,Xproj,alpha] = FDA(DATA, classes)
 % FDA
 % Fisher Discriminant Analysis
 % 
@@ -16,8 +16,13 @@ function [w,Xproj] = fda(DATA, classes)
 ni = [sum(classes==1), sum(classes==2)];
 
 % approximate the data with lower dimensions:
-[U,S,V] = svd(DATA,0);
-X = S*V';
+% [U,S,V] = svd(DATA,0);
+[U,S,V] = best_basis(DATA);
+E = cumulative_energy(diag(S), rank(DATA));
+k = find(E>0.95, 1);    % use 90% rank approximation
+X_new = U(:,1:k)'*DATA;
+X = S(1:k,1:k)*V(:,1:k)';
+
 
 X1 = X(:,(classes==1));
 X2 = X(:,(classes==2));
@@ -26,7 +31,7 @@ m1 = sum(X1,2) / ni(1);
 m2 = sum(X2,2) / ni(2);
 m  = (m1+m2)/2;
 
-SW = zeros(sum(ni));
+SW = zeros(k);
 for ii = 1:size(X,2)
     if classes(ii) == 1
         mu = m1;
@@ -52,9 +57,8 @@ w       = V(:,ndx);
 
 % [U,S,V] = svd(A,0);
 % w       = U(:,1);
-Xproj   = w'*X;
-
-alpha = w'*m;
+Xproj   = w'*X_new;
+alpha   = w'*m;
 
 end
 

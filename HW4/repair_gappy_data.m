@@ -29,7 +29,7 @@ if nargin == 2
     maxit = 50;     % maximum number of iterations
 end
 
-cvg_tol     = 1e-4;
+cvg_tol     = 1e-6;
 P           = size(xhat,2);
 Pi          = sum(mask,2);
 xavg        = sum(xhat,2) ./ Pi;

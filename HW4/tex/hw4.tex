@@ -5,7 +5,7 @@
 %----------------------------------------------------------------------------------------
 
 \newcommand{\hmwkTitle}{Homework\ 4} % Assignment title
-\newcommand{\hmwkDueDate}{Tuesday,\ April\ 17,\ 2018} % Due date
+\newcommand{\hmwkDueDate}{Thursday,\ April\ 19,\ 2018} % Due date
 \newcommand{\hmwkClass}{Math\ 521} % Course/clas
 \newcommand{\hmwkAuthorName}{Kristin Holmbeck} % Your name
 
@@ -324,7 +324,41 @@ where $\left ( \bm{f}^{(\mu)} \right )_m = \frac{1}{N} \sum_{k=1}^N \frac{1}{k} 
 \end{enumerate}
 
 \problemAnswer{
-    First we will examine the true data
+    For the algorithm to make sense, we need to recall some important properties about the SVD. A data set (matrix) $X \in \mathbb{R}^{m \times p}$ ($m>p$, rank$(X)=p$) can be decomposed into the ``thin" SVD:
+    $$
+        X = U \Sigma V^T \implies U^T X = \Sigma V^T
+    $$
+    where $U$ is $m \times p$, $S$ is $p \times p$, and $V$ is $p \times p$. In our particular data, we have $X$ as an $19760 \times 20$ matrix, and it is not feasible to find the $S_B$ and $S_W$ matrices due to limited computer memory. If we instead perform LDA on $\tilde{X} = \Sigma V^T \in \mathbb{R}^{p \times p}$, we can use the projection vector $w$ on $\tilde{X}$ to classify the data. The code is include later in this document, but the general outline is this:
+    \begin{itemize}
+        \item Perform thin SVD on $X$: $[U,S,V]$ = svd$(X,0)$
+        \item Apply PCA to obtain a $D$-rank approximation. We now have $\hat{U}, \hat{S}, \hat{V}$ that have $D$ columns each (instead of $p$ columns).
+        \item Form a modified data set, $A = \hat{S} \hat{V}^T$ \cite{debbie}
+        \item Formulate the between-class scatter matrix, $S_B$, and the within-class scatter matrix, $S_W$, based on $A$
+        \item Get the eigenvector $w$ associated with the maximum eigenvalue of $S_W^{-1}S_B$
+        \item Project: $w^T A$. This should give the desired classes.
+    \end{itemize}
+    The results for the EEG data shows clear separation, along with an interesting variation depending on how we calculate the SVD. In particular, we find that the separation is very clear when using just the SVD on $X$ to reduce the data (Figure \ref{fig:lda_1}). If we instead use SVD on $X - \langle X \rangle$, the mean-subtracted data, we obtain the results shown in Figure \ref{fig:lda_2}. There is still a clear separation between classes, and the data points are classified correctly, but the projected points have more variance in the $w$ space.
+    \\
+    \\
+    As a quick guess, this may happen because the raw data has very strong variance between the classes. Performing SVD on the mean-subtracted \textit{entire} data set, we are normalizing both classes to be ``closer" together.
+}
+\problemAnswer{
+    \begin{minipage}{1.0\textwidth}
+        \begin{figure}[H]
+        \centering
+        \includegraphics[trim={0cm 1cm 0cm 0cm},clip,width=0.60\columnwidth]{../data/classify}
+        \caption{LDA using SVD directly}
+        \label{fig:lda_1}
+        \end{figure}
+    \end{minipage}
+    \begin{minipage}{1.0\textwidth}
+        \begin{figure}[H]
+        \centering
+        \includegraphics[trim={0cm 1cm 0cm 0cm},clip,width=0.60\columnwidth]{../data/classify_KL}
+        \caption{LDA using SVD on the mean-subtracted data}
+        \label{fig:lda_2}
+        \end{figure}
+    \end{minipage}
 }
 
 \end{homeworkSection}
@@ -355,23 +389,50 @@ $$
 $$
 Notice that $X \in \mathbb{R}^{n \times p}$ and $dX \in \mathbb{R}^{(n-1) \times p}$.
 In your report, examine and elaborate on the effect of a $D$-mode
-reconstruction on a single noisy signal for various values of $D$ (i.e., choose a single column to filter). In
-a single graph, visually display the result of the original signal, noisy signal, and filtered (de-noised) data
+reconstruction on a single noisy signal for various values of $D$ (i.e., choose a single column to filter). In a single graph, visually display the result of the original signal, noisy signal, and filtered (de-noised) data
 (with your best choice of $D$) to compare. Use the graph legend to distinguish each.
+\\
+\\
+\problemAnswer{
+    According to \cite{kirby}, the MNF optimal basis is found via:
+    \begin{itemize}
+    \itemsep0em
+    \item Take the eigenvector expansion of the covariance of $dX^T dX = V_1 \Sigma_1^2 V_1^T$.
+    \item Whiten the original data: $\hat{X} = X V_1 \Sigma_1^{-1}$.
+    \item Use the eigenvector expansion of the covariance of $\hat{X}$: $\hat{X}^T \hat{X} = U_1 \Sigma _2^2 U_1^T$.
+    \item Define $\Psi = V_1 \Sigma_1^{-1} U_1^T$.
+    \item Compute the maximum noise fraction basis vectors via $\Phi = X \Psi$.
+    \end{itemize}
+
+    Then our signal $S = \Phi$. Unfortunately, I was not able to effectively produce desired results, as seen in Figure \ref{fig:mnf}.
+
+    \begin{minipage}{1.0\textwidth}
+        \begin{figure}[H]
+        \centering
+        \includegraphics[trim={0cm 1cm 0cm 1cm},clip,width=0.60\columnwidth]{../data/MNF}
+        \caption{MNF for noise elimination}
+        \label{fig:mnf}
+        \end{figure}
+    \end{minipage}
+}
 
 \end{homeworkSection}
 
 \end{section}
 %----------------------------------------------------------------------------------------
-\newpage
 
 \appendix
 
 \section{Code}\label{code}
 
 \subsection{KL Procedure for Gappy Data}
-
 \lstinputlisting{../repair_gappy_data.m}
+
+\subsection{LDA}
+\lstinputlisting{../LDA.m}
+
+\subsection{MNF}
+\lstinputlisting{../MNF.m}
 
 
 \begin{thebibliography}{10}
@@ -383,6 +444,13 @@ a single graph, visually display the result of the original signal, noisy signal
 
     \bibitem{everson}
     R. Everson and L. Sirovich. The karhunen-loeve transform for incomplete data. \textit{J. Opt. Soc. Am., A}, 12(8):1657–1664, 1995.
+
+    \bibitem{kirby}
+    Hundley, D., Kirby, M., and Anderle, M. \textit{A SOLUTION PROCEDURE FOR BLIND SIGNAL SEPARATION USING THE MAXIMUM NOISE FRACTION APPROACH: ALGORITHMS AND EXAMPLES}.
+    <https://inc.ucsd.edu/ica2001/115-hundley.pdf>.
+
+    \bibitem{debbie}
+    Tonne, Debbie. Helped with emphasizing dimensionality reduction before doing LDA.
 \end{thebibliography}
 
 \end{document}
