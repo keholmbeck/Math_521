@@ -1,0 +1,143 @@
+\input{template.tex}
+
+%----------------------------------------------------------------------------------------
+%   NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Final Project: Cats and Dogs} % Assignment title
+\newcommand{\hmwkDueDate}{Tuesday,\ May\ 15,\ 2018} % Due date
+\newcommand{\hmwkClass}{Math\ 521} % Course/clas
+\newcommand{\hmwkAuthorName}{Kristin Holmbeck and Debbie Tonne} % Your name
+
+%----------------------------------------------------------------------------------------
+%   TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\textmd{\textbf{\hmwkClass \ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+\vspace{0.1in}
+\vspace{0.2in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%   TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+\vspace{0.75in}
+\tableofcontents
+\listoffigures
+\newpage
+
+%----------------------------------------------------------------------------------------
+%   PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+% To have just one problem per page, simply put a \clearpage after each problem
+
+\begin{section}{Theory}
+
+\begin{homeworkSection}{1. Fourier series}
+Suppose $f(w)$ has the Fourier series representation $f(w) = \sum_{k \in \mathbb{Z}} c_k e^{ikw}$ and suppose that $g(w) = e^{imw}f(w)$. For some $m \in \mathbb{Z}$, show that
+$$
+	g(w) = \sum_{k = -\infty}^{\infty} d_k e^{ikw}, \quad \text{where} \quad d_k = c_{k-m}
+$$
+\\
+\problemAnswer{
+}
+\end{homeworkSection}
+
+\begin{homeworkSection}{2. Fourier series}
+Find the Fourier series for the $2\pi$-periodic square wave function 
+$$
+	f(\omega) = \left \lbrace \begin{matrix} -k && \text{if} && -\pi < \omega < 0\\
+		k && \text{if} && 0 < \omega < \pi \\
+	 \end{matrix} \right.
+	\quad \text{and} \quad f(\omega + 2\pi) = f(\omega)
+$$
+\\
+\problemAnswer{
+}
+\end{homeworkSection}
+
+\begin{homeworkSection}{3. Wavelet decomposition}
+Compute by hand the Haar wavelet decomposition (Pyramidal decomposition) of the vector $x^T = [1,7,−3,2]$ by viewing it as
+$$
+	f(x) = \left \lbrace 
+	\begin{matrix} 
+		1 && \text{if} && x \in [0,\frac{1}{4}) \\
+		7 && \text{if} && x \in [\frac{1}{4}, \frac{1}{2}) \\
+		-3 && \text{if} && x \in [\frac{1}{2},\frac{3}{4}) \\
+		2 && \text{if} && x \in [\frac{3}{4},1) \\
+	 \end{matrix} \right.
+	\quad \text{and} \quad f(\omega + 2\pi) = f(\omega)
+$$
+Graphically show the projections onto the scaling and wavelet subspaces
+\\
+\\
+\problemAnswer{ 
+}
+\end{homeworkSection}
+
+\end{section}
+
+
+\begin{section}{Computing}
+\begin{homeworkSection}{1. }
+Implement a $3 \times 3$ \textit{median filter} and apply the filtering  process on a corrupted image of “app-ndt-Chip5.JPG”
+located via the course website. Specifically, corrupt “app-ndt-Chip-5.JPG” with \textit{salt-and-pepper} noise, where the corrupted pixels are either set to the maximum value (which looks like snow in the image) or have single bits flipped over. In some cases, single pixels can be set alternatively to zero or to the maximum value (i.e., 255 on a 8-bit machine). Then apply the median filter to de-noise the corrupted image. Compare your result with the original.
+\end{homeworkSection}
+
+\begin{homeworkSection}{2. }
+Given an image “CTimage.JPG“ on the course website, perform the following operations:
+\renewcommand{\theenumi}{\alph{enumi}}
+\begin{enumerate}
+	\item Construct a $3 \times 3$ average filter to smooth the image.
+	\item Then use a 2D Laplacian filter mask to extract the edges of the smoothed image.
+	\item Finally, enhance the smoothed image with the result from part (b). How does this image compare to the original?
+\end{enumerate}
+\end{homeworkSection}
+
+\begin{homeworkSection}{3. }
+Test your codes with your favorite image for this problem. Make sure your codes are as general as possible and be sure to plot the results.
+\renewcommand{\theenumi}{\alph{enumi}}
+\begin{enumerate}
+	\item Write a function in \textsc{MATLAB} to compute the approximation and each of the three detail components of an image. (i.e., you will produce 4 \textit{extremely} short codes here) Notice that the resolution of LL, HL, LH, and HH will be $M/2 \times N/2$, where $(M,N)$ is the resolution of the original image.
+	\item Write a subroutine to reconstruct an image from \textbf{only} the \textit{approximation} component as a function of level. Notice that the resolution of the reconstructed image will be of size $M\times N$.
+	\item Compress the image up to level 3 using \textbf{only the approximation component}. Compute the compression ratio as a function of each compression level. Plot the compressed image for each level along with their compression ratio. Note that the compression ratio in this case can be defined as
+	$$
+		CR = \frac{ \text{\# of nonzero entries in the original} }{ \text{\# of nonzero entries in the compressed} }
+	$$
+\end{enumerate}
+\end{homeworkSection}
+
+\end{section}
+
+%----------------------------------------------------------------------------------------
+\newpage
+
+\appendix
+
+\section{Code}\label{code}
+
+%\subsection{Gram-Schmidt} \label{code:gram_schmidt}
+%\lstinputlisting{../Kristin_Holmbeck_HW2_GramSchmidt.m}
+
+
+\begin{thebibliography}{10}
+    \bibitem{chang}
+    Chang, Jen-Mei. \textit{Matrix Methods for Geometric Data Analysis and Recognition}. 2014.
+
+\end{thebibliography}
+
+\end{document}

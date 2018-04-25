@@ -1,0 +1,279 @@
+\input{template.tex}
+
+%----------------------------------------------------------------------------------------
+%   NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Homework\ 5} % Assignment title
+\newcommand{\hmwkDueDate}{Tuesday,\ May\ 8,\ 2018} % Due date
+\newcommand{\hmwkClass}{Math\ 521} % Course/clas
+\newcommand{\hmwkAuthorName}{Kristin Holmbeck} % Your name
+
+%----------------------------------------------------------------------------------------
+%   TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\textmd{\textbf{\hmwkClass \ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+\vspace{0.1in}
+\vspace{0.2in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%   TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+\vspace{0.75in}
+\tableofcontents
+\listoffigures
+\newpage
+
+%----------------------------------------------------------------------------------------
+%   PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+% To have just one problem per page, simply put a \clearpage after each problem
+
+\begin{section}{Theory}
+
+\begin{homeworkSection}{1. Fourier series coefficient shift}
+Suppose $f(w)$ has the Fourier series representation $f(w) = \sum_{k \in \mathbb{Z}} c_k e^{ikw}$ and suppose that $g(w) = e^{imw}f(w)$. For some $m \in \mathbb{Z}$, show that
+$$
+	g(w) = \sum_{k = -\infty}^{\infty} d_k e^{ikw}, \quad \text{where} \quad d_k = c_{k-m}
+$$
+\\
+\problemAnswer{
+}
+\end{homeworkSection}
+
+\begin{homeworkSection}{2. Fourier series computation (continuous case)}
+Find the Fourier series for the $2\pi$-periodic square wave function 
+$$
+	f(\omega) = \left \lbrace \begin{matrix} -k && \text{if} && -\pi < \omega < 0\\
+		k && \text{if} && 0 < \omega < \pi \\
+	 \end{matrix} \right.
+	\quad \text{and} \quad f(\omega + 2\pi) = f(\omega)
+$$
+\\
+\problemAnswer{
+	Since $f$ is $2\pi$-periodic, we can represent its Fourier series by $f(x) = \sum_{k=-\infty}^{\infty} c_k e^{ikx}$, where (as derived in class) the coefficients $c_k$ are given by
+	$$
+		c_k = \frac{1}{2\pi} \int_{-\pi}^{\pi} f(x) e^{-ikx} dx.
+	$$
+	Note that $c_0 = 0$. Using this, let's solve for the coefficients (when $k\neq0$):
+	\begin{align*}
+		c_k &= \frac{1}{2\pi} \int_{-\pi}^{\pi} f(x) e^{-ikx} dx 
+			= \frac{1}{2\pi} \left[ \int_{-\pi}^{0} -k e^{-ikx} dx + \int_{0}^{\pi} k e^{-ikx} dx \right ] \\
+			&= \frac{k}{2\pi} \left[ \int_{0}^{\pi} e^{-ikx} dx - \int_{-\pi}^{0} e^{-ikx} dx \right ] 
+			 \qquad (\text{Note that } c_0 = 0)\\
+			&= \frac{k}{2\pi} \left[ \frac{-1}{ik} \left. e^{-ikx} \right|_{x=0}^\pi + \frac{1}{ik} \left. e^{-ikx} \right|_{x=-\pi}^0 \right ] \\
+			&= \frac{-1}{2\pi i} \left[ e^{-ik\pi} - 1  - \left( 1 - e^{ik\pi} \right )\right ]
+			= \frac{i}{2\pi} \left [ e^{ik\pi} + e^{-ik\pi} \right ] \\
+			&= \frac{e^{2ik\pi} + 1}{2\pi e^{ik\pi}} \\
+			\implies c_k &= \left \lbrace \begin{matrix} 0 && k = 0 \\
+				\frac{e^{2ik\pi} + 1}{2\pi e^{ik\pi}} && k \neq 0 \end{matrix}\right .
+	\end{align*}
+	Thus, the Fourier series for $f(\omega)$ is given by
+	\begin{align*}
+		f(x) &= \frac{1}{2\pi}\sum_{k=-\infty}^{\infty} \frac{e^{2ik\pi} + 1}{e^{ik(\pi-x)}} 
+	\end{align*}
+}
+\end{homeworkSection}
+
+\begin{homeworkSection}{3. Wavelet decomposition}
+Compute by hand the Haar wavelet decomposition (Pyramidal decomposition) of the vector $x^T = [1,7,−3,2]$ by viewing it as
+$$
+	f(x) = \left \lbrace 
+	\begin{matrix} 
+		1 && \text{if} && x \in [0,\frac{1}{4}) \\
+		7 && \text{if} && x \in [\frac{1}{4}, \frac{1}{2}) \\
+		-3 && \text{if} && x \in [\frac{1}{2},\frac{3}{4}) \\
+		2 && \text{if} && x \in [\frac{3}{4},1) \\
+	 \end{matrix} \right.
+	\quad \text{and} \quad f(\omega + 2\pi) = f(\omega)
+$$
+Graphically show the projections onto the scaling and wavelet subspaces
+\\
+\\
+\problemAnswer{ 
+}
+\end{homeworkSection}
+
+\end{section}
+
+\newpage
+\begin{section}{Computing}
+\begin{homeworkSection}{1. Median Filter for Noise Reduction}
+Implement a $3 \times 3$ \textit{median filter} and apply the filtering  process on a corrupted image of “app-ndt-Chip5.JPG”
+located via the course website. Specifically, corrupt “app-ndt-Chip-5.JPG” with \textit{salt-and-pepper} noise, where the corrupted pixels are either set to the maximum value (which looks like snow in the image) or have single bits flipped over. In some cases, single pixels can be set alternatively to zero or to the maximum value (i.e., 255 on a 8-bit machine). Then apply the median filter to de-noise the corrupted image. Compare your result with the original.
+\\
+\\
+\problemAnswer{
+    \begin{minipage}{0.5\textwidth}
+        \begin{figure}[H]
+        \centering
+        \includegraphics[trim={0cm 1.5cm 1cm 0cm},clip,width=1.0\columnwidth]{../data/im_orig}
+        \caption{Original Image}
+        \label{fig:im_orig}
+        \end{figure}
+    \end{minipage}
+    \begin{minipage}{0.5\textwidth}
+        \begin{figure}[H]
+        \centering
+        \includegraphics[trim={0cm 1.5cm 1cm 0.5cm},clip,width=1.0\columnwidth]{../data/im_noise}
+        \caption{Salt-and-Pepper Image}
+        \label{fig:im_noise}
+        \end{figure}
+    \end{minipage}
+    \begin{minipage}{0.5\textwidth}
+        \begin{figure}[H]
+        \centering
+        \includegraphics[trim={0cm 1.5cm 1cm 0.5cm},clip,width=1.0\columnwidth]{../data/im_filt}
+        \caption{$3 \times 3$ Median-Filtered Image}
+        \label{fig:im_filt}
+        \end{figure}
+    \end{minipage}
+    \begin{minipage}{0.5\textwidth}
+        \begin{figure}[H]
+        \centering
+        \includegraphics[trim={0cm 1.5cm 1cm 0.5cm},clip,width=1.0\columnwidth]{../data/im_diff_bin}
+        \caption{Pixel difference between original and filtered image}
+        \label{fig:im_bin}
+        \end{figure}
+    \end{minipage}
+    \\
+    \\
+    \\
+	In visualizing absolute difference between the true image (in Figure \ref{fig:im_orig}) and the image that comes from applying a $3 \times 3$ median filter to Figure \ref{fig:im_noise}, it is unclear to see where the images differ. The plot shown in Figure \ref{fig:im_bin} comes from the \textit{locations} where the images differ, as opposed to the intensity values.
+	\\
+	\\
+}
+\end{homeworkSection}
+
+\begin{homeworkSection}{2. Laplacian Filter for Image Sharpening}
+Given an image “CTimage.JPG“ on the course website, perform the following operations:
+\renewcommand{\theenumi}{\alph{enumi}}
+\begin{enumerate}
+	\item Construct a $3 \times 3$ average filter to smooth the image.
+	\item Then use a 2D Laplacian filter mask to extract the edges of the smoothed image.
+	\item Finally, enhance the smoothed image with the result from part (b). How does this image compare to the original?
+\end{enumerate}
+\problemAnswer{
+	We begin with the original image (Figure \ref{fig:CTimage}) and apply a $3 \times 3$ averaging filter to obtain the image in Figure \ref{fig:CTavg}. We then apply a Laplacian filter, which approximates the $2^{\text{nd}}$ derivative at each pixel. Since the $2^{\text{nd}}$ derivative is acceleration, the Laplacian of an image is akin to extracting information on \textit{edges} in the image -- sharp changes between background and foreground. By adding the edge information back into an image, we can \textit{sharpen} features and thereby enhance the original, given image. An example is shown below with some CT scan data.
+	\\
+	\\
+	To perform this process, we need masks representing the averge and the Laplacian of a small region. If both masks are $3 \times 3$,
+	$$
+		m_{\text{avg}} = \frac{1}{9} \begin{bmatrix} 
+				1 && 1 && 1 \\ 1 && 1 && 1 \\ 1 && 1 && 1 
+			\end{bmatrix} \qquad \text{and} \qquad
+		m_{\text{Laplace}} = \begin{bmatrix} 0 && 1 && 0 \\ 1 && -4 && 1 \\ 0 && 1 && 0 \end{bmatrix}
+	$$
+	Convolving $m_{\text{avg}}$ with each pixel in the original image, we end up generating, for each pixel, an average of its neighbors in an $3 \times 3$ neighborhood, as shown in Figure \ref{fig:CTavg}. We will call this our ``given" image, i.e. given a blurred image, sharpen it. Now, apply the Laplace mask to this averaged image to obtain edge information (Figure \ref{fig:CTlap}). To obtain the final sharpened image, we can add or subtract the Laplacian image.
+	\\
+	\\
+	According to \cite{chang}, if we use the Laplacian filter $m_{\text{Laplace}}$ as defined above, then the sharpened image is given by $I_{\text{sharp}} = I_{\text{orig}} - I_{\text{Laplacian}}$. We could have also used the negative of the Laplacian filter (with positive $4$ in the center) to generate the sharpened image via the \textit{addition} of the original and Laplacian-filtered image. 
+}
+\\
+\problemAnswer{
+    \begin{minipage}{0.5\textwidth}
+        \begin{figure}[H]
+        \centering
+        \includegraphics[trim={0cm 1.5cm 1cm 0.5cm},clip,width=0.8\columnwidth]{../data/CTimage}
+        \caption{Original CT Scan (``True" Image)}
+        \label{fig:CTimage}
+        \end{figure}
+    \end{minipage}
+    \begin{minipage}{0.5\textwidth}
+        \begin{figure}[H]
+        \centering
+        \includegraphics[trim={0cm 1.5cm 1cm 0.5cm},clip,width=0.8\columnwidth]{../data/CTavg}
+        \caption{Average-Filtered CT Scan}
+        \label{fig:CTavg}
+        \end{figure}
+    \end{minipage}
+    \begin{minipage}{0.5\textwidth}
+        \begin{figure}[H]
+        \centering
+        \includegraphics[trim={0cm 1.5cm 1cm 0.5cm},clip,width=0.8\columnwidth]{../data/CTlap}
+        \caption{Laplacian-filtered CT Scan from Figure \ref{fig:CTavg}}
+        \label{fig:CTlap}
+        \end{figure}
+    \end{minipage}
+    \begin{minipage}{0.5\textwidth}
+        \begin{figure}[H]
+        \centering
+        \includegraphics[trim={0cm 1.5cm 1cm 0.5cm},clip,width=0.8\columnwidth]{../data/CTsharp}
+        \caption{CT Scan sharpened from Figure \ref{fig:CTavg}}
+        \label{fig:CTsharp}
+        \end{figure}
+    \end{minipage}
+    \\
+    \\
+    \\
+    Furthermore, let's look at the difference between the ``true", original image (Figure \ref{fig:CTimage}) and the sharpened image (Figure \ref{fig:CTsharp}), which is shown in Figure \ref{fig:CTdiff}. This difference looks very similar to the edge information from Figure \ref{fig:CTlap}. Indeed, we show in Figure \ref{fig:CTdiff_edge} that (up to machine precision) $I_{\text{true}} - I_{\text{sharp}} = I_{\text{Laplacian}}$. 
+    \\
+    \\
+    \begin{minipage}{0.5\textwidth}
+        \begin{figure}[H]
+        \centering
+        \includegraphics[trim={0cm 1.5cm 1cm 0.5cm},clip,width=0.8\columnwidth]{../data/CTdiff}
+        \caption{Difference between ``true" and sharpened image}
+        \label{fig:CTdiff}
+        \end{figure}
+    \end{minipage}
+    \begin{minipage}{0.5\textwidth}
+        \begin{figure}[H]
+        \centering
+        \includegraphics[trim={0cm 1.5cm 1cm 0.5cm},clip,width=0.8\columnwidth]{../data/CTdiff_edge}
+        \caption{ $I_{\text{true}} - I_{\text{sharp}} = I_{\text{Laplacian}}$ }
+        \label{fig:CTdiff_edge}
+        \end{figure}
+    \end{minipage}}
+\end{homeworkSection}
+
+\begin{homeworkSection}{3. }
+Test your codes with your favorite image for this problem. Make sure your codes are as general as possible and be sure to plot the results.
+\renewcommand{\theenumi}{\alph{enumi}}
+\begin{enumerate}
+	\item Write a function in \textsc{MATLAB} to compute the approximation and each of the three detail components of an image. (i.e., you will produce 4 \textit{extremely} short codes here) Notice that the resolution of LL, HL, LH, and HH will be $M/2 \times N/2$, where $(M,N)$ is the resolution of the original image.
+	\item Write a subroutine to reconstruct an image from \textbf{only} the \textit{approximation} component as a function of level. Notice that the resolution of the reconstructed image will be of size $M\times N$.
+	\item Compress the image up to level 3 using \textbf{only the approximation component}. Compute the compression ratio as a function of each compression level. Plot the compressed image for each level along with their compression ratio. Note that the compression ratio in this case can be defined as
+	$$
+		CR = \frac{ \text{\# of nonzero entries in the original} }{ \text{\# of nonzero entries in the compressed} }
+	$$
+\end{enumerate}
+\end{homeworkSection}
+
+\end{section}
+
+%----------------------------------------------------------------------------------------
+\newpage
+
+\appendix
+
+\section{Code}\label{code}
+
+\subsection{Image Filtering}
+This code was created to hande several methods, including median, average, and Laplacian filters.
+\lstinputlisting{../imfilt.m}
+
+
+\begin{thebibliography}{10}
+    \bibitem{chang}
+    Chang, Jen-Mei. \textit{Matrix Methods for Geometric Data Analysis and Recognition}. 2014.
+
+\end{thebibliography}
+
+\end{document}

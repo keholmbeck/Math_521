@@ -1,0 +1,10 @@
+\contentsline {section}{Theory}{2}
+\contentsline {subsection}{1. Fourier series coefficient shift}{2}
+\contentsline {subsection}{2. Fourier series computation (continuous case)}{2}
+\contentsline {subsection}{3. Wavelet decomposition}{3}
+\contentsline {section}{Computing}{4}
+\contentsline {subsection}{1. Median Filter for Noise Reduction}{4}
+\contentsline {subsection}{2. Laplacian Filter for Image Sharpening}{5}
+\contentsline {subsection}{3. }{6}
+\contentsline {section}{Code}{8}
+\contentsline {subsection}{Image Filtering}{8}

@@ -1,0 +1,10 @@
+\contentsline {figure}{\numberline {1}{\ignorespaces Original Image}}{4}
+\contentsline {figure}{\numberline {2}{\ignorespaces Salt-and-Pepper Image}}{4}
+\contentsline {figure}{\numberline {3}{\ignorespaces $3 \times 3$ Median-Filtered Image}}{4}
+\contentsline {figure}{\numberline {4}{\ignorespaces Pixel difference between original and filtered image}}{4}
+\contentsline {figure}{\numberline {5}{\ignorespaces Original CT Scan (``True" Image)}}{6}
+\contentsline {figure}{\numberline {6}{\ignorespaces Average-Filtered CT Scan}}{6}
+\contentsline {figure}{\numberline {7}{\ignorespaces Laplacian-filtered CT Scan from Figure 6\hbox {}}}{6}
+\contentsline {figure}{\numberline {8}{\ignorespaces CT Scan sharpened from Figure 6\hbox {}}}{6}
+\contentsline {figure}{\numberline {9}{\ignorespaces Difference between ``true" and sharpened image}}{6}
+\contentsline {figure}{\numberline {10}{\ignorespaces $I_{\text {true}} - I_{\text {sharp}} = I_{\text {Laplacian}}$ }}{6}
