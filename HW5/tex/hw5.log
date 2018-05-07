@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.10.10)  25 APR 2018 13:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.10.10)  26 APR 2018 18:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -304,12 +304,12 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
  [1
 
 {/usr/local/texlive/2017basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 54--59
+Underfull \hbox (badness 10000) in paragraph at lines 54--64
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 67--93
+Underfull \hbox (badness 10000) in paragraph at lines 72--98
 
  []
 
@@ -317,12 +317,12 @@ Missing character: There is no ‚ in font cmr10!
 Missing character: There is no à in font cmr10!
 Missing character: There is no í in font cmr10!
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 105--112
+Underfull \hbox (badness 10000) in paragraph at lines 110--128
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 105--112
+Underfull \hbox (badness 10000) in paragraph at lines 110--128
 
  []
 
@@ -343,65 +343,65 @@ Missing character: There is no ù in font cmr10!
 File: ../data/im_orig.png Graphic file (type png)
 
 <use ../data/im_orig.png>
-Package pdftex.def Info: ../data/im_orig.png used on input line 161.
+Package pdftex.def Info: ../data/im_orig.png used on input line 177.
 (pdftex.def)             Requested size: 230.17894pt x 163.37878pt.
 
 <../data/im_noise.png, id=28, 562.2606pt x 421.575pt>
 File: ../data/im_noise.png Graphic file (type png)
 
 <use ../data/im_noise.png>
-Package pdftex.def Info: ../data/im_noise.png used on input line 161.
+Package pdftex.def Info: ../data/im_noise.png used on input line 177.
 (pdftex.def)             Requested size: 230.17894pt x 157.24443pt.
 
 <../data/im_filt.png, id=30, 562.2606pt x 421.575pt>
 File: ../data/im_filt.png Graphic file (type png)
  <use ../data/im_filt.png>
-Package pdftex.def Info: ../data/im_filt.png used on input line 161.
+Package pdftex.def Info: ../data/im_filt.png used on input line 177.
 (pdftex.def)             Requested size: 230.17894pt x 157.24443pt.
 
 <../data/im_diff_bin.png, id=32, 562.2606pt x 421.575pt>
 File: ../data/im_diff_bin.png Graphic file (type png)
 
 <use ../data/im_diff_bin.png>
-Package pdftex.def Info: ../data/im_diff_bin.png used on input line 161.
+Package pdftex.def Info: ../data/im_diff_bin.png used on input line 177.
 (pdftex.def)             Requested size: 230.17894pt x 157.24443pt.
 
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 161--161
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 177--177
 []$[]$ $[]$
  []
 
 
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 161--161
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 177--177
 []$ $[]$ 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 161--161
+Underfull \hbox (badness 10000) in paragraph at lines 177--177
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 161--161
+Underfull \hbox (badness 10000) in paragraph at lines 177--177
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 161--161
+Underfull \hbox (badness 10000) in paragraph at lines 177--177
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 161--161
+Underfull \hbox (badness 10000) in paragraph at lines 177--177
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 118--163
+Underfull \hbox (badness 10000) in paragraph at lines 134--179
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 118--163
+Underfull \hbox (badness 10000) in paragraph at lines 134--179
 
  []
 
@@ -413,95 +413,95 @@ Missing character: There is no Ä in font cmr10!
 Missing character: There is no ú in font cmr10!
 [4 <../data/im_orig.png (PNG copy)> <../data/im_noise.png (PNG copy)> <../data/
 im_filt.png (PNG copy)> <../data/im_diff_bin.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 187--187
+Underfull \hbox (badness 10000) in paragraph at lines 203--203
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 187--187
+Underfull \hbox (badness 10000) in paragraph at lines 203--203
 
  []
 
 <../data/CTimage.png, id=42, 562.2606pt x 421.575pt>
 File: ../data/CTimage.png Graphic file (type png)
  <use ../data/CTimage.png>
-Package pdftex.def Info: ../data/CTimage.png used on input line 243.
+Package pdftex.def Info: ../data/CTimage.png used on input line 259.
 (pdftex.def)             Requested size: 184.14384pt x 125.79442pt.
 
 <../data/CTavg.png, id=44, 562.2606pt x 421.575pt>
 File: ../data/CTavg.png Graphic file (type png)
  <use ../data/CTavg.png>
-Package pdftex.def Info: ../data/CTavg.png used on input line 243.
+Package pdftex.def Info: ../data/CTavg.png used on input line 259.
 (pdftex.def)             Requested size: 184.14384pt x 125.79442pt.
 
 <../data/CTlap.png, id=46, 562.2606pt x 421.575pt>
 File: ../data/CTlap.png Graphic file (type png)
  <use ../data/CTlap.png>
-Package pdftex.def Info: ../data/CTlap.png used on input line 243.
+Package pdftex.def Info: ../data/CTlap.png used on input line 259.
 (pdftex.def)             Requested size: 184.14384pt x 125.79442pt.
 
 <../data/CTsharp.png, id=48, 562.2606pt x 421.575pt>
 File: ../data/CTsharp.png Graphic file (type png)
  <use ../data/CTsharp.png>
-Package pdftex.def Info: ../data/CTsharp.png used on input line 243.
+Package pdftex.def Info: ../data/CTsharp.png used on input line 259.
 (pdftex.def)             Requested size: 184.14384pt x 125.79442pt.
 
 <../data/CTdiff.png, id=50, 562.2606pt x 421.575pt>
 File: ../data/CTdiff.png Graphic file (type png)
  <use ../data/CTdiff.png>
-Package pdftex.def Info: ../data/CTdiff.png used on input line 243.
+Package pdftex.def Info: ../data/CTdiff.png used on input line 259.
 (pdftex.def)             Requested size: 184.14384pt x 125.79442pt.
 
 <../data/CTdiff_edge.png, id=52, 562.2606pt x 421.575pt>
 File: ../data/CTdiff_edge.png Graphic file (type png)
 
 <use ../data/CTdiff_edge.png>
-Package pdftex.def Info: ../data/CTdiff_edge.png used on input line 243.
+Package pdftex.def Info: ../data/CTdiff_edge.png used on input line 259.
 (pdftex.def)             Requested size: 184.14384pt x 125.79442pt.
 
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 243--243
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 259--259
 []$[]$ $[]$
  []
 
 
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 243--243
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 259--259
 []$ $[]$ 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 243--243
+Underfull \hbox (badness 10000) in paragraph at lines 259--259
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 243--243
+Underfull \hbox (badness 10000) in paragraph at lines 259--259
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 243--243
+Underfull \hbox (badness 10000) in paragraph at lines 259--259
 
  []
 
 
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 243--243
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 259--259
 []$ $[]$ 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 187--245
+Underfull \hbox (badness 10000) in paragraph at lines 203--261
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 187--245
+Underfull \hbox (badness 10000) in paragraph at lines 203--261
 
  []
 
 [5] [6 <../data/CTimage.png (PNG copy)> <../data/CTavg.png (PNG copy)> <../data
 /CTlap.png (PNG copy)> <../data/CTsharp.png (PNG copy)> <../data/CTdiff.png (PN
 G copy)> <../data/CTdiff_edge.png (PNG copy)>] [7]
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 270.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 286.
 
 
 (/usr/local/texlive/2017basic/texmf-dist/tex/latex/psnfss/ot1pcr.fd
@@ -537,7 +537,7 @@ xmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2017basic
 asic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texl
 ive/2017basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/lo
 cal/texlive/2017basic/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on hw5.pdf (9 pages, 1964628 bytes).
+Output written on hw5.pdf (9 pages, 1967757 bytes).
 PDF statistics:
  133 PDF objects out of 1000 (max. 8388607)
  84 compressed objects within 1 object stream

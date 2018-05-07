@@ -1,4 +1,4 @@
-function [w,Xproj,alpha] = LDA(DATA, classes)
+function [w,Xproj,alpha] = LDA(DATA, classes, tol)
 % LDA
 % Linear Discriminant Analysis
 % 
@@ -13,6 +13,10 @@ function [w,Xproj,alpha] = LDA(DATA, classes)
 
 % Author: Kristin Holmbeck
 
+if nargin == 2
+    tol = 0.95;
+end
+
 allClasses  = unique(classes);
 nClasses    = length( allClasses );
 ni          = zeros(nClasses,1);
@@ -25,7 +29,7 @@ end
 [U,S,V] = svd(DATA,0);
 % [U,S,V] = svd(bsxfun(@minus, DATA, sum(DATA,2))/size(DATA,2), 0);
 E       = cumulative_energy(diag(S), rank(DATA));
-k       = find(E>0.99, 1);          % 99% rank approximation
+k       = find(E>tol, 1);          % 99% rank approximation
 X       = S(1:k,1:k)*V(:,1:k)';     % use this new space
 
 nDat    = size(X,2);
@@ -49,7 +53,18 @@ A       = pinv(SW)*SB;
 D       = abs(diag(D));
 [D,ndx] = max(D);
 w       = V(:,ndx);
-Xproj   = w'*X;
-alpha   = w'*m;         % alpha is only valid for nClasses=2
+  
+w       = U(:,1:k)*w;   % convert to the same # of rows as DATA
+Xproj   = w'*DATA;
+
+alpha = mean(w);
+
+% alpha   = w'*m;         % alpha is only valid for nClasses=2
+
+if nClasses == 2
+    x1 = sort(Xproj(classes == allClasses(1)));
+    x2 = sort(Xproj(classes == allClasses(2)));
+    alpha = (max(x1) + min(x2))/2;
+end
 
 end

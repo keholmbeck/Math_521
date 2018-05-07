@@ -16,11 +16,11 @@ names  = {'CTimage', 'CTavg', 'CTlap', 'CTsharp'};
 for ii = 1:length(images)
     imagesc( images{ii} );
     axis image; axis off; colormap gray;
-    saveas(gcf, ['data/', names{ii}, '.png']);
+%     saveas(gcf, ['data/', names{ii}, '.png']);
 end
 
 imagesc(im - im_sharp); colormap gray; axis off; colorbar;
-saveas(gcf, 'data/CTdiff.png');
+% saveas(gcf, 'data/CTdiff.png');
 
 imagesc(im - im_sharp - im_edge); colormap gray; axis off; colorbar;
-saveas(gcf, 'data/CTdiff_edge.png');
+% saveas(gcf, 'data/CTdiff_edge.png');

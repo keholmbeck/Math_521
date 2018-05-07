@@ -28,14 +28,19 @@ for c = task
         end
     end
 end
-
+rng(1028);
 DATA    = [CLASS_2, CLASS_3];
 classes = [ones(1,10), 2*ones(1,10)];
+ndx     = (1:length(classes));
+ndx     = randperm(length(classes));
 
-[w, yproj, alpha] = LDA(DATA, classes);
+[w, yproj, alpha] = LDA(DATA(:,ndx), classes(ndx));
 
-ax1 = plot(yproj(1:10),0,'ob', 'MarkerSize',10); hold on;
-ax2 = plot(yproj(11:20),0,'+r', 'MarkerSize',10);
+ax1 = plot(yproj(classes(ndx)==1),0,'ob', 'MarkerSize',10); hold on;
+ax2 = plot(yproj(classes(ndx)==2),0,'+r', 'MarkerSize',10);
 plot(alpha*[1,1], 0.1*[-1,1], ':k', 'LineWidth',2); hold off; title LDA;
 legend([ax1(1),ax2(1)], 'Class 1', 'Class 2');
+figure(gcf);
+return;
+
 saveas(gcf, 'data/classify.png');

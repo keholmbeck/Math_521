@@ -1,0 +1,9 @@
+\contentsline {section}{Theory}{2}
+\contentsline {subsection}{Introduction}{2}
+\contentsline {subsection}{Preprocessing}{2}
+\contentsline {subsection}{Classification}{2}
+\contentsline {subsection}{Singular Values}{2}
+\contentsline {section}{Results}{2}
+\contentsline {subsection}{Dogs and Cats}{2}
+\contentsline {subsection}{Classification Types}{2}
+\contentsline {section}{Code}{3}

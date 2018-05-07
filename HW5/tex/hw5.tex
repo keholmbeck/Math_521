@@ -54,6 +54,11 @@ $$
 $$
 \\
 \problemAnswer{
+\begin{align*}
+	g(w) = e^{imw}f(w) &= e^{imw} \sum_{k \in \mathbb{Z}} c_k e^{ikw} \\
+	&= \sum_{k \in \mathbb{Z}} c_k e^{iw(k+m)} \\
+	&= \sum_{h \in \mathbb{Z}} c_{h-m} e^{iwh}  \qquad \text{by setting } h=k+m \\ 
+\end{align*}
 }
 \end{homeworkSection}
 
@@ -71,12 +76,12 @@ $$
 	$$
 		c_k = \frac{1}{2\pi} \int_{-\pi}^{\pi} f(x) e^{-ikx} dx.
 	$$
-	Note that $c_0 = 0$. Using this, let's solve for the coefficients (when $k\neq0$):
+	Using this, let's solve for the coefficients (when $k\neq0$):
 	\begin{align*}
 		c_k &= \frac{1}{2\pi} \int_{-\pi}^{\pi} f(x) e^{-ikx} dx 
 			= \frac{1}{2\pi} \left[ \int_{-\pi}^{0} -k e^{-ikx} dx + \int_{0}^{\pi} k e^{-ikx} dx \right ] \\
 			&= \frac{k}{2\pi} \left[ \int_{0}^{\pi} e^{-ikx} dx - \int_{-\pi}^{0} e^{-ikx} dx \right ] 
-			 \qquad (\text{Note that } c_0 = 0)\\
+			 \qquad (\text{note that } c_0 = 0)\\
 			&= \frac{k}{2\pi} \left[ \frac{-1}{ik} \left. e^{-ikx} \right|_{x=0}^\pi + \frac{1}{ik} \left. e^{-ikx} \right|_{x=-\pi}^0 \right ] \\
 			&= \frac{-1}{2\pi i} \left[ e^{-ik\pi} - 1  - \left( 1 - e^{ik\pi} \right )\right ]
 			= \frac{i}{2\pi} \left [ e^{ik\pi} + e^{-ik\pi} \right ] \\
@@ -107,6 +112,17 @@ Graphically show the projections onto the scaling and wavelet subspaces
 \\
 \\
 \problemAnswer{ 
+	We need to arbitrarily specify the size of the smallest scale to start the pyramidal decomposition algorithm. We will choose dim$f = 4 = 2^{-j}$, thus the finest resolution required is at the $V_{-2}$ level. For the Haar wavelet, we can represent levels as
+	$$
+		\phi^{j+1}(x) = \sqrt(2) \sum_n h_n \phi^{j}(x)
+	$$
+	This will involve the subspaces
+	\begin{align*}
+		V_{-2} &= \text{span} \lbrace 2\phi(4x-k) \rbrace \\
+		V_{-1} &= \text{span} \lbrace \sqrt{2}\phi(2x-k) \rbrace \\
+		V_{0} &= \text{span} \lbrace \phi(x-k) \rbrace \\
+	\end{align*}
+	where $k \in \mathbb{Z}$ for each subspace.
 }
 \end{homeworkSection}
 

@@ -1,0 +1,299 @@
+
+<!-- saved from url=(0067)http://www.cad.zju.edu.cn/home/dengcai/Data/DimensionReduction.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>Matlab codes for dimensionality reduction</title>
+
+<script type="text/javascript" async="" src="./Matlab codes for dimensionality reduction_files/ga.js"></script><script type="text/javascript" language="javascript" src="./Matlab codes for dimensionality reduction_files/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" language="javascript" src="./Matlab codes for dimensionality reduction_files/jquery.dimensions.min.js"></script>
+<script type="text/javascript" language="javascript" src="./Matlab codes for dimensionality reduction_files/jquery.inputHintBox.js"></script>
+<style>
+/* hint box的样式 */
+.hint_box {
+	width:600px;
+	padding:10px;
+	background-color:#D9E6F7;
+	border:1px solid blue;
+}
+</style> 
+
+<script type="text/javascript">
+    $().ready(function() {
+        $('.hint_link').inputHintBox({ className: 'hint_box', source: 'attr', attr: 'title', incrementLeft: 5 });
+        $('body').click(function(e) {
+            var $clicked = $(e.target);
+            if (!($clicked.is('.hint_link') || $clicked.is('.hint_box') || $clicked.parents().is('.hint_box'))) {
+                $('.hint_box').fadeOut();
+            }
+        });        
+    });
+</script>
+
+</head>
+
+<body bgcolor="#ffffff">
+<center>
+<h2> Matlab codes for dimensionality reduction (subspace learning)</h2>
+</center>
+
+<hr>
+<font color="red"> <b> If you find these algoirthms and data sets useful, we appreciate it very much if you can cite our related works: </b></font> (<a href="http://www.cad.zju.edu.cn/home/dengcai/Publication/PublicationCategorized.html" target="_blank">Publications sort by topic</a>)<p>
+	
+</p><ul>
+
+	<li>Deng Cai, Xiaofei He, Jiawei Han, and Hong-Jiang Zhang, "Orthogonal Laplacianfaces for Face Recognition", in IEEE TIP, 2006.<br>
+<a href="javascript:return false;" class="hint_link" title="@ARTICLE{CHHZ06,&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AUTHOR =       {Deng Cai and Xiaofei He and Jiawei Han and Hong-Jiang Zhang},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;TITLE =        {Orthogonal Laplacianfaces for Face Recognition},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;JOURNAL =      {IEEE Transactions on Image Processing},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;YEAR =         {2006},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;volume =       {15},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;number =       {11},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pages =        {3608-3614},}">Bibtex source</a>
+
+</li><li> Deng Cai, Xiaofei He, and Jiawei Han, "Document Clustering Using Locality Preserving Indexing", in IEEE TKDE, 2005. <br>
+<a href="javascript:return false;" class="hint_link" title="@ARTICLE{CHH05,&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AUTHOR =       {Deng Cai and Xiaofei He and Jiawei Han},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;TITLE =        {Document Clustering Using Locality Preserving Indexing},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;JOURNAL =      {IEEE Transactions on Knowledge and Data Engineering},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;YEAR =         {2005},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;volume =       {17},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;number =       {12},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pages =        {1624-1637},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;month =        {December},}">Bibtex source</a>
+
+
+</li><li>Deng Cai, Xiaofei He and Jiawei Han, "Semi-Supervised Discriminant Analysis", ICCV'07. <br>
+	<a href="javascript:return false;" class="hint_link" title="@INPROCEEDINGS{CHH07a,&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AUTHOR =       {Deng Cai and Xiaofei He and Jiawei Han},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;TITLE =        {Semi-Supervised Discriminant Analysis},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;BOOKTITLE =    {Proc. Int. Conf. Computer Vision (ICCV&#39;07)},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;YEAR =         {2007},}">Bibtex source</a>
+
+	</li><li>Deng Cai, Xiaofei He, Yuxiao Hu, Jiawei Han and Thomas Huang, "Learning a Spatially Smooth Subspace for Face Recognition", CVPR'07. <br>
+	<a href="javascript:return false;" class="hint_link" title="@INPROCEEDINGS{CHHH07,&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AUTHOR =       {Deng Cai and Xiaofei He and Yuxiao Hu and Jiawei Han and Thomas Huang},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;TITLE =        {Learning a Spatially Smooth Subspace for Face Recognition},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;BOOKTITLE =    {Proc. IEEE Conf. Computer Vision and Pattern Recognition Machine Learning (CVPR&#39;07)},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;YEAR =         {2007},}">Bibtex source</a>
+	
+
+
+	</li><li>Xiaofei He, Shuicheng Yan, Yuxiao Hu, Partha Niyogi, and Hong-Jiang Zhang, "Face Recognition Using Laplacianfaces", in IEEE TPAMI, 2005.<br>
+<a href="javascript:return false;" class="hint_link" title="@ARTICLE{HYHNZ05,&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AUTHOR =       {Xiaofei He and Shuicheng Yan and Yuxiao Hu and Partha Niyogi and Hong-Jiang Zhang},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;TITLE =        {Face Recognition Using Laplacianfaces},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;JOURNAL =      {IEEE Trans. Pattern Anal. Mach. Intelligence},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;YEAR =         {2005},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;volume =       {27},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;number =       {3},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pages =        {328-340},}">Bibtex source</a>
+	
+	</li><li>Xiaofei He and Partha Niyogi, "Locality Preserving Projections", NIPS 16, 2003. <br>
+<a href="javascript:return false;" class="hint_link" title="@Inproceedings{HN03,&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;author = {Xiaofei He and Partha Niyogi},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;title = {Locality Preserving Projections},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;booktitle = {Advances in Neural Information Processing Systems 16},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;year = {2003}}">Bibtex source</a>
+	
+</li></ul>
+	
+
+<hr>
+<h3> Algorithms </h3> 
+
+<p>
+</p><ul>
+<li> Some general functions
+<ul>
+<li> <a href="http://www.cad.zju.edu.cn/home/dengcai/Data/code/EuDist2.m" onclick="var that=this;_gaq.push([&#39;_trackEvent&#39;,&#39;Download&#39;,&#39;EuDist2&#39;,this.href]);setTimeout(function(){location.href=that.href;},500);return false;">EuDist2</a>: Calculate the Euclidean distance matrix of two data matrix.
+</li><li> <a href="http://www.cad.zju.edu.cn/home/dengcai/Data/code/mySVD.m" onclick="var that=this;_gaq.push([&#39;_trackEvent&#39;,&#39;Download&#39;,&#39;mySVD&#39;,this.href]);setTimeout(function(){location.href=that.href;},500);return false;">mySVD</a>: An efficient SVD.
+</li><li> <a href="http://www.cad.zju.edu.cn/home/dengcai/Data/code/NormalizeFea.m" onclick="var that=this;_gaq.push([&#39;_trackEvent&#39;,&#39;Download&#39;,&#39;NormalizeFea&#39;,this.href]);setTimeout(function(){location.href=that.href;},500);return false;">NormalizeFea</a>: Normalize the data matrix.
+</li><li> <a href="http://www.cad.zju.edu.cn/home/dengcai/Data/code/constructW.m" onclick="var that=this;_gaq.push([&#39;_trackEvent&#39;,&#39;Download&#39;,&#39;constructW&#39;,this.href]);setTimeout(function(){location.href=that.href;},500);return false;"> constructW</a>: Function used to construct the affinity matrix.
+</li><li> <a href="http://www.cad.zju.edu.cn/home/dengcai/Data/code/constructKernel.m" onclick="var that=this;_gaq.push([&#39;_trackEvent&#39;,&#39;Download&#39;,&#39;constructKernel&#39;,this.href]);setTimeout(function(){location.href=that.href;},500);return false;">constructKernel</a>: Function used to construct the kernel matrix.
+</li></ul>
+<hr>
+</li><li> <a href="http://www.cad.zju.edu.cn/home/dengcai/Data/code/PCA.m" onclick="var that=this;_gaq.push([&#39;_trackEvent&#39;,&#39;Download&#39;,&#39;PCA&#39;,this.href]);setTimeout(function(){location.href=that.href;},500);return false;">PCA</a>: Principal Component Analysis
+<p>
+</p></li><li> <a href="http://www.cad.zju.edu.cn/home/dengcai/Data/code/KPCA.m" onclick="var that=this;_gaq.push([&#39;_trackEvent&#39;,&#39;Download&#39;,&#39;KPCA&#39;,this.href]);setTimeout(function(){location.href=that.href;},500);return false;">KPCA</a>: Kernel Principal Component Analysis
+<p>
+</p><hr>
+</li><li> <a href="http://www.cad.zju.edu.cn/home/dengcai/Data/code/LGE.m" onclick="var that=this;_gaq.push([&#39;_trackEvent&#39;,&#39;Download&#39;,&#39;LGE&#39;,this.href]);setTimeout(function(){location.href=that.href;},500);return false;">LGE</a>: (Regularized) Linear Graph Embedding (Provides a general framework for graph based subspace learning. This function will be called by LPP, NPE, IsoProjection, LSDA, MMP ...) 
+<p>
+</p></li><li> <a href="http://www.cad.zju.edu.cn/home/dengcai/Data/code/OLGE.m" onclick="var that=this;_gaq.push([&#39;_trackEvent&#39;,&#39;Download&#39;,&#39;OLGE&#39;,this.href]);setTimeout(function(){location.href=that.href;},500);return false;">OLGE</a>: (Regularized) Orthogonal Linear Graph Embedding (Provides a general framework for graph based subspace learning (orthogonal basis vectors). This function will be called by OLPP. It is also very easy to develop ONPE, OIsoProjection, OLSDA, MMP...) 
+<p>
+</p></li><li> <a href="http://www.cad.zju.edu.cn/home/dengcai/Data/code/TensorLGE.m" onclick="var that=this;_gaq.push([&#39;_trackEvent&#39;,&#39;Download&#39;,&#39;TensorLGE&#39;,this.href]);setTimeout(function(){location.href=that.href;},500);return false;">TensorLGE</a>: Tensor Linear Graph Embedding (Provides a general framework for graph based tensor subspace learning. This function will be called by TensorLPP. It is also very easy to develop TensorNPE, TensorIsoProjection, TensorLSDA, TensorMMP...) 
+<p>
+</p></li><li> <a href="http://www.cad.zju.edu.cn/home/dengcai/Data/code/KGE.m" onclick="var that=this;_gaq.push([&#39;_trackEvent&#39;,&#39;Download&#39;,&#39;KGE&#39;,this.href]);setTimeout(function(){location.href=that.href;},500);return false;">KGE</a>: (Regularized) Kernel Graph Embedding (Provides a general framework for graph based kernel subspace learning. This function will be called by KernelLPP. It is also very easy to develop KernelNPE, KernelIsoProjection, KernelLSDA, KernelMMP...) 
+<p>
+</p><ul>
+	<li>Deng Cai, Xiaofei He and Jiawei Han, "Spectral Regression for Efficient Regularized Subspace Learning", ICCV'07.<br>
+	<a href="javascript:return false;" class="hint_link" title="@INPROCEEDINGS{CHH07b,&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AUTHOR =       {Deng Cai and Xiaofei He and Jiawei Han},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;TITLE =        {Spectral Regression for Efficient Regularized Subspace Learning},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;BOOKTITLE =    {Proc. Int. Conf. Computer Vision (ICCV&#39;07)},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;YEAR =         {2007},}">Bibtex source</a>
+	
+	</li><li>Deng Cai, Xiaofei He, Yuxiao Hu, Jiawei Han and Thomas Huang, "Learning a Spatially
+Smooth Subspace for Face Recognition", CVPR'07.<br>
+<a href="javascript:return false;" class="hint_link" title="@INPROCEEDINGS{CHHH07,&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AUTHOR =       {Deng Cai and Xiaofei He and Yuxiao Hu and Jiawei Han and Thomas Huang},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;TITLE =        {Learning a Spatially Smooth Subspace for Face Recognition},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;BOOKTITLE =    {Proc. IEEE Conf. Computer Vision and Pattern Recognition Machine Learning (CVPR&#39;07)},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;YEAR =         {2007},}">Bibtex source</a>
+</li></ul>
+<hr>
+</li><li> <a href="http://www.cad.zju.edu.cn/home/dengcai/Data/code/LDA.m" onclick="var that=this;_gaq.push([&#39;_trackEvent&#39;,&#39;Download&#39;,&#39;LDA&#39;,this.href]);setTimeout(function(){location.href=that.href;},500);return false;">LDA</a>: (Regularized) Linear Discriminant Analysis (Generally, LDA can also use LGE as a subroutine. However, we can use the special graph structure of LDA to obtain some computational benefits.)
+<p>
+</p></li><li> <a href="http://www.cad.zju.edu.cn/home/dengcai/Data/code/KDA.m" onclick="var that=this;_gaq.push([&#39;_trackEvent&#39;,&#39;Download&#39;,&#39;KDA&#39;,this.href]);setTimeout(function(){location.href=that.href;},500);return false;">KDA</a>: (Regularized) Kernel Discriminant Analysis (Generally, KDA can also use KGE as a subroutine. However, we can use the special graph structure of KDA to obtain some computational benefits.)
+<p>
+
+</p><ul>
+	<li>
+Deng Cai, Xiaofei He and Jiawei Han, "SRDA: An Efficient Algorithm for Large-Scale Discriminant Analysis", IEEE TKDE 2008. <br>
+<a href="javascript:return false;" class="hint_link" title="@article{CHH08,&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;author = {Deng Cai and Xiaofei He and Jiawei Han},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;title = {SRDA: An Efficient Algorithm for Large-Scale Discriminant Analysis},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;journal = {IEEE Trans. on Knowl. and Data Eng.},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;volume = {20},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;number = {1},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;year = {2008},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pages = {1--12}}">Bibtex source</a>
+
+	</li><li>
+Deng Cai, Xiaofei He, Jiawei Han, "Speed Up Kernel Discriminant Analysis", The VLDB Journal, 2011. <br>
+<a href="javascript:return false;" class="hint_link" title="
+@ARTICLE{Cai11SRKDA,&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+  AUTHOR =       {Deng Cai and Xiaofei He and Jiawei Han},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+  TITLE =        {Speed Up Kernel Discriminant Analysis},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+  JOURNAL =      {The VLDB Journal},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+  YEAR =         {2011},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+  volume =       {20},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+  number =       {1},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+  pages =        {21-33},
+}">Bibtex source</a>
+
+</li></ul>
+
+<hr>
+</li><li> <a href="http://www.cad.zju.edu.cn/home/dengcai/Data/code/LPP.m" onclick="var that=this;_gaq.push([&#39;_trackEvent&#39;,&#39;Download&#39;,&#39;LPP&#39;,this.href]);setTimeout(function(){location.href=that.href;},500);return false;">LPP</a>: Locality Preserving Projection (You need to download LGE.m as well as constructW.m).
+<p>
+
+</p></li><li> <a href="http://www.cad.zju.edu.cn/home/dengcai/Data/code/OLPP.m" onclick="var that=this;_gaq.push([&#39;_trackEvent&#39;,&#39;Download&#39;,&#39;OLPP&#39;,this.href]);setTimeout(function(){location.href=that.href;},500);return false;">OLPP</a>: Orthogonal Locality Preserving Projections (You need to download OLGE.m as well as constructW.m)
+<p>
+
+</p></li><li> <a href="http://www.cad.zju.edu.cn/home/dengcai/Data/code/TensorLPP.m" onclick="var that=this;_gaq.push([&#39;_trackEvent&#39;,&#39;Download&#39;,&#39;TensorLPP&#39;,this.href]);setTimeout(function(){location.href=that.href;},500);return false;">TensorLPP</a>: Tensor Locality Preserving Projections (You need to download TensorLGE.m as well as constructW.m)
+<p>
+</p></li><li> <a href="http://www.cad.zju.edu.cn/home/dengcai/Data/code/KLPP.m" onclick="var that=this;_gaq.push([&#39;_trackEvent&#39;,&#39;Download&#39;,&#39;KLPP&#39;,this.href]);setTimeout(function(){location.href=that.href;},500);return false;">KernelLPP</a>: Kernel Locality Preserving Projections (You need to download KGE.m as well as constructW.m)
+<p>
+</p><ul>	
+	<li>Deng Cai, Xiaofei He, Jiawei Han, and Hong-Jiang Zhang, "Orthogonal Laplacianfaces for Face Recognition", in IEEE TIP, 2006. <br>
+<a href="javascript:return false;" class="hint_link" title="@ARTICLE{CHHZ06,&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AUTHOR =       {Deng Cai and Xiaofei He and Jiawei Han and Hong-Jiang Zhang},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;TITLE =        {Orthogonal Laplacianfaces for Face Recognition},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;JOURNAL =      {IEEE Transactions on Image Processing},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;YEAR =         {2006},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;volume =       {15},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;number =       {11},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pages =        {3608-3614},}">Bibtex source</a>
+
+</li><li> Xiaofei He, Deng Cai, and Partha Niyogi, "Tensor Subspace Analysis", NIPS 2005. <br>
+<a href="javascript:return false;" class="hint_link" title="
+	@INPROCEEDINGS{HCN05b,&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+  AUTHOR =       {Xiaofei He and Deng Cai and Partha Niyogi},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+  TITLE =        {Tensor Subspace Analysis},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+  BOOKTITLE =    {Advances in Neural Information Processing Systems 18},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+  YEAR =         {2005},
+}
+">Bibtex source</a>
+
+	</li><li>Xiaofei He, Shuicheng Yan, Yuxiao Hu, Partha Niyogi, and Hong-Jiang Zhang, "Face Recognition Using Laplacianfaces", in IEEE TPAMI, 2005. <br>
+<a href="javascript:return false;" class="hint_link" title="@ARTICLE{HYHNZ05,&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AUTHOR =       {Xiaofei He and Shuicheng Yan and Yuxiao Hu and Partha Niyogi and Hong-Jiang Zhang},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;TITLE =        {Face Recognition Using Laplacianfaces},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;JOURNAL =      {IEEE Trans. Pattern Anal. Mach. Intelligence},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;YEAR =         {2005},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;volume =       {27},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;number =       {3},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pages =        {328-340},}">Bibtex source</a>
+	
+	</li><li>Xiaofei He and Partha Niyogi, "Locality Preserving Projections", NIPS 16, 2003. <br>
+<a href="javascript:return false;" class="hint_link" title="@Inproceedings{HN03,&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;author = {Xiaofei He and Partha Niyogi},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;title = {Locality Preserving Projections},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;booktitle = {Advances in Neural Information Processing Systems 16},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;year = {2003}}">Bibtex source</a>
+
+</li></ul>
+	
+	
+<hr>
+</li><li> <a href="http://www.cad.zju.edu.cn/home/dengcai/Data/code/NPE.m" onclick="var that=this;_gaq.push([&#39;_trackEvent&#39;,&#39;Download&#39;,&#39;NPE&#39;,this.href]);setTimeout(function(){location.href=that.href;},500);return false;">NPE</a>: Neighborhood Preserving Embedding (You need to download LGE.m)
+<p>
+	</p><ul>
+		<li> Xiaofei He, Deng Cai, Shuicheng Yan and Hong-Jiang Zhang, "Neighborhood Preserving Embedding," ICCV 2005. <br>  
+<a href="javascript:return false;" class="hint_link" title="@INPROCEEDINGS{HCYZ05,&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AUTHOR =       {Xiaofei He and Deng Cai and Shuicheng Yan and Hong-Jiang Zhang},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;TITLE =        {Neighborhood Preserving Embedding},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;BOOKTITLE =    {Proc. Int. Conf. Computer Vision (ICCV&#39;05)},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;YEAR =         {2005},}">Bibtex source</a>
+	</li></ul>
+<hr>
+</li><li> <a href="http://www.cad.zju.edu.cn/home/dengcai/Data/code/IsoP.m" onclick="var that=this;_gaq.push([&#39;_trackEvent&#39;,&#39;Download&#39;,&#39;IsoP&#39;,this.href]);setTimeout(function(){location.href=that.href;},500);return false;">IsoProjection</a>: Isometric Projection (You need to download LGE.m)
+<p>
+ <a href="http://www.cad.zju.edu.cn/home/dengcai/Data/code/dijkstra.mexw32">dijkstra.mexw32 (for 32bit Windows)</a> <br>
+ <a href="http://www.cad.zju.edu.cn/home/dengcai/Data/code/dijkstra.mexw64">dijkstra.mexw64 (for 64bit Windows)</a> <br>
+ <a href="http://www.cad.zju.edu.cn/home/dengcai/Data/code/dijkstra.mexglx">dijkstra.mexglx (for Linux)</a>: dijkstra algorithm (You can download the source code at <a href="http://isomap.stanford.edu/" target="_blank">here</a>)
+</p><p>
+	</p><ul>
+		<li> Deng Cai, Xiaofei He, and Jiawei Han, "Isometric Projection," AAAI 2007. <br>
+<a href="javascript:return false;" class="hint_link" title="
+@INPROCEEDINGS{CHH07d,&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+  AUTHOR =       {Deng Cai and Xiaofei He and Jiawei Han},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+  TITLE =        {Isometric Projection},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+  BOOKTITLE =    {Proc. 2007 AAAI Conf. on Artificial Intelligence (AAAI&#39;07)},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+  YEAR =         {2007},
+}
+">Bibtex source</a>
+
+	</li></ul>
+<hr>
+</li><li> <a href="http://www.cad.zju.edu.cn/home/dengcai/Data/code/LSDA.m" onclick="var that=this;_gaq.push([&#39;_trackEvent&#39;,&#39;Download&#39;,&#39;LSDA&#39;,this.href]);setTimeout(function(){location.href=that.href;},500);return false;">LSDA</a>: Locality Sensitive Discriminant Analysis (You need to download LGE.m)
+<p>
+	</p><ul>
+		<li> Deng Cai, Xiaofei He, Kun Zhou, Jiawei Han and Hujun Bao, "Locality Sensitive Discriminant Analysis," IJCAI'07.	<br>
+<a href="javascript:return false;" class="hint_link" title="
+@INPROCEEDINGS{CHZHB07,&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+  AUTHOR =       {Deng Cai and Xiaofei He and Kun Zhou and Jiawei Han and Hujun Bao},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+  TITLE =        {Locality Sensitive Discriminant Analysis},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+  BOOKTITLE =    {International Joint Conference on Artificial Intelligence (IJCAI&#39;07)},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+  YEAR =         {2007},
+}
+">Bibtex source</a>
+	</li></ul>
+<hr>
+</li><li><a href="http://www.cad.zju.edu.cn/home/dengcai/Data/code/SDA.m" onclick="var that=this;_gaq.push([&#39;_trackEvent&#39;,&#39;Download&#39;,&#39;SDA&#39;,this.href]);setTimeout(function(){location.href=that.href;},500);return false;">SDA</a>: Semi-Supervised Discriminant Analysis 
+	
+<p>
+</p><ul>
+<li>Deng Cai, Xiaofei He and Jiawei Han, "Semi-Supervised Discriminant Analysis", ICCV'07. <br>
+	<a href="javascript:return false;" class="hint_link" title="@INPROCEEDINGS{CHH07a,&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AUTHOR =       {Deng Cai and Xiaofei He and Jiawei Han},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;TITLE =        {Semi-Supervised Discriminant Analysis},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;BOOKTITLE =    {Proc. Int. Conf. Computer Vision (ICCV&#39;07)},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;YEAR =         {2007},}">Bibtex source</a>
+</li></ul>
+<p>
+</p><hr>
+</li><li><a href="http://www.cad.zju.edu.cn/home/dengcai/Data/code/MMP.m" onclick="var that=this;_gaq.push([&#39;_trackEvent&#39;,&#39;Download&#39;,&#39;MMP&#39;,this.href]);setTimeout(function(){location.href=that.href;},500);return false;">MMP</a>: Maximum Margin Projection
+<p>
+	</p><ul>
+		<li>Xiaofei He, Deng Cai, Jiawei Han, "Learning a Maximum Margin Subspace for Image Retrieval," TKDE 2008<br>
+<a href="javascript:return false;" class="hint_link" title="
+@ARTICLE{MMP,&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+  AUTHOR =       {Xiaofei He and Deng Cai and Jiawei Han},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+  TITLE =        {Learning a Maximum Margin Subspace for Image Retrieval},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+  JOURNAL =      {IEEE Transactions on Knowledge and Data Engineering},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+  YEAR =         {2008},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+  volume =       {20},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+  number =       {2},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+  month =        {February},
+}">Bibtex source</a>
+	</li></ul>
+<hr>
+</li><li><a href="http://www.cad.zju.edu.cn/home/dengcai/Data/code/GenSpatialSmoothRegularizer.m" onclick="var that=this;_gaq.push([&#39;_trackEvent&#39;,&#39;Download&#39;,&#39;GenSpatialSmoothRegularizer&#39;,this.href]);setTimeout(function(){location.href=that.href;},500);return false;">GenSpatialSmoothRegularizer</a>: Generate the spatially smooth regularizer <br>
+<ul>
+<li>  Deng Cai, Xiaofei He, Yuxiao Hu, Jiawei Han and Thomas Huang, "Learning a Spatially Smooth Subspace for Face Recognition", CVPR'07.  <br>
+ <a href="javascript:return false;" class="hint_link" title="@INPROCEEDINGS{CHHH07,&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;AUTHOR =       {Deng Cai and Xiaofei He and Yuxiao Hu and Jiawei Han and Thomas Huang},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;TITLE =        {Learning a Spatially Smooth Subspace for Face Recognition},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;BOOKTITLE =    {Proc. IEEE Conf. Computer Vision and Pattern Recognition Machine Learning (CVPR&#39;07)},&lt;br&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;YEAR =         {2007},}">Bibtex source</a>
+</li></ul>		
+<p>
+</p><p>
+</p></li></ul> 
+
+<hr>
+<center>
+<b>
+Return to <a href="http://www.cad.zju.edu.cn/home/dengcai/Data/data.html">Codes and Data</a>
+</b>
+</center>
+
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-27887439-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<div class="hint_box _hintBox" style="display: none;">@ARTICLE{CHHZ06,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AUTHOR =       {Deng Cai and Xiaofei He and Jiawei Han and Hong-Jiang Zhang},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TITLE =        {Orthogonal Laplacianfaces for Face Recognition},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JOURNAL =      {IEEE Transactions on Image Processing},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;YEAR =         {2006},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;volume =       {15},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number =       {11},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pages =        {3608-3614},}</div><div class="hint_box _hintBox" style="display: none;">@ARTICLE{CHH05,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AUTHOR =       {Deng Cai and Xiaofei He and Jiawei Han},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TITLE =        {Document Clustering Using Locality Preserving Indexing},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JOURNAL =      {IEEE Transactions on Knowledge and Data Engineering},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;YEAR =         {2005},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;volume =       {17},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number =       {12},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pages =        {1624-1637},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;month =        {December},}</div><div class="hint_box _hintBox" style="display: none;">@INPROCEEDINGS{CHH07a,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AUTHOR =       {Deng Cai and Xiaofei He and Jiawei Han},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TITLE =        {Semi-Supervised Discriminant Analysis},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BOOKTITLE =    {Proc. Int. Conf. Computer Vision (ICCV'07)},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;YEAR =         {2007},}</div><div class="hint_box _hintBox" style="display: none;">@INPROCEEDINGS{CHHH07,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AUTHOR =       {Deng Cai and Xiaofei He and Yuxiao Hu and Jiawei Han and Thomas Huang},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TITLE =        {Learning a Spatially Smooth Subspace for Face Recognition},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BOOKTITLE =    {Proc. IEEE Conf. Computer Vision and Pattern Recognition Machine Learning (CVPR'07)},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;YEAR =         {2007},}</div><div class="hint_box _hintBox" style="display: none;">@ARTICLE{HYHNZ05,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AUTHOR =       {Xiaofei He and Shuicheng Yan and Yuxiao Hu and Partha Niyogi and Hong-Jiang Zhang},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TITLE =        {Face Recognition Using Laplacianfaces},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JOURNAL =      {IEEE Trans. Pattern Anal. Mach. Intelligence},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;YEAR =         {2005},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;volume =       {27},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number =       {3},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pages =        {328-340},}</div><div class="hint_box _hintBox" style="display: none;">@Inproceedings{HN03,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;author = {Xiaofei He and Partha Niyogi},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title = {Locality Preserving Projections},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;booktitle = {Advances in Neural Information Processing Systems 16},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;year = {2003}}</div><div class="hint_box _hintBox" style="display: none;">@INPROCEEDINGS{CHH07b,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AUTHOR =       {Deng Cai and Xiaofei He and Jiawei Han},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TITLE =        {Spectral Regression for Efficient Regularized Subspace Learning},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BOOKTITLE =    {Proc. Int. Conf. Computer Vision (ICCV'07)},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;YEAR =         {2007},}</div><div class="hint_box _hintBox" style="display: none;">@INPROCEEDINGS{CHHH07,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AUTHOR =       {Deng Cai and Xiaofei He and Yuxiao Hu and Jiawei Han and Thomas Huang},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TITLE =        {Learning a Spatially Smooth Subspace for Face Recognition},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BOOKTITLE =    {Proc. IEEE Conf. Computer Vision and Pattern Recognition Machine Learning (CVPR'07)},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;YEAR =         {2007},}</div><div class="hint_box _hintBox" style="display: none;">@article{CHH08,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;author = {Deng Cai and Xiaofei He and Jiawei Han},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title = {SRDA: An Efficient Algorithm for Large-Scale Discriminant Analysis},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;journal = {IEEE Trans. on Knowl. and Data Eng.},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;volume = {20},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number = {1},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;year = {2008},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pages = {1--12}}</div><div class="hint_box _hintBox" style="display: none;">
+@ARTICLE{Cai11SRKDA,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  AUTHOR =       {Deng Cai and Xiaofei He and Jiawei Han},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  TITLE =        {Speed Up Kernel Discriminant Analysis},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  JOURNAL =      {The VLDB Journal},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  YEAR =         {2011},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  volume =       {20},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  number =       {1},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  pages =        {21-33},
+}</div><div class="hint_box _hintBox" style="display: none;">@ARTICLE{CHHZ06,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AUTHOR =       {Deng Cai and Xiaofei He and Jiawei Han and Hong-Jiang Zhang},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TITLE =        {Orthogonal Laplacianfaces for Face Recognition},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JOURNAL =      {IEEE Transactions on Image Processing},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;YEAR =         {2006},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;volume =       {15},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number =       {11},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pages =        {3608-3614},}</div><div class="hint_box _hintBox" style="display: none;">
+	@INPROCEEDINGS{HCN05b,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  AUTHOR =       {Xiaofei He and Deng Cai and Partha Niyogi},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  TITLE =        {Tensor Subspace Analysis},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  BOOKTITLE =    {Advances in Neural Information Processing Systems 18},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  YEAR =         {2005},
+}
+</div><div class="hint_box _hintBox" style="display: none;">@ARTICLE{HYHNZ05,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AUTHOR =       {Xiaofei He and Shuicheng Yan and Yuxiao Hu and Partha Niyogi and Hong-Jiang Zhang},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TITLE =        {Face Recognition Using Laplacianfaces},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JOURNAL =      {IEEE Trans. Pattern Anal. Mach. Intelligence},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;YEAR =         {2005},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;volume =       {27},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number =       {3},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pages =        {328-340},}</div><div class="hint_box _hintBox" style="display: none;">@Inproceedings{HN03,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;author = {Xiaofei He and Partha Niyogi},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title = {Locality Preserving Projections},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;booktitle = {Advances in Neural Information Processing Systems 16},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;year = {2003}}</div><div class="hint_box _hintBox" style="display: none;">@INPROCEEDINGS{HCYZ05,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AUTHOR =       {Xiaofei He and Deng Cai and Shuicheng Yan and Hong-Jiang Zhang},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TITLE =        {Neighborhood Preserving Embedding},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BOOKTITLE =    {Proc. Int. Conf. Computer Vision (ICCV'05)},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;YEAR =         {2005},}</div><div class="hint_box _hintBox" style="display: none;">
+@INPROCEEDINGS{CHH07d,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  AUTHOR =       {Deng Cai and Xiaofei He and Jiawei Han},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  TITLE =        {Isometric Projection},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  BOOKTITLE =    {Proc. 2007 AAAI Conf. on Artificial Intelligence (AAAI'07)},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  YEAR =         {2007},
+}
+</div><div class="hint_box _hintBox" style="display: none;">
+@INPROCEEDINGS{CHZHB07,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  AUTHOR =       {Deng Cai and Xiaofei He and Kun Zhou and Jiawei Han and Hujun Bao},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  TITLE =        {Locality Sensitive Discriminant Analysis},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  BOOKTITLE =    {International Joint Conference on Artificial Intelligence (IJCAI'07)},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  YEAR =         {2007},
+}
+</div><div class="hint_box _hintBox" style="display: none;">@INPROCEEDINGS{CHH07a,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AUTHOR =       {Deng Cai and Xiaofei He and Jiawei Han},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TITLE =        {Semi-Supervised Discriminant Analysis},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BOOKTITLE =    {Proc. Int. Conf. Computer Vision (ICCV'07)},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;YEAR =         {2007},}</div><div class="hint_box _hintBox" style="display: none;">
+@ARTICLE{MMP,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  AUTHOR =       {Xiaofei He and Deng Cai and Jiawei Han},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  TITLE =        {Learning a Maximum Margin Subspace for Image Retrieval},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  JOURNAL =      {IEEE Transactions on Knowledge and Data Engineering},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  YEAR =         {2008},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  volume =       {20},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  number =       {2},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  month =        {February},
+}</div><div class="hint_box _hintBox" style="display: none;">@INPROCEEDINGS{CHHH07,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AUTHOR =       {Deng Cai and Xiaofei He and Yuxiao Hu and Jiawei Han and Thomas Huang},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TITLE =        {Learning a Spatially Smooth Subspace for Face Recognition},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BOOKTITLE =    {Proc. IEEE Conf. Computer Vision and Pattern Recognition Machine Learning (CVPR'07)},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;YEAR =         {2007},}</div></body></html>

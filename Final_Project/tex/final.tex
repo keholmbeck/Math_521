@@ -47,79 +47,42 @@
 
 \begin{section}{Theory}
 
-\begin{homeworkSection}{1. Fourier series}
-Suppose $f(w)$ has the Fourier series representation $f(w) = \sum_{k \in \mathbb{Z}} c_k e^{ikw}$ and suppose that $g(w) = e^{imw}f(w)$. For some $m \in \mathbb{Z}$, show that
-$$
-	g(w) = \sum_{k = -\infty}^{\infty} d_k e^{ikw}, \quad \text{where} \quad d_k = c_{k-m}
-$$
-\\
-\problemAnswer{
-}
+\begin{homeworkSection}{Introduction}
+The project we present in this report involves properly classifying two data sets successfully. In this context, the data sets are images of dogs and cats, but the same ideas and algorithms can be successfully applied to other data sets, such as sound waves. Since we are working with images, some preprocessing methods will be explored to add uniformity or variance to the data sets. 
 \end{homeworkSection}
 
-\begin{homeworkSection}{2. Fourier series}
-Find the Fourier series for the $2\pi$-periodic square wave function 
-$$
-	f(\omega) = \left \lbrace \begin{matrix} -k && \text{if} && -\pi < \omega < 0\\
-		k && \text{if} && 0 < \omega < \pi \\
-	 \end{matrix} \right.
-	\quad \text{and} \quad f(\omega + 2\pi) = f(\omega)
-$$
+\begin{homeworkSection}{Preprocessing}
+Image \textit{preprocessing} typically involves filtering or computing the Fourier transform of an image prior to analysis. To this end, we will discuss some basics, beginning with filtering. 
 \\
-\problemAnswer{
-}
+\\
+Image filtering uses a \textit{mask} matrix on subsets of an image to perform operations. One filter example is the averaging filter: Given an $m \times n$ mask size, the mask $m_a$will be
+$$
+	m_a = \frac{1}{mn} \begin{bmatrix} 1 && \cdots && 1 \\ \vdots && \ddots && \vdots \\ 1 && \cdots && 1 \end{bmatrix}
+$$
+where the filtering operation involves an $m\times n$ neighborhood around each pixel of the original image matrix $A$.
+
 \end{homeworkSection}
 
-\begin{homeworkSection}{3. Wavelet decomposition}
-Compute by hand the Haar wavelet decomposition (Pyramidal decomposition) of the vector $x^T = [1,7,−3,2]$ by viewing it as
-$$
-	f(x) = \left \lbrace 
-	\begin{matrix} 
-		1 && \text{if} && x \in [0,\frac{1}{4}) \\
-		7 && \text{if} && x \in [\frac{1}{4}, \frac{1}{2}) \\
-		-3 && \text{if} && x \in [\frac{1}{2},\frac{3}{4}) \\
-		2 && \text{if} && x \in [\frac{3}{4},1) \\
-	 \end{matrix} \right.
-	\quad \text{and} \quad f(\omega + 2\pi) = f(\omega)
-$$
-Graphically show the projections onto the scaling and wavelet subspaces
-\\
-\\
-\problemAnswer{ 
-}
+\begin{homeworkSection}{Classification}
+
+\end{homeworkSection}
+
+
+\begin{homeworkSection}{Singular Values}
+The Singular Value Decomposition (SVD) is an important first step in classification.
 \end{homeworkSection}
 
 \end{section}
 
 
-\begin{section}{Computing}
-\begin{homeworkSection}{1. }
-Implement a $3 \times 3$ \textit{median filter} and apply the filtering  process on a corrupted image of “app-ndt-Chip5.JPG”
-located via the course website. Specifically, corrupt “app-ndt-Chip-5.JPG” with \textit{salt-and-pepper} noise, where the corrupted pixels are either set to the maximum value (which looks like snow in the image) or have single bits flipped over. In some cases, single pixels can be set alternatively to zero or to the maximum value (i.e., 255 on a 8-bit machine). Then apply the median filter to de-noise the corrupted image. Compare your result with the original.
+\begin{section}{Results}
+\begin{homeworkSection}{Dogs and Cats}
 \end{homeworkSection}
 
-\begin{homeworkSection}{2. }
-Given an image “CTimage.JPG“ on the course website, perform the following operations:
-\renewcommand{\theenumi}{\alph{enumi}}
-\begin{enumerate}
-	\item Construct a $3 \times 3$ average filter to smooth the image.
-	\item Then use a 2D Laplacian filter mask to extract the edges of the smoothed image.
-	\item Finally, enhance the smoothed image with the result from part (b). How does this image compare to the original?
-\end{enumerate}
+\begin{homeworkSection}{Classification Types}
+
 \end{homeworkSection}
 
-\begin{homeworkSection}{3. }
-Test your codes with your favorite image for this problem. Make sure your codes are as general as possible and be sure to plot the results.
-\renewcommand{\theenumi}{\alph{enumi}}
-\begin{enumerate}
-	\item Write a function in \textsc{MATLAB} to compute the approximation and each of the three detail components of an image. (i.e., you will produce 4 \textit{extremely} short codes here) Notice that the resolution of LL, HL, LH, and HH will be $M/2 \times N/2$, where $(M,N)$ is the resolution of the original image.
-	\item Write a subroutine to reconstruct an image from \textbf{only} the \textit{approximation} component as a function of level. Notice that the resolution of the reconstructed image will be of size $M\times N$.
-	\item Compress the image up to level 3 using \textbf{only the approximation component}. Compute the compression ratio as a function of each compression level. Plot the compressed image for each level along with their compression ratio. Note that the compression ratio in this case can be defined as
-	$$
-		CR = \frac{ \text{\# of nonzero entries in the original} }{ \text{\# of nonzero entries in the compressed} }
-	$$
-\end{enumerate}
-\end{homeworkSection}
 
 \end{section}
 
