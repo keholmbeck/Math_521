@@ -36,15 +36,19 @@ ndx     = randperm(length(classes));
 
 % [w, yproj, alpha] = LDA2(DATA(:,ndx), classes(ndx), 0.96);
 
+TrainData = DATA(:,ndx);
 % %{
-[w, yproj, alpha] = LDA2(DATA(:,ndx), classes(ndx), 0.96);
-[eigvector, eigvalue] = LDA_CAD(DATA(:,ndx)', classes(ndx)');
-w = eigvector; yproj = w'*DATA(:,ndx);
+[w, yproj, alpha] = LDA(TrainData, classes(ndx), 0.96);
+yproj = KLDA(TrainData, classes(ndx), TrainData);
+
+% yproj = w;
+% [eigvector, eigvalue] = LDA_CAD(TrainData', classes(ndx)');
+% w = eigvector; yproj = w'*TrainData;
 % return
 %}
 
 ax1 = plot(yproj(classes(ndx)==1),0,'ob', 'MarkerSize',10); hold on;
 ax2 = plot(yproj(classes(ndx)==2),0,'+r', 'MarkerSize',10);
-plot(alpha*[1,1], 0.1*[-1,1], ':k', 'LineWidth',2); hold off; title LDA;
+plot(mean(yproj)*[1,1], 0.1*[-1,1], ':k', 'LineWidth',2); hold off; title LDA;
 legend([ax1(1),ax2(1)], 'Class 1', 'Class 2');
 figure(gcf);
