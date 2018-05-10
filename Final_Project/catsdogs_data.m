@@ -31,6 +31,8 @@ for ii = 1:length(files)
     end
 end
 DATA = double(DATA);
+
+%{
 allNdx      = 1:size(DATA,2);
 
 trainNdx    = [1:77, 82:159];
@@ -40,49 +42,57 @@ testNdx     = allNdx( ~ismember(allNdx,trainNdx) );
 TestData    = DATA(:,testNdx);
 TestClass   = classes( testNdx );
 
-% %{
+
 X = TrainData; cats = (TrainClass == 0); dogs = (TrainClass == 1);
 
-[yproj] = KLDA(TrainData, TrainClass, X);
+[yproj] = KLDA(DATA, TrainClass, X);
 alpha = mean(yproj);
 
 % X = TestData; cats = (TestClass == 0); dogs = (TestClass == 1);
 % [yproj] = KLDA(TrainData, TrainClass, X);
+%}
+load PatternRecAns.mat
 
+%{
+% preprocess the data
+for ii = 1:size(TestSet,2)
+    dat0 = TestSet(:,ii);
+    dat = reshape(dat0, [64,64]);
+    dat = imfilt(dat, 'average', [3,3]);
+    dat = imfilt(dat, 'laplacian');
+    dat = dat(:) - dat0(:);
+    TestSet(:,ii) = dat(:);
+end
+%}
+
+[yproj, yproj0] = KLDA(DATA, classes, TestSet);
+alpha = mean(yproj0);
+
+cats = (classes==0); dogs = (classes==1);
+
+subplot(121);
+ax1 = plot(yproj0(cats),0,'ob', 'MarkerSize',10); hold on;
+ax2 = plot(yproj0(dogs),0,'+r', 'MarkerSize',10);
+plot(alpha*[1,1], 0.1*[-1,1], ':k', 'LineWidth',2);
+
+hold off; title 'Test Data'; legend([ax1(1),ax2(1)], 'Cats', 'Dogs');
+
+% [yproj] = KLDA(DATA, classes, TestSet);
+
+cats = (hiddenlabels==0); dogs = (hiddenlabels==1);
+% cats = (classes==0); dogs = (classes==1);
+
+subplot(122);
 ax1 = plot(yproj(cats),0,'ob', 'MarkerSize',10); hold on;
 ax2 = plot(yproj(dogs),0,'+r', 'MarkerSize',10);
 plot(alpha*[1,1], 0.1*[-1,1], ':k', 'LineWidth',2);
 
-% yproj = w'*TestData; 
-% ax3 = plot(yproj(TestClass==0),0.02,'db', 'MarkerSize',10);
-% ax4 = plot(yproj(TestClass==1),0.02,'dr', 'MarkerSize',10);
+hold off; title 'Training Data'; legend([ax1(1),ax2(1)], 'Cats', 'Dogs');
 
-hold off; title LDA; legend([ax1(1),ax2(1)], 'Dogs', 'Cats');
 figure(gcf);
-return;
 
+cat_rate = sum(yproj(cats)<=alpha) / sum(cats)
+dog_rate = sum(yproj(dogs)>alpha) / sum(dogs)
+total_rate = 0.5*(cat_rate + dog_rate)
 
-% [w, yproj, alpha] = LDA(TrainData, TrainClass, TestData);
-%}
-testNdx     = allNdx( ~ismember(allNdx,trainNdx) );
-TestData    = DATA(:,testNdx);
-TestClass   = classes( testNdx );
-
-
-[w, eigvalue] = LDA_CAD(TrainData',TrainClass');
-yproj = w'*TrainData;
-
-% subplot(121);
-ax1 = plot(yproj(TrainClass==0),0,'ob', 'MarkerSize',10); hold on;
-ax2 = plot(yproj(TrainClass==1),0,'+r', 'MarkerSize',10);
-
-yproj = w'*bsxfun(@minus, TestData, mean(TrainData,2));
-% ax3 = plot(yproj(otherDat),0,'dg', 'MarkerSize',10);
-ax3 = plot(yproj(TestClass==0),0.02,'db', 'MarkerSize',10);
-ax4 = plot(yproj(TestClass==1),0.02,'dr', 'MarkerSize',10);
-
-% plot(alpha*[1,1], 0.1*[-1,1], ':k', 'LineWidth',2);
-
-hold off; title LDA; legend([ax1(1),ax2(1)], 'Dogs', 'Cats');
-figure(gcf);
 

@@ -1,4 +1,4 @@
-function yproj = KLDA(DATA, classes, TestData)
+function [yproj, yproj0] = KLDA(DATA, classes, TestData)
 % KLDA
 % Kernel Linear Discriminant Analysis
 % 
@@ -14,10 +14,9 @@ function yproj = KLDA(DATA, classes, TestData)
 
 % Author: Kristin Holmbeck
 
-doPCA = false;
-
-if nargin == 2
-    tol = 0.95; % meant to be for PCA
+if nargin == 3
+    options.doPCA = 0;
+    options.tol = 0.999;
 end
 
 allClasses  = unique(classes);
@@ -27,14 +26,18 @@ for ii = 1:nClasses
     ni(ii) = sum(classes == allClasses(ii));
 end
 
-if doPCA
+% meanDat = sum(DATA,2) / size(DATA,2);
+% DATA = bsxfun(@minus, DATA, meanDat);
+% TestData = bsxfun(@minus, TestData, meanDat);
+
+if options.doPCA
     % approximate the data with lower dimensions (PCA)
     % and transform into a new space (X)
     X       = DATA;
     [U,S,V] = svd(DATA,0);
     % [U,S,V] = svd(bsxfun(@minus, DATA, sum(DATA,2))/size(DATA,2), 0);
     E       = cumulative_energy(diag(S), rank(DATA));
-    k       = find(E>tol, 1);          % 99% rank approximation
+    k       = find(E>options.tol, 1);
     DATA    = S(1:k,1:k)*V(:,1:k)';     % use this new space
 end
 
@@ -77,14 +80,21 @@ D       = abs(diag(D));
 [D,ndx] = max(D);
 alpha   = V(:,ndx);
 
-ker = @kernel;
-
-if doPCA
-    keyboard
+if options.doPCA
+    TestData = DATA;
 end
 
-yproj = zeros(size(DATA,2), 1);
+% project training data
+yproj0 = zeros(size(DATA,2), 1);
+for jj = 1:size(DATA,2)
+    for ii = 1:size(DATA,2)
+        yproj0(jj) = yproj0(jj) + alpha(ii)*kernel(DATA(:,ii), DATA(:,jj));
+    end
+end
 
+
+% project testing data
+yproj = zeros(size(TestData,2), 1);
 for jj = 1:size(TestData,2)
     for ii = 1:size(DATA,2)
         yproj(jj) = yproj(jj) + alpha(ii)*kernel(DATA(:,ii), TestData(:,jj));
@@ -95,8 +105,8 @@ end
 
 function k = kernel(x,y)
 
-k = exp(-norm(x-y).^2 / 0.5);
-% k = y'*x;
+% k = exp(-norm(x-y).^2 / 0.5);
+k = y'*x;
 
 end
 
