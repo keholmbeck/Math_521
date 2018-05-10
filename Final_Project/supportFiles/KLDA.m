@@ -16,7 +16,7 @@ function [yproj, yproj0] = KLDA(DATA, classes, TestData)
 
 if nargin == 3
     options.doPCA = 0;
-    options.tol = 0.999;
+    options.tol = 0.9999;
 end
 
 allClasses  = unique(classes);
@@ -68,7 +68,7 @@ for ii = 1:nClasses
 
 %     M(:,ii) = sum(Ki,2) / ni(ii);    
 end
-N = N + 1e-3*eye(npts);  % regularization term
+% N = N + 1e-3*eye(npts);  % regularization term
 
 % ASSUME WE ONLY HAVE 2 CLASSES
 M1 = M(:,1);
@@ -81,7 +81,7 @@ D       = abs(diag(D));
 alpha   = V(:,ndx);
 
 if options.doPCA
-    TestData = DATA;
+    DATA = U(:,1:k)*DATA;
 end
 
 % project training data

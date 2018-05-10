@@ -7,22 +7,25 @@ files = files(3:end);
 DATA = [];
 classes = zeros(1, length(files));
 
+PREPROCESS = 0;
+
 for ii = 1:length(files)
     fname = files(ii).name;
     dat = imread([folder, fname]);
     dat = dat(:,:,1);
     dat0 = double(dat);
     
-    %{
-    % preprocess the data
-    dat = imfilt(dat, 'average', [3,3]);
-    dat = imfilt(dat, 'laplacian');
-    dat = dat - dat0;
-%     subplot(121); imagesc(dat); axis image; subplot(122); imagesc(dat0-dat); axis image;
-    %}
-    dat = dat(:);
+	if PREPROCESS
+        % preprocess the data
+        dat = imfilt(dat, 'average', [3,3]);
+        dat = imfilt(dat, 'laplacian');
+        dat = dat - dat0;
+        
+        dat = dat - min(dat(:));
+        dat = dat ./ max(dat(:));
+    end
     
-    DATA = [DATA, dat];
+    DATA = [DATA, dat(:)];
     
     if ~isempty( strfind(lower(fname), 'cat') )
         classes(ii) = 1;
@@ -53,17 +56,20 @@ alpha = mean(yproj);
 %}
 load PatternRecAns.mat
 
-%{
-% preprocess the data
-for ii = 1:size(TestSet,2)
-    dat0 = TestSet(:,ii);
-    dat = reshape(dat0, [64,64]);
-    dat = imfilt(dat, 'average', [3,3]);
-    dat = imfilt(dat, 'laplacian');
-    dat = dat(:) - dat0(:);
-    TestSet(:,ii) = dat(:);
+if PREPROCESS
+    for ii = 1:size(TestSet,2)
+        dat0 = TestSet(:,ii);
+        dat = reshape(dat0, [64,64]);
+        dat = imfilt(dat, 'average', [3,3]);
+        dat = imfilt(dat, 'laplacian');
+        dat = dat(:) - dat0(:);
+        
+        dat = dat - min(dat);
+        dat = dat ./ max(dat);
+        
+        TestSet(:,ii) = dat(:);
+    end
 end
-%}
 
 [yproj, yproj0] = KLDA(DATA, classes, TestSet);
 alpha = mean(yproj0);
