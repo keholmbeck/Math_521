@@ -68,7 +68,7 @@ for ii = 1:nClasses
 
 %     M(:,ii) = sum(Ki,2) / ni(ii);    
 end
-N = N + 1e-3*eye(npts);  % regularization term
+% N = N + 1e-3*eye(npts);  % regularization term
 
 % ASSUME WE ONLY HAVE 2 CLASSES
 M1 = M(:,1);

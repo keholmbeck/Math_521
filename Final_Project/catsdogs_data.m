@@ -6,43 +6,37 @@ load PatternRecAns.mat
 GEN_FLIP_IM = 0;
 PREPROCESS = 1;
 
-if PREPROCESS || GEN_FLIP_IM
-    nDat = size(DATA,2);
-    for ii = 1:nDat
-        dat = DATA(:,ii);
-        dat = reshape(dat, [64,64]);
-        tmp = dat;
-        
-        if PREPROCESS
-            tmp = imfilt(dat, 'average', [3,3]);
-            tmp = imfilt(tmp, 'laplacian');
-%             tmp = tmp - dat;
-            tmp = wcodemat(tmp, 64);
-            
-            DATA(:,ii) = tmp(:);
-        end
-        
-        if GEN_FLIP_IM
-            tmp = fliplr(tmp);
-            DATA = [DATA, tmp(:)];
-        end
-    end
-    if GEN_FLIP_IM
-        classes = [classes, classes];
-    end
-end
+folder = 'TIFFtraining/';
+files = dir( folder );
+files = files(3:end);
 
-if PREPROCESS
-    % preprocess the data
-    for ii = 1:size(TestSet,2)
-        dat0 = TestSet(:,ii);
-        dat0 = reshape(dat0, [64,64]);
-        dat = imfilt(dat0, 'average', [3,3]);
+DATA = [];
+classes = zeros(1, length(files));
+
+PREPROCESS = 0;
+
+for ii = 1:length(files)
+    fname = files(ii).name;
+    dat = imread([folder, fname]);
+    dat = dat(:,:,1);
+    dat0 = double(dat);
+    
+	if PREPROCESS
+        % preprocess the data
+        dat = imfilt(dat, 'average', [3,3]);
         dat = imfilt(dat, 'laplacian');
-%         dat = dat - dat0;
-        dat = wcodemat(dat, 64);
+        dat = dat - dat0;
         
-        TestSet(:,ii) = dat(:);
+        dat = dat - min(dat(:));
+        dat = dat ./ max(dat(:));
+    end
+    
+    DATA = [DATA, dat(:)];
+    
+    if ~isempty( strfind(lower(fname), 'cat') )
+        classes(ii) = 1;
+    else
+        classes(ii) = 0;
     end
 end
 
@@ -79,7 +73,23 @@ alpha = mean(yproj);
 % [yproj] = KLDA(TrainData, TrainClass, X);
 %}
 
-[yproj, yproj0] = KLDA(TrainData, TrainClass, TestSet);
+if PREPROCESS
+    for ii = 1:size(TestSet,2)
+        dat0 = TestSet(:,ii);
+        dat = reshape(dat0, [64,64]);
+        dat = imfilt(dat, 'average', [3,3]);
+        dat = imfilt(dat, 'laplacian');
+        dat = dat(:) - dat0(:);
+        
+        dat = dat - min(dat);
+        dat = dat ./ max(dat);
+        
+        TestSet(:,ii) = dat(:);
+    end
+end
+
+[yproj, yproj0] = KLDA(DATA, classes, TestSet);
+
 alpha = mean(yproj0);
 
 catst = (TrainClass==0); dogst = (TrainClass==1);
@@ -114,5 +124,4 @@ else
     dog_rate = sum(yproj(dogs)>alpha) / sum(dogs)
     total_rate = 0.5*(cat_rate + dog_rate)
 end
-
 
