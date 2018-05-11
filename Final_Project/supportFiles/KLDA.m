@@ -1,4 +1,4 @@
-function [yproj, yproj0] = KLDA(DATA, classes, TestData)
+function [yproj, yproj0, alpha] = KLDA(DATA, classes, TestData)
 % KLDA
 % Kernel Linear Discriminant Analysis
 % 
@@ -15,7 +15,7 @@ function [yproj, yproj0] = KLDA(DATA, classes, TestData)
 % Author: Kristin Holmbeck
 
 if nargin == 3
-    options.doPCA = 0;
+    options.doPCA = 1;
     options.tol = 0.999;
 end
 
@@ -75,38 +75,52 @@ M1 = M(:,1);
 M2 = M(:,2);
 M  = (M1-M2)*(M1-M2)';
 
-[V,D]   = eigs(M,N);
-D       = abs(diag(D));
-[D,ndx] = max(D);
-alpha   = V(:,ndx);
+% [V,D]   = eig(M,N);
+% D       = abs(diag(D));
+% [D,ndx] = max(D);
+% alpha   = V(:,ndx);
 
+[U1,V1,X1,C1,S1] = gsvd(M,N,0);
+[v,ndx] = max(diag(C1).*diag(S1));
+alpha = V1(:,ndx);
+
+% project testing data
 if options.doPCA
-    TestData = DATA;
+    TestData = U(:,1:k)'*TestData;
 end
 
 % project training data
 yproj0 = zeros(size(DATA,2), 1);
 for jj = 1:size(DATA,2)
-    for ii = 1:size(DATA,2)
-        yproj0(jj) = yproj0(jj) + alpha(ii)*kernel(DATA(:,ii), DATA(:,jj));
-    end
+%     for ii = 1:size(DATA,2)
+%         yproj0(jj) = yproj0(jj) + alpha(ii)*kernel(DATA(:,ii), DATA(:,jj));
+%     end
+    yproj0(jj) = kernel(DATA, DATA(:,jj)) * alpha;
 end
 
 
-% project testing data
 yproj = zeros(size(TestData,2), 1);
 for jj = 1:size(TestData,2)
-    for ii = 1:size(DATA,2)
-        yproj(jj) = yproj(jj) + alpha(ii)*kernel(DATA(:,ii), TestData(:,jj));
-    end
+%     for ii = 1:size(DATA,2)
+%         yproj(jj) = yproj(jj) + alpha(ii)*kernel(DATA(:,ii), TestData(:,jj));
+%     end
+    yproj(jj) = kernel(DATA, TestData(:,jj)) * alpha;
 end
 
 end
 
 function k = kernel(x,y)
 
-% k = exp(-norm(x-y).^2 / 0.5);
-k = y'*x;
+switch 1
+    case 0
+        k = y'*x;
+    case 1
+        % k = exp(-norm(x-y).^2 / 0.5);
+        tmp = bsxfun(@minus, x, y);
+        k = exp( -(tmp(1,:).^2 + tmp(2,:).^2) / 0.5 );
+    otherwise
+        error('Invalid kernel type');
+end
 
 end
 

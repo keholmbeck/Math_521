@@ -34,12 +34,12 @@ classes = [ones(1,10), 2*ones(1,10)];
 ndx     = (1:length(classes));
 ndx     = randperm(length(classes));
 
-% [w, yproj, alpha] = LDA2(DATA(:,ndx), classes(ndx), 0.96);
+[w, yproj, alpha] = LDA2(DATA(:,ndx), classes(ndx), DATA(:,ndx), 0.96);
 
-TrainData = DATA(:,ndx);
-% %{
-[w, yproj, alpha] = LDA(TrainData, classes(ndx), 0.96);
-yproj = KLDA(TrainData, classes(ndx), TrainData);
+% TrainData = DATA(:,ndx);
+% % %{
+% [w, yproj, alpha] = LDA(TrainData, classes(ndx), 0.96);
+% yproj = KLDA(TrainData, classes(ndx), TrainData);
 
 % yproj = w;
 % [eigvector, eigvalue] = LDA_CAD(TrainData', classes(ndx)');

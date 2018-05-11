@@ -1,4 +1,4 @@
-function [w,Xproj,alpha] = LDA(DATA, classes, tol)
+function [Xproj, Xproj0, alpha, w] = LDA(DATA, classes, TestData, opts)
 % LDA
 % Linear Discriminant Analysis
 % 
@@ -13,8 +13,9 @@ function [w,Xproj,alpha] = LDA(DATA, classes, tol)
 
 % Author: Kristin Holmbeck
 
-if nargin == 2
-    tol = 0.95;
+if nargin == 3
+    opts.doPCA = false;
+    opts.tol = 0.95;
 end
 
 allClasses  = unique(classes);
@@ -26,11 +27,16 @@ end
 
 % approximate the data with lower dimensions (PCA)
 % and transform into a new space (X)
-[U,S,V] = svd(DATA,0);
-% [U,S,V] = svd(bsxfun(@minus, DATA, sum(DATA,2))/size(DATA,2), 0);
-E       = cumulative_energy(diag(S), rank(DATA));
-k       = find(E>tol, 1);          % 99% rank approximation
-X       = S(1:k,1:k)*V(:,1:k)';     % use this new space
+if opts.doPCA
+    [U,S,V] = svd(DATA,0);
+    % [U,S,V] = svd(bsxfun(@minus, DATA, sum(DATA,2))/size(DATA,2), 0);
+    E       = cumulative_energy(diag(S), rank(DATA));
+    k       = find(E>opts.tol, 1);          % 99% rank approximation
+    X       = S(1:k,1:k)*V(:,1:k)';     % use this new space
+else
+    X = DATA;
+    k = size(DATA,1);
+end
 
 nDat    = size(X,2);
 m       = sum(X,2) / nDat;          % total mean
@@ -48,16 +54,24 @@ for ii = 1:nClasses
     end
 end
 
-A       = pinv(SW)*SB;
-[V,D]   = eig(A);
-D       = abs(diag(D));
-[D,ndx] = max(D);
-w       = V(:,ndx);
-  
-w       = U(:,1:k)*w;   % convert to the same # of rows as DATA
-Xproj   = w'*DATA;
+% A       = pinv(SW)*SB;
+% [V,D]   = eig(A);
+% D       = abs(diag(D));
+% [D,ndx] = max(D);
 
-alpha = mean(w);
+[U1,V1,X1,C1,S1] = gsvd(SB, SW, 0);
+[v,ndx] = max(diag(S1).*diag(C1));
+w       = V1(:,ndx);
+
+Xproj0  = w'*X;
+
+if opts.doPCA
+    TestData = U(:,1:k)'*TestData;
+end
+
+Xproj   = w'*TestData;
+
+alpha = mean(Xproj0);
 
 % alpha   = w'*m;         % alpha is only valid for nClasses=2
 
