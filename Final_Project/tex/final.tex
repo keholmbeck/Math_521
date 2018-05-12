@@ -54,13 +54,18 @@ The project we present in this report involves properly classifying two data set
 
 \begin{subsection}{Preprocessing}
 Image \textit{preprocessing} typically involves filtering or computing the Fourier transform of an image prior to analysis. To this end, we will discuss some basics, beginning with filtering. 
-\\
-\\
+
+\begin{subsubsection}{Filtering}
+
 Image filtering uses a \textit{mask} matrix on subsets of an image to perform operations. One filter example is the averaging filter: Given an $m \times n$ mask size, the mask $m_a$will be
 $$
 	m_a = \frac{1}{mn} \begin{bmatrix} 1 && \cdots && 1 \\ \vdots && \ddots && \vdots \\ 1 && \cdots && 1 \end{bmatrix}
 $$
 where the filtering operation involves an $m\times n$ neighborhood around each pixel of the original image matrix $A$.
+\end{subsubsection}
+
+\begin{subsubsection}{Dimension Reduction}
+\end{subsubsection}
 
 \end{subsection}
 
@@ -78,23 +83,25 @@ Before detailing the kernel classification method, we will provide an intuitive 
 \\
 \\
 \\
-There is no way to separate this data linearly, but the classes clearly have a defined separation. Kernel Discriminant Analysis (KDA) utilizes the ideas of LDA but with the data set $X$ mapped onto a new \textit{feature} space $\mathcal{F}$ where the data has a linear relationship in $\mathcal{F}$.
+There linear way to separate the data, but the classes clearly have a defined separation. Kernel Discriminant Analysis (KDA) utilizes the ideas of LDA but with the data set $X$ mapped onto a new \textit{feature} space $\mathcal{F}$ where the data has a linear relationship in $\mathcal{F}$. For the remainder of this paper, we will present KDA in the context of two classes, although it can be generalized to $n$ classes.
 \\
 \\
-Following the LDA method, suppose our two-class data is given by $X \ X_1 \cup X_2$ where $X_1 = \lbrace x_i \rbrace_{i=1}^{l_1}$ and $X_2 = \lbrace x_j \rbrace_{j=1}^{l_2}$. Now, let $\Phi$ be a nonlinear mapping to some feature space $\mathcal{F}$, that is, we take a vector $x$ from $X$ and map it using $\Phi(x) \in \mathcal{F}$. From the LDA algorithm, we need to maximize
+Following the LDA method, suppose our two-class data is given by $X = X_1 \cup X_2$ where $X_1 = \lbrace x_i \rbrace_{i=1}^{l_1}$ and $X_2 = \lbrace x_j \rbrace_{j=1}^{l_2}$. Now, let $\Phi$ be a nonlinear mapping to some feature space $\mathcal{F}$, that is, we take a vector $x \in X$ and map it using $\Phi(x) \in \mathcal{F}$. From the LDA algorithm, we need to maximize
 $$
 	J(w) = \frac{w^T S_B w}{w^T S_W w}
 $$
 However, using the new space, we must maximize
-$$
-	J(w) = \frac{w^T S_B^\Phi w}{w^T S_w^\Phi w}
-$$
+\begin{align}
+	J(w) = \frac{w^T S_B^\Phi w}{w^T S_W^\Phi w} \label{objFcn}
+\end{align}
 where 
 \begin{align*}
 	S_B^\Phi &= (m_1^\Phi - m_2^\Phi) (m_1^\Phi - m_2^\Phi)^T \qquad \text{and} \\
 	S_W^\Phi &= \sum_{i=1}^2 \sum_{x \in X_i} (\Phi(x) - m_i^\Phi) (\Phi(x) - m_i^\Phi)^T
 \end{align*}
-are the between-class and within-class scatter matrices, respectively, in the $\mathcal{F}$ space, and $m_i = \frac{1}{l_i} \sum_{j=1}^{l_i} \Phi( x_j^{(i)} )$, the mean of the $i^{\text{th}}$ class.
+are the between-class and within-class scatter matrices, respectively, in the $\mathcal{F}$ space, and $m_i = \frac{1}{l_i} \sum_{j=1}^{l_i} \Phi( x_j^{(i)} )$, the mean of the $i^{\text{th}}$ class. Furthermore, note that we are now finding the projection $w \in \mathcal{F}$.
+\\
+\\
 
 \begin{subsubsection}{Kernel Trick}
 The kernel trick boils down to using a linear classifier to solve a non-linear problem.
@@ -102,93 +109,76 @@ The kernel trick boils down to using a linear classifier to solve a non-linear p
 \\
 A feature map is a map $\Phi:X \to \mathcal{F}$, where $\mathcal{F}$ is what we call the feature space. Every feature map defines a kernel
 $$
-	K(x,y) = \langle \Phi(x), \Phi(y) \rangle
+	\kappa(x,y) = \langle \Phi(x), \Phi(y) \rangle
 $$
-where $K$ is clearly symmetric and positive-definite. In the context of linear algebra, the kernel is the space equivalent to the null space. In the statistical context, the kernel is used as a measure of similarity. In particular, the kernel function $k$ defines the distribution of similarities of points around a given point $x$, $k(x,y)$ denotes the similarity of point $x$ with another given point $y$. 
+where $\kappa$ is clearly symmetric and positive-definite. In the context of linear algebra, the kernel is the space equivalent to the null space. In the statistical context, the kernel is used as a measure of similarity. In particular, the kernel function $\kappa$ defines the distribution of similarities of points around a given point $x$, $\kappa(x,y)$ denotes the similarity of point $x$ with another given point $y$. 
 \\
 
 Explicitly computing the mappings of a function $\Phi(x)$ onto $\mathcal{F}$ can become intractable quick. To that end, we instead compute the inner products between the images (images in the linear algebra sense) of all pairs of data in the feature space.
 \\
 \\
-For any $x, \hat{x}$ in $X$, some kernel functions $k(x,\hat{x})$ can be expressed as an inner product in another space $V$. In other words, $k : X \times X \to \mathbb{R}$ and $\Phi : X \to V$.
+For any $x, \hat{x}$ in $X$, some kernel functions $\kappa(x,\hat{x})$ can be expressed as an inner product in another space $V$. In other words, $\kappa : X \times X \to \mathbb{R}$ and $\Phi : X \to V$.
 $$
-	k(x, \hat{x}) = \langle \Phi(x), \Phi( \hat{x} ) \rangle_V
+	\kappa(x, \hat{x}) = \langle \Phi(x), \Phi( \hat{x} ) \rangle_V
 $$
 \end{subsubsection}
 
-\begin{subsubsection}{KDA on concentric circle data}
-Let us revisit the concentric data problem from Figure \ref{fig:circle_data}, and compare the classification of LDA to KDA. For LDA, we obtain the failed classification (Figure \ref{fig:LDA_circles}) and the projection vector along with the data in Figure \ref{fig:LDA_proj_circles}.
-\\
-\centerline{\begin{minipage}{0.6\textwidth}
-    \begin{figure}[H]
-    \centering
-    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\columnwidth]{kda_test/LDA_circles}
-    \caption{Figure \ref{fig:circle_data} data with LDA projection vector}
-    \label{fig:LDA_circles}
-    \end{figure}
-\end{minipage}}
-\centerline{\begin{minipage}{0.6\textwidth}
-    \begin{figure}[H]
-    \centering
-    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\columnwidth]{kda_test/LDA_proj_circles}
-    \caption{Figure \ref{fig:circle_data} LDA classification}
-    \label{fig:LDA_proj_circles}
-    \end{figure}
-\end{minipage}}
-\\
-\\
-As described above, the kernel conversion is kind of tricky, and thus we cannot plot the equivalent projection vector. However, the successful classification is shown in Figure \ref{fig:KDA_proj_circles}.
+\begin{subsubsection}{KDA with the Kernel Trick}
+Noting that $w \in \mathcal{F}$, and using the theory of reproducing kernels \cite{kernTheory}, $w$ lies in the span of all training samples in $\mathcal{F}$. Hence, 
+$$
+	w = \sum_{i=1}^l \alpha_i \Phi \left( x_i^{(j)} \right)
+$$
+Multiplying $w^T$ by the mean,
+\begin{align*}
+	w^T m_i^{\Phi} &= \frac{1}{l_i} \sum_{j=1}^l \alpha_j \Phi^T \left( x_j \right)
+		\sum_{k=1}^{l_i} \Phi \left( x_k^{(i)} \right ) \\
+	&= \frac{1}{l_i} \sum_{j=1}^l \sum_{k=1}^{l_i} 
+		\alpha_j \Phi^T \left( x_j \right) \Phi \left( x_k^{(i)} \right ) \\
+	&= \frac{1}{l_i} \sum_{j=1}^l \sum_{k=1}^{l_i} \alpha_j \kappa \left( x_j, x_k^{(i)} \right)
+\end{align*}
+Defining $\left( M_i \right)_j := \frac{1}{l_i} \sum_{k=1}^{l_i} \kappa \left( x_j, x_k^{(i)} \right)$, 
+$$
+	w^T m_i = \alpha^T M_i
+$$
+For the details of $S_B^{\Phi}$,
 
-\centerline{\begin{minipage}{0.8\textwidth}
-    \begin{figure}[H]
-    \centering
-    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.8\columnwidth]{kda_test/KDA_proj_circles}
-    \caption{Figure \ref{fig:circle_data} KDA classification}
-    \label{fig:KDA_proj_circles}
-    \end{figure}
-\end{minipage}}
+\begin{align*}
+	S_B^{\Phi} &= \left( m_1^{\Phi} - m_2^{\Phi} \right) \left( m_1^{\Phi} - m_2^{\Phi} \right)^T 
+	= m_1^{\Phi} {m_1^{\Phi}}^T - m_1^{\Phi} {m_2^{\Phi}}^T - m_2^{\Phi} {m_1^{\Phi}}^T + m_2^{\Phi} {m_2^{\Phi}}^T \\
+\end{align*}
+Looking at just one of the terms, 
+\begin{align*}
+	&= \frac{1}{l_a l_b} \sum_{j=1}^{l_a} \sum_{k=1}^{l_b} \Phi \left( x_j^{(a)} \right) \Phi^T \left( x_k^{(b)} \right) \\
+	&= \frac{1}{l_a l_b} \sum_{j=1}^{l_a} \sum_{k=1}^{l_b} \kappa \left( x_j^{(a)}, x_k^{(b)} \right )
+\end{align*}
+With this, we can now write 
+\begin{align*}
+	S_B^{\Phi} = \left( M_1 - M_2 \right) \left( M_1 - M_2 \right)^T 
+	\qquad \text{with} \qquad
+		\left( M_i \right)_j := \frac{1}{l_i} \sum_{k=1}^{l_i} \kappa \left( x_j, x_k^{(i)} \right)
+\end{align*}
+where $M_i \in \mathbb{R}^{ l \times l }$ \textbf{(VERIFY THIS)}. Thus, the numerator of (\ref{objFcn}) can be written as $\alpha^T M \alpha$.
+\\
+\\
+Following the same logic, the denominator $w^T S_W^{\Phi} w$ can be written as $\alpha^T N \alpha$ where
+\begin{align*}
+	N &:= \sum_{j=1}^2 K_j (I - \bm{1}_{l_j}) K_j^T \\
+	\left( K_j \right)_{nm} &:= \kappa \left( x_n, x_m^{(j)} \right), K_j \in \mathbb{R}^{l \times l_j}\\
+	\bm{1}_{lj} &:= \frac{1}{l_j} \begin{bmatrix} 1 && \cdots && 1 \\ \vdots && \ddots && \vdots \\ 1&& \cdots && 1 \end{bmatrix} \in \mathbb{R}^{l_j \times l_j}
+\end{align*}
+Then, (\ref{objFcn}) can be rewritten as
+\begin{align}
+	J(\alpha) = \frac{\alpha^T M \alpha }{\alpha^T N \alpha} \label{objFcn2}
+\end{align}
+and a \textit{new} projection of $x$ onto $w$ is given by
+\begin{align}
+	w \cdot \Phi(x)  = \sum_{i=1}^l \alpha_i \kappa(x_i,x)
+\end{align}
 
 \end{subsubsection}
 
-\begin{subsubsection}{KDA on parabolic data}
-Another data set is shown in Figure \ref{fig:parab_data}. Again, this is easily separable, but it's clear that the separation is nonlinear. Again, for LDA, we obtain the failed classification (Figure \ref{fig:LDA_parab}) and the successful classification in Figure \ref{fig:KDA_proj_parab}.
-\\
-\begin{minipage}{1.0\textwidth}
-    \begin{figure}[H]
-    \centering
-    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.8\columnwidth]{kda_test/parab_data}
-    \caption{Parabolically-separable data}
-    \label{fig:parab_data}
-    \end{figure}
-\end{minipage}
-
-\centerline{\begin{minipage}{0.6\textwidth}
-    \begin{figure}[H]
-    \centering
-    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\columnwidth]{kda_test/LDA_parab}
-    \caption{Figure \ref{fig:parab_data} data with LDA projection vector}
-    \label{fig:LDA_parab}
-    \end{figure}
-\end{minipage}}
-
-\centerline{\begin{minipage}{0.6\textwidth}
-    \begin{figure}[H]
-    \centering
-    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\columnwidth]{kda_test/LDA_proj_parab}
-    \caption{Figure \ref{fig:parab_data} LDA classification}
-    \label{fig:LDA_proj_parab}
-    \end{figure}
-\end{minipage}}
-
-\centerline{\begin{minipage}{0.8\textwidth}
-    \begin{figure}[H]
-    \centering
-    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.8\columnwidth]{kda_test/KDA_proj_parab}
-    \caption{Figure \ref{fig:parab_data} KDA classification}
-    \label{fig:KDA_proj_parab}
-    \end{figure}
-\end{minipage}}
-\end{subsubsection}
+\input{KDA_on_concentric_data}
+\input{KDA_on_parabolic_data}
 
 \end{subsection}
 
@@ -235,6 +225,8 @@ The Singular Value Decomposition (SVD) is an important first step in classificat
     \bibitem{kda}
 	S. Mika, G. Ratsch, J. Weston, B. Scholkopf, and K. Muller. Fisher discriminant analysis with kernels. In \textit{Proc. IEEE Neural Networks for Signal Processing Workshop}, pages 41–48. IEEE Computer Society Press, 1999.
 
+	\bibitem{kernTheory}
+	Aronszajn, N. ``Theory of Reproducing Kernels." \textit{Transactions of the American Mathematical Society} 68, no. 3 (1950): 337-404. doi:10.2307/1990404.
 \end{thebibliography}
 
 \end{document}

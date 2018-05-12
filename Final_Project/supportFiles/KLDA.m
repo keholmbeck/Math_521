@@ -1,15 +1,19 @@
-function [yproj, yproj0, alpha] = KLDA(DATA, classes, TestData)
+function [yproj, yproj0, alpha] = KLDA(DATA, classes, TestData, options)
 % KLDA
 % Kernel Linear Discriminant Analysis
 % 
 % Syntax:
 %   yproj = KLDA(TrainData, TrainClassLabel, TestData)
+%   yproj = KLDA(TrainData, TrainClassLabel, TestData, options)
 % 
 % where TrainData is the entire data set and TrainClassLabel indicates the 
 % class of each column of TrainData.
 % 
 % The function returns the vector yproj, which is the projection of
 % TestData onto the space.
+% 
+% The options input is a structure that controls whether or not we perform
+% PCA.
 % 
 
 % Author: Kristin Holmbeck

@@ -1,13 +1,16 @@
 \contentsline {section}{Theory}{2}
 \contentsline {subsection}{Introduction}{2}
 \contentsline {subsection}{Preprocessing}{2}
+\contentsline {subsubsection}{Filtering}{2}
+\contentsline {subsubsection}{Dimension Reduction}{2}
 \contentsline {subsection}{Kernel Discriminant Analysis}{2}
 \contentsline {subsubsection}{Kernel Trick}{4}
-\contentsline {subsubsection}{KDA on concentric circle data}{4}
-\contentsline {subsubsection}{KDA on parabolic data}{5}
-\contentsline {subsection}{Classification}{7}
-\contentsline {subsection}{Singular Values}{7}
-\contentsline {section}{Results}{8}
-\contentsline {subsection}{Dogs and Cats}{8}
-\contentsline {subsection}{Classification Types}{8}
-\contentsline {section}{Code}{9}
+\contentsline {subsubsection}{KDA with the Kernel Trick}{4}
+\contentsline {subsubsection}{KDA on concentric circle data}{5}
+\contentsline {subsubsection}{KDA on parabolic data}{7}
+\contentsline {subsection}{Classification}{9}
+\contentsline {subsection}{Singular Values}{9}
+\contentsline {section}{Results}{9}
+\contentsline {subsection}{Dogs and Cats}{9}
+\contentsline {subsection}{Classification Types}{9}
+\contentsline {section}{Code}{10}
