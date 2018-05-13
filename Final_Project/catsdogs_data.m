@@ -1,44 +1,16 @@
 clear;
 
 load data/cats_and_dogs.mat
-load PatternRecAns.mat
+load data/PatternRecAns.mat
 
-GEN_FLIP_IM = 0;
 PREPROCESS = 1;
 
-folder = 'TIFFtraining/';
-files = dir( folder );
-files = files(3:end);
+opts.doPCA    = 1;
+opts.tol      = 0.95;
+opts.kernType = 1;   % 0: polynomial, 1: RBF
 
-DATA = [];
-classes = zeros(1, length(files));
-
-PREPROCESS = 0;
-
-for ii = 1:length(files)
-    fname = files(ii).name;
-    dat = imread([folder, fname]);
-    dat = dat(:,:,1);
-    dat0 = double(dat);
-    
-	if PREPROCESS
-        % preprocess the data
-        dat = imfilt(dat, 'average', [3,3]);
-        dat = imfilt(dat, 'laplacian');
-        dat = dat - dat0;
-        
-        dat = dat - min(dat(:));
-        dat = dat ./ max(dat(:));
-    end
-    
-    DATA = [DATA, dat(:)];
-    
-    if ~isempty( strfind(lower(fname), 'cat') )
-        classes(ii) = 1;
-    else
-        classes(ii) = 0;
-    end
-end
+plotOpts.c1_style = {'ob', 'MarkerSize', 10};
+plotOpts.c2_style = {'+r', 'MarkerSize', 10};
 
 if 0
     allNdx      = 1:size(DATA,2);
@@ -46,82 +18,60 @@ if 0
     TrainData   = DATA(:,trainNdx);
     TrainClass  = classes( trainNdx );
     testNdx     = allNdx( ~ismember(allNdx,trainNdx) );
-    TestSet    = DATA(:,testNdx);
-    hiddenlabels   = classes( testNdx );
+    TestSet     = DATA(:,testNdx);
+    hiddenlabels= classes( testNdx );
 else
     TrainData = DATA;
     TrainClass = classes;
 end
 
-%{
-allNdx      = 1:size(DATA,2);
-
-trainNdx    = [1:77, 82:159];
-TrainData   = DATA(:,trainNdx);
-TrainClass  = classes( trainNdx );
-testNdx     = allNdx( ~ismember(allNdx,trainNdx) );
-TestData    = DATA(:,testNdx);
-TestClass   = classes( testNdx );
-
-
-X = TrainData; cats = (TrainClass == 0); dogs = (TrainClass == 1);
-
-[yproj] = KLDA(DATA, TrainClass, X);
-alpha = mean(yproj);
-
-% X = TestData; cats = (TestClass == 0); dogs = (TestClass == 1);
-% [yproj] = KLDA(TrainData, TrainClass, X);
-%}
-
 if PREPROCESS
-    for ii = 1:size(TestSet,2)
-        dat0 = TestSet(:,ii);
-        dat = reshape(dat0, [64,64]);
-        dat = imfilt(dat, 'average', [3,3]);
-        dat = imfilt(dat, 'laplacian');
-        dat = dat(:) - dat0(:);
-        
-        dat = dat - min(dat);
-        dat = dat ./ max(dat);
-        
-        TestSet(:,ii) = dat(:);
+    %TrainData = addData(TrainData);
+    
+    if 1
+        filtFcn = @waveletDecomp;
+    else
+        filtFcn = @(x,y)laplacianFilter(x);
     end
+    TestSet = filtFcn(TestSet, 1);
+    TrainData = filtFcn(TrainData, 1);
 end
 
-[yproj, yproj0] = KLDA(DATA, classes, TestSet);
+[Xproj, Xproj0, alpha] = LDA(TrainData, TrainClass, TestSet, opts);
+[yproj, yproj0, wa] = KLDA(TrainData, TrainClass, TestSet, opts);
+
+[pOpts1, pOpts2] = deal(plotOpts);
+pOpts1.alpha = alpha;
 
 alpha = mean(yproj0);
+pOpts2.alpha = alpha;
 
-catst = (TrainClass==0); dogst = (TrainClass==1);
-    
-subplot(121);
-ax1 = plot(yproj0(catst),0,'ob', 'MarkerSize',10); hold on;
-ax2 = plot(yproj0(dogst),0,'+r', 'MarkerSize',10);
-plot(alpha*[1,1], 0.1*[-1,1], ':k', 'LineWidth',2);
+% ----------------------------------------------
+% plot the LDA
+subplot(221);
+[ax1, ax2] = plotClassification(Xproj0, TrainClass, pOpts1);
+title 'LDA Training Data'; legend([ax1(1),ax2(1)], 'Cats', 'Dogs');
 
-hold off; title 'Training Data'; legend([ax1(1),ax2(1)], 'Cats', 'Dogs');
+subplot(222);
+[ax1, ax2] = plotClassification(Xproj, hiddenlabels, pOpts1);
+title 'LDA Test Data'; legend([ax1(1),ax2(1)], 'Cats', 'Dogs');
 
-% [yproj] = KLDA(DATA, classes, TestSet);
+% ----------------------------------------------
+% plot the KDA
+subplot(223);
+[ax1, ax2] = plotClassification(yproj0, TrainClass, pOpts2);
+title 'KDA Training Data'; legend([ax1(1),ax2(1)], 'Cats', 'Dogs');
 
-cats = (hiddenlabels==0); dogs = (hiddenlabels==1);
-% cats = (classes==0); dogs = (classes==1);
-
-subplot(122);
-ax1 = plot(yproj(cats),0,'ob', 'MarkerSize',10); hold on;
-ax2 = plot(yproj(dogs),0,'+r', 'MarkerSize',10);
-plot(alpha*[1,1], 0.1*[-1,1], ':k', 'LineWidth',2);
-
-hold off; title 'Test Data'; legend([ax1(1),ax2(1)], 'Cats', 'Dogs');
+subplot(224);
+[ax1, ax2] = plotClassification(yproj, hiddenlabels, pOpts2);
+title 'KDA Test Data'; legend([ax1(1),ax2(1)], 'Cats', 'Dogs');
 
 figure(gcf);
 
-if all(yproj0(catst)>=alpha)
-    cat_rate = sum(yproj(cats)>alpha) / sum(cats)
-    dog_rate = sum(yproj(dogs)<=alpha) / sum(dogs)
-    total_rate = 0.5*(cat_rate + dog_rate)
-else
-    cat_rate = sum(yproj(cats)<=alpha) / sum(cats)
-    dog_rate = sum(yproj(dogs)>alpha) / sum(dogs)
-    total_rate = 0.5*(cat_rate + dog_rate)
-end
+% ----------------------------------------------
+% Display classification rates
+r = classification_rates(Xproj0, Xproj, TrainClass, hiddenlabels, pOpts1.alpha);
+disp('LDA rate'); disp(r);
 
+r = classification_rates(yproj0, yproj, TrainClass, hiddenlabels, pOpts2.alpha);
+disp('KDA rate'); disp(r);

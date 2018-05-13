@@ -21,6 +21,7 @@ function [yproj, yproj0, alpha] = KLDA(DATA, classes, TestData, options)
 if nargin == 3
     options.doPCA = 1;
     options.tol = 0.999;
+    options.kernType = 0;
 end
 
 allClasses  = unique(classes);
@@ -56,7 +57,7 @@ for ii = 1:nClasses
     Ki = zeros(npts, ni(ii));
     for jj = 1:npts
         for kk = 1:ni(ii)
-            Ki(jj,kk) = kernel(DATA(:,jj), classData(:,kk));
+            Ki(jj,kk) = kernel(DATA(:,jj), classData(:,kk), options.kernType);
         end
     end
     I = eye(ni(ii));
@@ -65,7 +66,8 @@ for ii = 1:nClasses
     
     for jj = 1:ni(ii)
         for kk = 1:npts;
-            M(:,ii) = M(:,ii) + kernel(DATA(:,kk), classData(:,jj));
+%             M(:,ii) = M(:,ii) + kernel(DATA(:,kk), classData(:,jj), options.kernType);
+            M(kk,ii) = M(kk,ii) + kernel(DATA(:,kk), classData(:,jj), options.kernType);
         end
     end
     M(:,ii) = M(:,ii) / ni(ii);    
@@ -96,30 +98,29 @@ end
 % project training data
 yproj0 = zeros(size(DATA,2), 1);
 for jj = 1:size(DATA,2)
-%     for ii = 1:size(DATA,2)
-%         yproj0(jj) = yproj0(jj) + alpha(ii)*kernel(DATA(:,ii), DATA(:,jj));
-%     end
-    yproj0(jj) = kernel(DATA, DATA(:,jj)) * alpha;
+    for ii = 1:size(DATA,2)
+        yproj0(jj) = yproj0(jj) + alpha(ii)*kernel(DATA(:,ii), DATA(:,jj), options.kernType);
+    end
+%     yproj0(jj) = kernel(DATA, DATA(:,jj), options.kernType) * alpha;
 end
-
 
 yproj = zeros(size(TestData,2), 1);
 for jj = 1:size(TestData,2)
-%     for ii = 1:size(DATA,2)
-%         yproj(jj) = yproj(jj) + alpha(ii)*kernel(DATA(:,ii), TestData(:,jj));
-%     end
-    yproj(jj) = kernel(DATA, TestData(:,jj)) * alpha;
+    for ii = 1:size(DATA,2)
+        yproj(jj) = yproj(jj) + alpha(ii)*kernel(DATA(:,ii), TestData(:,jj), options.kernType);
+    end
+%     yproj(jj) = kernel(DATA, TestData(:,jj), options.kernType) * alpha;
 end
 
 end
 
-function k = kernel(x,y)
+function k = kernel(x,y, kernType)
 
-switch 1
+switch kernType
     case 0
         k = y'*x;
     case 1
-        % k = exp(-norm(x-y).^2 / 0.5);
+        k = exp(-norm(x-y).^2 / 10.5); return;
         tmp = bsxfun(@minus, x, y);
         k = exp( -(tmp(1,:).^2 + tmp(2,:).^2) / 0.5 );
     otherwise
@@ -127,4 +128,3 @@ switch 1
 end
 
 end
-

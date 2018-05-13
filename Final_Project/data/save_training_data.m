@@ -23,4 +23,4 @@ for ii = 1:length(files)
 end
 DATA = double(DATA);
 
-save data/cats_and_dogs.mat DATA classes
+save cats_and_dogs.mat DATA classes

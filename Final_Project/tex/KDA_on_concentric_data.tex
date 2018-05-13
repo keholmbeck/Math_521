@@ -1,6 +1,5 @@
 
-\begin{subsubsection}{KDA on concentric circle data}
-Let us revisit the concentric data problem from Figure \ref{fig:circle_data}, and compare the classification of LDA to KDA. For LDA, we obtain the failed classification (Figure \ref{fig:LDA_circles}) and the projection vector along with the data in Figure \ref{fig:LDA_proj_circles}.
+Let us revisit the concentric data problem present in Figure \ref{fig:circle_data}, and compare the classification of LDA to KDA. As discussed, the data is not linearly separable and so we expect LDA to be a poor classifier. For LDA, we obtain the failed classification (Figure \ref{fig:LDA_circles}) and the projection vector along with the data in Figure \ref{fig:LDA_proj_circles}.
 \\
 \centerline{\begin{minipage}{0.6\textwidth}
     \begin{figure}[H]
@@ -20,7 +19,7 @@ Let us revisit the concentric data problem from Figure \ref{fig:circle_data}, an
 \end{minipage}}
 \\
 \\
-As described above, the kernel conversion is kind of tricky, and thus we cannot plot the equivalent projection vector. However, the successful classification is shown in Figure \ref{fig:KDA_proj_circles}.
+Because of the kernel trick, we cannot plot the projection ``vector" directly. Nonetheless, the successful classification is shown in Figure \ref{fig:KDA_proj_circles}.
 
 \centerline{\begin{minipage}{0.8\textwidth}
     \begin{figure}[H]
@@ -30,5 +29,3 @@ As described above, the kernel conversion is kind of tricky, and thus we cannot 
     \label{fig:KDA_proj_circles}
     \end{figure}
 \end{minipage}}
-
-\end{subsubsection}

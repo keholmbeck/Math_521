@@ -1,8 +1,9 @@
-\contentsline {figure}{\numberline {1}{\ignorespaces Concentric Data}}{3}
-\contentsline {figure}{\numberline {2}{\ignorespaces Figure 1\hbox {} data with LDA projection vector}}{6}
-\contentsline {figure}{\numberline {3}{\ignorespaces Figure 1\hbox {} LDA classification}}{6}
-\contentsline {figure}{\numberline {4}{\ignorespaces Figure 1\hbox {} KDA classification}}{7}
-\contentsline {figure}{\numberline {5}{\ignorespaces Parabolically-separable data}}{7}
-\contentsline {figure}{\numberline {6}{\ignorespaces Figure 5\hbox {} data with LDA projection vector}}{8}
-\contentsline {figure}{\numberline {7}{\ignorespaces Figure 5\hbox {} LDA classification}}{8}
-\contentsline {figure}{\numberline {8}{\ignorespaces Figure 5\hbox {} KDA classification}}{9}
+\contentsline {figure}{\numberline {1}{\ignorespaces LDA Motivation \cite {lda_1}\relax }}{4}
+\contentsline {figure}{\numberline {2}{\ignorespaces Concentric Data\relax }}{5}
+\contentsline {figure}{\numberline {3}{\ignorespaces Figure 2\hbox {} data with LDA projection vector\relax }}{7}
+\contentsline {figure}{\numberline {4}{\ignorespaces Figure 2\hbox {} LDA classification\relax }}{8}
+\contentsline {figure}{\numberline {5}{\ignorespaces Figure 2\hbox {} KDA classification\relax }}{8}
+\contentsline {figure}{\numberline {6}{\ignorespaces Parabolically-separable data\relax }}{9}
+\contentsline {figure}{\numberline {7}{\ignorespaces Figure 6\hbox {} data with LDA projection vector\relax }}{9}
+\contentsline {figure}{\numberline {8}{\ignorespaces Figure 6\hbox {} LDA classification\relax }}{10}
+\contentsline {figure}{\numberline {9}{\ignorespaces Figure 6\hbox {} KDA classification\relax }}{10}

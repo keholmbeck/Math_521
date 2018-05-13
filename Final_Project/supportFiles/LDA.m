@@ -76,8 +76,8 @@ alpha = mean(Xproj0);
 % alpha   = w'*m;         % alpha is only valid for nClasses=2
 
 if nClasses == 2
-    x1 = sort(Xproj(classes == allClasses(1)));
-    x2 = sort(Xproj(classes == allClasses(2)));
+    x1 = sort(Xproj0(classes == allClasses(1)));
+    x2 = sort(Xproj0(classes == allClasses(2)));
     alpha = (max(x1) + min(x2))/2;
 end
 

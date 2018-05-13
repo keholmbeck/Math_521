@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.10.10)  12 MAY 2018 10:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.10.10)  13 MAY 2018 13:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -117,9 +117,36 @@ Package: courier 2005/04/12 PSNFSS-v9.2a (WaS)
 Package: lipsum 2014/07/27 v1.3 150 paragraphs of Lorem Ipsum dummy text
 \c@lips@count=\count96
 )
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip10
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2016/05/22 v1.1-161 Sub-captions (AR)
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2016/05/22 v1.7-166 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 67.
+\captionmargin=\dimen109
+\captionmargin@=\dimen110
+\captionwidth=\dimen111
+\caption@tempdima=\dimen112
+\caption@indent=\dimen113
+\caption@parindent=\dimen114
+\caption@hangindent=\dimen115
+)
+\c@ContinuedFloat=\count97
+Package caption Info: listings package is loaded.
+)
+\c@subfigure=\count98
+\c@subtable=\count99
+)
 (/usr/local/texlive/2017basic/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count97
+\c@float@type=\count100
 \float@exts=\toks17
 \float@box=\box28
 \@float@everytoks=\toks18
@@ -144,46 +171,46 @@ Package: amstext 2000/06/29 v2.01 AMS text
 (/usr/local/texlive/2017basic/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks20
-\ex@=\dimen109
+\ex@=\dimen116
 ))
 (/usr/local/texlive/2017basic/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen110
+\pmbraise@=\dimen117
 )
 (/usr/local/texlive/2017basic/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2016/03/08 v2.02 operator names
 )
-\inf@bad=\count98
+\inf@bad=\count101
 LaTeX Info: Redefining \frac on input line 213.
-\uproot@=\count99
-\leftroot@=\count100
+\uproot@=\count102
+\leftroot@=\count103
 LaTeX Info: Redefining \overline on input line 375.
-\classnum@=\count101
-\DOTSCASE@=\count102
+\classnum@=\count104
+\DOTSCASE@=\count105
 LaTeX Info: Redefining \ldots on input line 472.
 LaTeX Info: Redefining \dots on input line 475.
 LaTeX Info: Redefining \cdots on input line 596.
 \Mathstrutbox@=\box30
 \strutbox@=\box31
-\big@size=\dimen111
+\big@size=\dimen118
 LaTeX Font Info:    Redeclaring font encoding OML on input line 712.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
-\macc@depth=\count103
-\c@MaxMatrixCols=\count104
-\dotsspace@=\muskip10
-\c@parentequation=\count105
-\dspbrk@lvl=\count106
+\macc@depth=\count106
+\c@MaxMatrixCols=\count107
+\dotsspace@=\muskip11
+\c@parentequation=\count108
+\dspbrk@lvl=\count109
 \tag@help=\toks21
-\row@=\count107
-\column@=\count108
-\maxfields@=\count109
+\row@=\count110
+\column@=\count111
+\maxfields@=\count112
 \andhelp@=\toks22
-\eqnshift@=\dimen112
-\alignsep@=\dimen113
-\tagshift@=\dimen114
-\tagwidth@=\dimen115
-\totwidth@=\dimen116
-\lineht@=\dimen117
+\eqnshift@=\dimen119
+\alignsep@=\dimen120
+\tagshift@=\dimen121
+\tagwidth@=\dimen122
+\totwidth@=\dimen123
+\lineht@=\dimen124
 \@envbody=\toks23
 \multlinegap=\skip53
 \multlinetaggap=\skip54
@@ -202,7 +229,7 @@ LaTeX Info: Redefining \bm on input line 207.
 (/usr/local/texlive/2017basic/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
-\c@homeworkProblemCounter=\count110
+\c@homeworkProblemCounter=\count113
 )
 (./final.aux)
 \openout1 = `final.aux'.
@@ -225,16 +252,16 @@ Package lastpage Info: Please have a look at the pageslts package at
 
 (/usr/local/texlive/2017basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count111
-\scratchdimen=\dimen118
+\scratchcounter=\count114
+\scratchdimen=\dimen125
 \scratchbox=\box32
-\nofMPsegments=\count112
-\nofMParguments=\count113
+\nofMPsegments=\count115
+\nofMParguments=\count116
 \everyMPshowfont=\toks25
-\MPscratchCnt=\count114
-\MPscratchDim=\dimen119
-\MPnumerator=\count115
-\makeMPintoPDFobject=\count116
+\MPscratchCnt=\count117
+\MPscratchDim=\dimen126
+\MPnumerator=\count118
+\makeMPintoPDFobject=\count119
 \everyMPtoPDFconversion=\toks26
 ) (/usr/local/texlive/2017basic/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2017/03/19 v0.25 Utility functions of pdfTeX for LuaTeX (HO
@@ -284,7 +311,10 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\c@lstlisting=\count117
+\c@lstlisting=\count120
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
+Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    Try loading font information for U+msa on input line 30.
  (/usr/local/texlive/2017basic/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -298,162 +328,179 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \tf@toc=\write3
 \openout3 = `final.toc'.
 
- (./final.lof)
+ (./final.lof [1
+
+{/usr/local/texlive/2017basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}])
 \tf@lof=\write4
 \openout4 = `final.lof'.
 
- [1
+ [2] <lda_1.png, id=13, 666.49pt x 590.205pt>
+File: lda_1.png Graphic file (type png)
 
-{/usr/local/texlive/2017basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-<kda_test/circles_data.png, id=10, 562.2606pt x 421.575pt>
+<use lda_1.png>
+Package pdftex.def Info: lda_1.png used on input line 78.
+(pdftex.def)             Requested size: 281.85585pt x 249.5955pt.
+ [3]
+Underfull \hbox (badness 10000) in paragraph at lines 90--95
+
+ []
+
+<kda_test/circles_data.png, id=24, 562.2606pt x 421.575pt>
 File: kda_test/circles_data.png Graphic file (type png)
 
 <use kda_test/circles_data.png>
-Package pdftex.def Info: kda_test/circles_data.png used on input line 78.
+Package pdftex.def Info: kda_test/circles_data.png used on input line 119.
 (pdftex.def)             Requested size: 375.80542pt x 281.77191pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 75--90
+Underfull \hbox (badness 10000) in paragraph at lines 116--131
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 75--90
+Underfull \hbox (badness 10000) in paragraph at lines 116--131
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 75--90
+Underfull \hbox (badness 10000) in paragraph at lines 116--131
 
  []
 
-[2]
-Overfull \hbox (2.82083pt too wide) in paragraph at lines 101--105
+[4 <./lda_1.png>]
+Overfull \hbox (1.4668pt too wide) in paragraph at lines 142--146
 \OT1/cmr/m/n/10 are the between-class and within-class scat-ter ma-tri-ces, re-
 spec-tively, in the $\OMS/cmsy/m/n/10 F$ \OT1/cmr/m/n/10 space, and $\OML/cmm/m
-/it/10 m[] \OT1/cmr/m/n/10 = [] [][] ^^H(\OML/cmm/m/it/10 x[]\OT1/cmr/m/n/10 )$
-,
+/it/10 m[] \OT1/cmr/m/n/10 = [] [][] ^^H(\OML/cmm/m/it/10 x\OT1/cmr/m/n/10 )$,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 101--105
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 101--105
+Underfull \hbox (badness 10000) in paragraph at lines 142--146
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 107--111
-
- []
-
-[3 <./kda_test/circles_data.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 113--116
+Underfull \hbox (badness 10000) in paragraph at lines 142--146
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 117--121
+Underfull \hbox (badness 10000) in paragraph at lines 148--152
 
  []
 
-[4]
+[5 <./kda_test/circles_data.png (PNG copy)>]
 Underfull \hbox (badness 10000) in paragraph at lines 159--164
 
  []
 
-(./KDA_on_concentric_data.tex
-<kda_test/LDA_circles.png, id=32, 562.2606pt x 421.575pt>
-File: kda_test/LDA_circles.png Graphic file (type png)
 
-<use kda_test/LDA_circles.png>
-Package pdftex.def Info: kda_test/LDA_circles.png used on input line 12.
-(pdftex.def)             Requested size: 281.85585pt x 211.33376pt.
-
-<kda_test/LDA_proj_circles.png, id=34, 562.2606pt x 421.575pt>
-File: kda_test/LDA_proj_circles.png Graphic file (type png)
-
-<use kda_test/LDA_proj_circles.png>
-Package pdftex.def Info: kda_test/LDA_proj_circles.png used on input line 20.
-(pdftex.def)             Requested size: 281.85585pt x 211.33376pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 3--24
+Underfull \hbox (badness 10000) in paragraph at lines 184--189
 
  []
 
-[5] <kda_test/KDA_proj_circles.png, id=39, 562.2606pt x 421.575pt>
+[6] (./KDA_on_concentric_data.tex
+<kda_test/LDA_circles.png, id=43, 562.2606pt x 421.575pt>
+File: kda_test/LDA_circles.png Graphic file (type png)
+
+<use kda_test/LDA_circles.png>
+Package pdftex.def Info: kda_test/LDA_circles.png used on input line 11.
+(pdftex.def)             Requested size: 281.85585pt x 211.33376pt.
+
+<kda_test/LDA_proj_circles.png, id=45, 562.2606pt x 421.575pt>
+File: kda_test/LDA_proj_circles.png Graphic file (type png)
+
+<use kda_test/LDA_proj_circles.png>
+Package pdftex.def Info: kda_test/LDA_proj_circles.png used on input line 19.
+(pdftex.def)             Requested size: 281.85585pt x 211.33376pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 2--23
+
+ []
+
+[7 <./kda_test/LDA_circles.png (PNG copy)>]
+<kda_test/KDA_proj_circles.png, id=52, 562.2606pt x 421.575pt>
 File: kda_test/KDA_proj_circles.png Graphic file (type png)
 
 <use kda_test/KDA_proj_circles.png>
-Package pdftex.def Info: kda_test/KDA_proj_circles.png used on input line 32.
+Package pdftex.def Info: kda_test/KDA_proj_circles.png used on input line 31.
 (pdftex.def)             Requested size: 300.64548pt x 225.42139pt.
-) (./KDA_on_parabolic_data.tex [6 <./kda_test/LDA_circles.png (PNG copy)> <./kd
-a_test/LDA_proj_circles.png (PNG copy)>]
-<kda_test/parab_data.png, id=46, 562.2606pt x 421.575pt>
+) (./KDA_on_parabolic_data.tex
+<kda_test/parab_data.png, id=54, 562.2606pt x 421.575pt>
 File: kda_test/parab_data.png Graphic file (type png)
 
 <use kda_test/parab_data.png>
-Package pdftex.def Info: kda_test/parab_data.png used on input line 8.
+Package pdftex.def Info: kda_test/parab_data.png used on input line 7.
 (pdftex.def)             Requested size: 375.80542pt x 281.77191pt.
 
-<kda_test/LDA_parab.png, id=48, 562.2606pt x 421.575pt>
+<kda_test/LDA_parab.png, id=56, 562.2606pt x 421.575pt>
 File: kda_test/LDA_parab.png Graphic file (type png)
 
 <use kda_test/LDA_parab.png>
-Package pdftex.def Info: kda_test/LDA_parab.png used on input line 21.
+Package pdftex.def Info: kda_test/LDA_parab.png used on input line 20.
 (pdftex.def)             Requested size: 281.85585pt x 211.33376pt.
-
-<kda_test/LDA_proj_parab.png, id=50, 562.2606pt x 421.575pt>
+ [8 <./kda_test/LDA_proj_circles.png (PNG copy)> <./kda_test/KDA_proj_circles.p
+ng (PNG copy)>]
+<kda_test/LDA_proj_parab.png, id=63, 562.2606pt x 421.575pt>
 File: kda_test/LDA_proj_parab.png Graphic file (type png)
 
 <use kda_test/LDA_proj_parab.png>
-Package pdftex.def Info: kda_test/LDA_proj_parab.png used on input line 30.
+Package pdftex.def Info: kda_test/LDA_proj_parab.png used on input line 29.
 (pdftex.def)             Requested size: 281.85585pt x 211.33376pt.
- [7 <./kda_test/KDA_proj_circles.png (PNG copy)> <./kda_test/parab_data.png (PN
-G copy)>]
-<kda_test/KDA_proj_parab.png, id=58, 562.2606pt x 421.575pt>
+
+<kda_test/KDA_proj_parab.png, id=65, 562.2606pt x 421.575pt>
 File: kda_test/KDA_proj_parab.png Graphic file (type png)
 
 <use kda_test/KDA_proj_parab.png>
-Package pdftex.def Info: kda_test/KDA_proj_parab.png used on input line 39.
+Package pdftex.def Info: kda_test/KDA_proj_parab.png used on input line 38.
 (pdftex.def)             Requested size: 300.64548pt x 225.42139pt.
-) [8 <./kda_test/LDA_parab.png (PNG copy)> <./kda_test/LDA_proj_parab.png (PNG 
-copy)>] [9 <./kda_test/KDA_proj_parab.png (PNG copy)>]
+ [9 <./kda_test/parab_data.png (PNG copy)> <./kda_test/LDA_parab.png (PNG copy)
+>]) [10 <./kda_test/LDA_proj_parab.png (PNG copy)> <./kda_test/KDA_proj_parab.p
+ng (PNG copy)>]
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no “ in font cmr10!
- 
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no “ in font cmr10!
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 247.
+
+
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+)
+(../supportFiles/LDA.m [11]) (../supportFiles/KLDA.m [12] [13]) (../test_KDA.m
+[14] [15]) 
 AED: lastpage setting LastPage
-[10] (./final.aux) ) 
+[16] (./final.aux) ) 
 Here is how much of TeX's memory you used:
- 4317 strings out of 494437
- 61523 string characters out of 6166644
- 258094 words of memory out of 5000000
- 7546 multiletter control sequences out of 15000+600000
- 17366 words of font info for 64 fonts, out of 8000000 for 9000
+ 6347 strings out of 494437
+ 91685 string characters out of 6166644
+ 455357 words of memory out of 5000000
+ 9544 multiletter control sequences out of 15000+600000
+ 18396 words of font info for 68 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 39i,16n,43p,449b,388s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2017basic/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2017basic/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2017basic/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2017basic/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2017basic/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2017basic/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2017basic/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2017basi
-c/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2017
-basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2
-017basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texli
-ve/2017basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on final.pdf (10 pages, 459284 bytes).
+ 44i,16n,43p,613b,2123s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2017basic/texmf-dist/fonts/enc/dvips/ba
+se/8r.enc}</usr/local/texlive/2017basic/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmbx10.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmbx12.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmex10.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2017basic/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2017basic/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2017basic/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2017basic/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2017basic/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2017basic/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2017bas
+ic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texliv
+e/2017basic/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
+Output written on final.pdf (16 pages, 519958 bytes).
 PDF statistics:
- 117 PDF objects out of 1000 (max. 8388607)
- 74 compressed objects within 1 object stream
+ 146 PDF objects out of 1000 (max. 8388607)
+ 93 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 89 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 100 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,16 +1,20 @@
-\contentsline {section}{Theory}{2}
-\contentsline {subsection}{Introduction}{2}
-\contentsline {subsection}{Preprocessing}{2}
-\contentsline {subsubsection}{Filtering}{2}
-\contentsline {subsubsection}{Dimension Reduction}{2}
-\contentsline {subsection}{Kernel Discriminant Analysis}{2}
-\contentsline {subsubsection}{Kernel Trick}{4}
-\contentsline {subsubsection}{KDA with the Kernel Trick}{4}
-\contentsline {subsubsection}{KDA on concentric circle data}{5}
-\contentsline {subsubsection}{KDA on parabolic data}{7}
-\contentsline {subsection}{Classification}{9}
-\contentsline {subsection}{Singular Values}{9}
-\contentsline {section}{Results}{9}
-\contentsline {subsection}{Dogs and Cats}{9}
-\contentsline {subsection}{Classification Types}{9}
-\contentsline {section}{Code}{10}
+\contentsline {section}{Introduction}{3}
+\contentsline {section}{Preprocessing}{3}
+\contentsline {subsection}{Filtering}{3}
+\contentsline {subsection}{Dimension Reduction}{3}
+\contentsline {section}{Linear Discriminant Analysis}{3}
+\contentsline {subsection}{Background and Motivation}{3}
+\contentsline {subsection}{Method / Algorithm}{4}
+\contentsline {section}{Kernel Discriminant Analysis}{4}
+\contentsline {subsection}{Kernel Trick}{6}
+\contentsline {subsection}{Choosing a kernel}{6}
+\contentsline {subsection}{KDA using the Kernel Trick}{6}
+\contentsline {subsection}{Example on concentric circle data}{7}
+\contentsline {subsection}{Example on parabolically-separable data}{8}
+\contentsline {section}{Results}{10}
+\contentsline {subsection}{Dogs and Cats}{10}
+\contentsline {subsection}{Classification Types}{10}
+\contentsline {section}{Code}{11}
+\contentsline {subsection}{Linear Discriminant Analysis}{11}
+\contentsline {subsection}{Kernel Discriminant Analysis}{12}
+\contentsline {subsection}{KDA testing code for data in Figures 2\hbox {} and 6\hbox {}}{14}

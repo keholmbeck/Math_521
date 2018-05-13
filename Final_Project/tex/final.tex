@@ -46,30 +46,71 @@
 
 % To have just one problem per page, simply put a \clearpage after each problem
 
-\begin{section}{Theory}
-
-\begin{subsection}{Introduction}
+\begin{section}{Introduction}
 The project we present in this report involves properly classifying two data sets successfully. In this context, the data sets are images of dogs and cats, but the same ideas and algorithms can be successfully applied to other data sets, such as sound waves. Since we are working with images, some preprocessing methods will be explored to add uniformity or variance to the data sets. 
-\end{subsection}
+\end{section}
 
-\begin{subsection}{Preprocessing}
+\begin{section}{Preprocessing}
 Image \textit{preprocessing} typically involves filtering or computing the Fourier transform of an image prior to analysis. To this end, we will discuss some basics, beginning with filtering. 
 
-\begin{subsubsection}{Filtering}
+\begin{subsection}{Filtering}
 
 Image filtering uses a \textit{mask} matrix on subsets of an image to perform operations. One filter example is the averaging filter: Given an $m \times n$ mask size, the mask $m_a$will be
 $$
 	m_a = \frac{1}{mn} \begin{bmatrix} 1 && \cdots && 1 \\ \vdots && \ddots && \vdots \\ 1 && \cdots && 1 \end{bmatrix}
 $$
-where the filtering operation involves an $m\times n$ neighborhood around each pixel of the original image matrix $A$.
-\end{subsubsection}
+where the filtering operation involves an $m \times n$ neighborhood around each pixel of the original image matrix $A$.
+\end{subsection}
 
-\begin{subsubsection}{Dimension Reduction}
-\end{subsubsection}
+\begin{subsection}{Dimension Reduction}
+\end{subsection}
+
+\end{section}
+
+\begin{section}{Linear Discriminant Analysis}
+
+\begin{subsection}{Background and Motivation}
+Linear discriminant analysis (LDA) is the method of classifying sets of data. Given a training set whose groups are given \textit{a priori}, we apply LDA to determine which points of a testing (or probe) set can be categorized into each group. The method comes from Fisher's linear discriminant paper \cite{fisher}, but LDA has been developed under some statistical assumptions about the data. Although LDA can be used on $n$ number of groups, we will present the method in the context of a two-class data set. An illustration of the idea behind LDA is shown in Figure \ref{fig:lda_1}.
+\\
+\begin{minipage}{1.0\textwidth}
+    \begin{figure}[H]
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.6\columnwidth]{lda_1}
+    \caption{LDA Motivation \cite{lda_1}}
+    \label{fig:lda_1}
+    \end{figure}
+\end{minipage}
 
 \end{subsection}
 
-\begin{subsection}{Kernel Discriminant Analysis}
+\begin{subsection}{Method / Algorithm}
+As shown in Figure \ref{fig:lda_1}, the goal of LDA is to find the optimal projection vector $w$ that maximizes
+\begin{align}
+	J(w) = \frac{w^T S_B w}{w^T S_W w} \label{objFcn1}
+\end{align}
+where $S_B$ and $S_W$ define the between-class and within-class \textit{scatter} matrices, respectively. $S_B$ and $S_W$ are covariance matrices used to represent the difference between classes. 
+\\
+\\
+Given a set of data $X \in \mathbb{R}^{m \times n}$ separated \textit{a priori} into two classes ($X = X_1 \cup X_2$), where $X_1 \in \mathbb{R}^{m \times n_1}$ and $X_2 \in \mathbb{R}^{m \times n_2}$, we define the classwise mean $m_i$ and total mean $m$:
+$$
+	m_i = \frac{1}{n_i} \sum_{y \in X_i} y, \quad m = \frac{1}{n} \sum_{x \in X} x.
+$$
+Then the between-class and within-class scatter matrices
+$$
+	S_B = \sum_{i=1}^2 n_i (m - m_i)(m - m_i)^T, \quad
+	S_W = \sum_{i=1}^2 \sum_{x \in X_i} (x - m_i)(x - m_i)^T
+$$
+Setting $\nabla J(w) = 0$, we obtain the optimal $w^*$ as the vector that solves the generalized eigenvalue problem
+\begin{align}
+	S_B w^* = \lambda_{\text{max}} S_W w^* \label{gsvd}
+\end{align}
+in other words, the $w^*$ associated with the maximum eigenvalue of (\ref{gsvd}).
+\end{subsection}
+
+\end{section}
+
+%----------------------------------------------------------------------------------------
+\begin{section}{Kernel Discriminant Analysis}
 Before detailing the kernel classification method, we will provide an intuitive example for explaining why one might want to use KDA over LDA. First, consider the toy problem of two concentric circles of data (Figure \ref{fig:circle_data}).
 
 \begin{minipage}{1.0\textwidth}
@@ -83,10 +124,10 @@ Before detailing the kernel classification method, we will provide an intuitive 
 \\
 \\
 \\
-There linear way to separate the data, but the classes clearly have a defined separation. Kernel Discriminant Analysis (KDA) utilizes the ideas of LDA but with the data set $X$ mapped onto a new \textit{feature} space $\mathcal{F}$ where the data has a linear relationship in $\mathcal{F}$. For the remainder of this paper, we will present KDA in the context of two classes, although it can be generalized to $n$ classes.
+There is no linear way to separate the data, but the classes clearly have a defined separation. Kernel Discriminant Analysis (KDA) utilizes the ideas of LDA but with the data set $X$ mapped onto a new \textit{feature} space $\mathcal{F}$ where the data has a linear relationship in $\mathcal{F}$. As with LDA, we will present KDA in the context of two classes, although it can be generalized to $n$ classes.
 \\
 \\
-Following the LDA method, suppose our two-class data is given by $X = X_1 \cup X_2$ where $X_1 = \lbrace x_i \rbrace_{i=1}^{l_1}$ and $X_2 = \lbrace x_j \rbrace_{j=1}^{l_2}$. Now, let $\Phi$ be a nonlinear mapping to some feature space $\mathcal{F}$, that is, we take a vector $x \in X$ and map it using $\Phi(x) \in \mathcal{F}$. From the LDA algorithm, we need to maximize
+Following the LDA method, suppose our two-class data is given by $X = X_1 \cup X_2$ where $X_1 \in \mathbb{R}^{m \times n_1}$ and $X_2 \in \mathbb{R}^{m \times n_2}$. Now, let $\Phi$ be a nonlinear mapping to some feature space $\mathcal{F}$, that is, we take a vector $x \in X$ and map it using $\Phi(x) \in \mathcal{F}$. From the LDA algorithm, we need to maximize
 $$
 	J(w) = \frac{w^T S_B w}{w^T S_W w}
 $$
@@ -99,102 +140,82 @@ where
 	S_B^\Phi &= (m_1^\Phi - m_2^\Phi) (m_1^\Phi - m_2^\Phi)^T \qquad \text{and} \\
 	S_W^\Phi &= \sum_{i=1}^2 \sum_{x \in X_i} (\Phi(x) - m_i^\Phi) (\Phi(x) - m_i^\Phi)^T
 \end{align*}
-are the between-class and within-class scatter matrices, respectively, in the $\mathcal{F}$ space, and $m_i = \frac{1}{l_i} \sum_{j=1}^{l_i} \Phi( x_j^{(i)} )$, the mean of the $i^{\text{th}}$ class. Furthermore, note that we are now finding the projection $w \in \mathcal{F}$.
+are the between-class and within-class scatter matrices, respectively, in the $\mathcal{F}$ space, and $m_i = \frac{1}{n_i} \sum_{x \in X_i} \Phi( x )$, the mean of the $i^{\text{th}}$ class. Furthermore, note that from (\ref{objFcn}) we are now finding the projection $w \in \mathcal{F}$.
 \\
 \\
 
-\begin{subsubsection}{Kernel Trick}
-The kernel trick boils down to using a linear classifier to solve a non-linear problem.
+\begin{subsection}{Kernel Trick}
+Explicitly computing the mappings of a function $\Phi(x)$ onto $\mathcal{F}$ is often inefficient. To that end, we instead compute the inner products between the images (images in the linear algebra sense) of all pairs of data in the \textit{implicit} feature space. This is referred to as the kernel trick or kernel method.
 \\
 \\
 A feature map is a map $\Phi:X \to \mathcal{F}$, where $\mathcal{F}$ is what we call the feature space. Every feature map defines a kernel
 $$
 	\kappa(x,y) = \langle \Phi(x), \Phi(y) \rangle
 $$
-where $\kappa$ is clearly symmetric and positive-definite. In the context of linear algebra, the kernel is the space equivalent to the null space. In the statistical context, the kernel is used as a measure of similarity. In particular, the kernel function $\kappa$ defines the distribution of similarities of points around a given point $x$, $\kappa(x,y)$ denotes the similarity of point $x$ with another given point $y$. 
-\\
+where $\kappa$ is clearly symmetric and positive-definite. In the statistical context, the kernel is used as a measure of similarity. In particular, the kernel function $\kappa$ defines the distribution of similarities of points around a given point $x$, $\kappa(x,y)$ denotes the similarity of point $x$ with another given point $y$. 
+\end{subsection}
 
-Explicitly computing the mappings of a function $\Phi(x)$ onto $\mathcal{F}$ can become intractable quick. To that end, we instead compute the inner products between the images (images in the linear algebra sense) of all pairs of data in the feature space.
+\begin{subsection}{Choosing a kernel}
+The most commonly used kernels are polynomial kernels $\kappa(x,y) = \langle x, y \rangle ^d$ (for some $d>0$) and the Gaussian radial basis kernel $\kappa(x,y) = \text{exp}(- ||x-y||^2 / c$) (for some $c > 0$).
 \\
 \\
-For any $x, \hat{x}$ in $X$, some kernel functions $\kappa(x,\hat{x})$ can be expressed as an inner product in another space $V$. In other words, $\kappa : X \times X \to \mathbb{R}$ and $\Phi : X \to V$.
-$$
-	\kappa(x, \hat{x}) = \langle \Phi(x), \Phi( \hat{x} ) \rangle_V
-$$
-\end{subsubsection}
+Since the kernel can be thought of as a similarity measure, we want to make sure to choose a kernel where points in the same class have a high kernel value (very similar) and points in different classes have a low kernel value (dissimilar).
+\end{subsection}
 
-\begin{subsubsection}{KDA with the Kernel Trick}
+\begin{subsection}{KDA using the Kernel Trick}
 Noting that $w \in \mathcal{F}$, and using the theory of reproducing kernels \cite{kernTheory}, $w$ lies in the span of all training samples in $\mathcal{F}$. Hence, 
 $$
-	w = \sum_{i=1}^l \alpha_i \Phi \left( x_i^{(j)} \right)
+	w = \sum_{i=1}^n \alpha_i \Phi \left( x_i \right)
 $$
 Multiplying $w^T$ by the mean,
 \begin{align*}
-	w^T m_i^{\Phi} &= \frac{1}{l_i} \sum_{j=1}^l \alpha_j \Phi^T \left( x_j \right)
-		\sum_{k=1}^{l_i} \Phi \left( x_k^{(i)} \right ) \\
-	&= \frac{1}{l_i} \sum_{j=1}^l \sum_{k=1}^{l_i} 
-		\alpha_j \Phi^T \left( x_j \right) \Phi \left( x_k^{(i)} \right ) \\
-	&= \frac{1}{l_i} \sum_{j=1}^l \sum_{k=1}^{l_i} \alpha_j \kappa \left( x_j, x_k^{(i)} \right)
+	w^T m_i^{\Phi} &= \frac{1}{n_i} \sum_{j=1}^n \alpha_j \Phi^T \left( x^{(j)} \right)
+		\sum_{y \in X_i} \Phi \left( y \right ) \\
+	&= \frac{1}{n_i} \sum_{j=1}^n \sum_{y \in X_i} 
+		\alpha_j \Phi^T \left( x^{(j)} \right) \Phi \left( y \right ) \\
+	&= \frac{1}{n_i} \sum_{j=1}^n \sum_{y \in X_i} \alpha_j \kappa \left( x^{(j)}, y \right) \\
+	&= \alpha^T M_i
 \end{align*}
-Defining $\left( M_i \right)_j := \frac{1}{l_i} \sum_{k=1}^{l_i} \kappa \left( x_j, x_k^{(i)} \right)$, 
+where $\left( M_i \right)_j := \frac{1}{n_i} \sum_{y \in X_i} \kappa \left( x^{(j)}, y  \right)$. 
+The number of (\ref{objFcn}) can then be rewritten as
 $$
-	w^T m_i = \alpha^T M_i
+	w^T S_B^\Phi w = w^T (m_1^\Phi - m_2^\Phi) (m_1^\Phi - m_2^\Phi)^T w
+		= \alpha^T M \alpha
 $$
-For the details of $S_B^{\Phi}$,
-
-\begin{align*}
-	S_B^{\Phi} &= \left( m_1^{\Phi} - m_2^{\Phi} \right) \left( m_1^{\Phi} - m_2^{\Phi} \right)^T 
-	= m_1^{\Phi} {m_1^{\Phi}}^T - m_1^{\Phi} {m_2^{\Phi}}^T - m_2^{\Phi} {m_1^{\Phi}}^T + m_2^{\Phi} {m_2^{\Phi}}^T \\
-\end{align*}
-Looking at just one of the terms, 
-\begin{align*}
-	&= \frac{1}{l_a l_b} \sum_{j=1}^{l_a} \sum_{k=1}^{l_b} \Phi \left( x_j^{(a)} \right) \Phi^T \left( x_k^{(b)} \right) \\
-	&= \frac{1}{l_a l_b} \sum_{j=1}^{l_a} \sum_{k=1}^{l_b} \kappa \left( x_j^{(a)}, x_k^{(b)} \right )
-\end{align*}
-With this, we can now write 
-\begin{align*}
-	S_B^{\Phi} = \left( M_1 - M_2 \right) \left( M_1 - M_2 \right)^T 
-	\qquad \text{with} \qquad
-		\left( M_i \right)_j := \frac{1}{l_i} \sum_{k=1}^{l_i} \kappa \left( x_j, x_k^{(i)} \right)
-\end{align*}
-where $M_i \in \mathbb{R}^{ l \times l }$ \textbf{(VERIFY THIS)}. Thus, the numerator of (\ref{objFcn}) can be written as $\alpha^T M \alpha$.
+where $M = (M_1 - M_2)(M_1 - M_2)^T$.
 \\
 \\
 Following the same logic, the denominator $w^T S_W^{\Phi} w$ can be written as $\alpha^T N \alpha$ where
 \begin{align*}
-	N &:= \sum_{j=1}^2 K_j (I - \bm{1}_{l_j}) K_j^T \\
-	\left( K_j \right)_{nm} &:= \kappa \left( x_n, x_m^{(j)} \right), K_j \in \mathbb{R}^{l \times l_j}\\
-	\bm{1}_{lj} &:= \frac{1}{l_j} \begin{bmatrix} 1 && \cdots && 1 \\ \vdots && \ddots && \vdots \\ 1&& \cdots && 1 \end{bmatrix} \in \mathbb{R}^{l_j \times l_j}
+	N &:= \sum_{j=1}^2 K_j (I - \bm{1}_{n_j}) K_j^T \\
+	\left( K_j \right)_{nm} &:= \kappa \left( x_n, x_m^{(j)} \right), K_j \in \mathbb{R}^{n \times n_j}\\
+	\bm{1}_{lj} &:= \frac{1}{n_j} \begin{bmatrix} 1 && \cdots && 1 \\ \vdots && \ddots && \vdots \\ 1&& \cdots && 1 \end{bmatrix} \in \mathbb{R}^{n_j \times n_j}
 \end{align*}
-Then, (\ref{objFcn}) can be rewritten as
+Then, (\ref{objFcn}) can be rewritten as (\ref{objFcn2}) and a \textit{new} projection of $x$ onto $w$ is given by (\ref{kdaProj}).
 \begin{align}
 	J(\alpha) = \frac{\alpha^T M \alpha }{\alpha^T N \alpha} \label{objFcn2}
 \end{align}
-and a \textit{new} projection of $x$ onto $w$ is given by
 \begin{align}
-	w \cdot \Phi(x)  = \sum_{i=1}^l \alpha_i \kappa(x_i,x)
+	w^T \Phi(x) = \sum_{i=1}^n \alpha_i \kappa(x_i,x) \label{kdaProj}
 \end{align}
-
-\end{subsubsection}
-
-\input{KDA_on_concentric_data}
-\input{KDA_on_parabolic_data}
-
+Just as in LDA, (\ref{objFcn2}) can be optimized via the generalized eigenvalue problem
+$$
+	M \alpha^* = \lambda_{\text{max}} N \alpha^*
+$$
 \end{subsection}
 
+\begin{subsection}{Example on concentric circle data}
+	\input{KDA_on_concentric_data}
+\end{subsection}
 
-
-\begin{homeworkSection}{Classification}
-
-\end{homeworkSection}
-
-
-\begin{homeworkSection}{Singular Values}
-The Singular Value Decomposition (SVD) is an important first step in classification.
-\end{homeworkSection}
+\begin{subsection}{Example on parabolically-separable data}
+	\input{KDA_on_parabolic_data}
+\end{subsection}
 
 \end{section}
 
+
+%----------------------------------------------------------------------------------------
 
 \begin{section}{Results}
 \begin{homeworkSection}{Dogs and Cats}
@@ -212,21 +233,29 @@ The Singular Value Decomposition (SVD) is an important first step in classificat
 
 \appendix
 
-\section{Code}\label{code}
-
-%\subsection{Gram-Schmidt} \label{code:gram_schmidt}
-%\lstinputlisting{../Kristin_Holmbeck_HW2_GramSchmidt.m}
-
-
 \begin{thebibliography}{10}
-    \bibitem{chang}
-    Chang, Jen-Mei. \textit{Matrix Methods for Geometric Data Analysis and Recognition}. 2014.
+	\bibitem{fisher}
+	R. Fisher. The use of multiple measurements in taxonomic problems. \textit{Annals of Eugenics}, 7:179–188, 1936.
 
     \bibitem{kda}
 	S. Mika, G. Ratsch, J. Weston, B. Scholkopf, and K. Muller. Fisher discriminant analysis with kernels. In \textit{Proc. IEEE Neural Networks for Signal Processing Workshop}, pages 41–48. IEEE Computer Society Press, 1999.
 
 	\bibitem{kernTheory}
 	Aronszajn, N. ``Theory of Reproducing Kernels." \textit{Transactions of the American Mathematical Society} 68, no. 3 (1950): 337-404. doi:10.2307/1990404.
+
+	\bibitem{lda_1}
+	Raschka, Sebastian. Cropped illustration of PCA vs LDA. \textit{Sebastian Raschka}. 3 August 2014. \url{http://sebastianraschka.com/Articles/2014_python_lda.html}.
 \end{thebibliography}
+
+\section{Code}\label{code}
+
+\subsection{Linear Discriminant Analysis}
+\lstinputlisting{../supportFiles/LDA.m}
+
+\subsection{Kernel Discriminant Analysis}
+\lstinputlisting{../supportFiles/KLDA.m}
+
+\subsection{KDA testing code for data in Figures \ref{fig:circle_data} and \ref{fig:parab_data}}
+\lstinputlisting{../test_KDA.m}
 
 \end{document}
